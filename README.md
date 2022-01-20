@@ -8,7 +8,7 @@
 This browser based web application to ...
 * Hi, I'm Angad. I'm excited about this project because I enjoy coding challenges.
 * Hi my name is Kiefer. I am putting this line here.
-* Hi my name is Towa. I'm excited about this project because its a fun course.
+* Hi my name is Towa. I'm excited about this project because its a fun course. New line to commit.
 	
 ## Technologies
 Technologies used for this project:
