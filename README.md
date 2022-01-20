@@ -6,6 +6,7 @@
 
 ## General Info
 This browser based web application to ...
+Hi, I'm Angad. I'm excited about this project because I enjoy coding challenges.
 	
 ## Technologies
 Technologies used for this project:
