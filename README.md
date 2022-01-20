@@ -6,7 +6,9 @@
 
 ## General Info
 This browser based web application to ...
-	
+
+
+* Hi my name is Kiefer. I am putting this line here.
 ## Technologies
 Technologies used for this project:
 * HTML, CSS
