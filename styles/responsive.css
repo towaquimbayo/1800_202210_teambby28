@@ -1,25 +1,101 @@
 @media (max-width: 575.98px) {
-
+    .navbar {
+        padding: 1em 1.5em;
+    }
+    .navbar-nav {
+        margin-top: 2em;
+    }
+    .navbar-nav .nav-item .nav-link {
+       padding: 1.2rem 0;
+    }
+    .navbar .navbar-brand img {
+        height: 40px;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption {
+        top: 40%;
+        left: 10%;
+        right: 10%;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption #descHead {
+        display: none;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption #mobHead {
+        display: block;
+        font-size: 3em;
+        margin-bottom: 1em;
+    }
+    .footer {
+        padding: 1em 1.5em;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
-
+    .navbar {
+        padding: 1em 3em;
+    }
+    .navbar-nav {
+        margin-top: 2em;
+    }
+    .navbar-nav .nav-item .nav-link {
+       padding: 1.2rem 0;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption {
+        left: 8%;
+        right: 8%;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption #descHead {
+        display: none;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption #mobHead {
+        display: block;
+        font-size: 3em;
+        margin-bottom: 1em;
+    }
+    .footer {
+        padding: 1em 3em;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-
+    .navbar-nav {
+        margin-top: 2em;
+    }
+    .navbar-nav .nav-item .nav-link {
+       padding: 1.2rem 0;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption {
+        left: 10%;
+        right: 10%;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption #descHead {
+        font-size: 3em;
+        margin-bottom: 1em;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
 
 }
 
-@media (min-width: 1200px) and (max-width: 1599.98px) {
+@media (min-width: 1200px) and (max-width: 1999.98px) {
 
 }
 
-@media (min-width: 1600px) {
-    #caroCaption {
-        left: 25%;
+@media (min-width: 2000px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 1.3em;
+        color: #000;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption {
+        position: absolute;
+        top: 45%;
+        left: 5%;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption #descHead {
+        font-size: 5.5em;
+    }
+    #carouselExampleCaptions .carousel-inner #overlay #caroCaption .ctaButton {
+        font-size: 1.5rem;
+        padding: 24px 48px;
     }
 }
