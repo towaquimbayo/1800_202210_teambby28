@@ -36,19 +36,123 @@
     <!-- Navbar -->
     <div id="navPlaceHolder"></div>
 
+    <div class="wrapper">
 
+        <!-- <div class="input-group">
+            <div class="form-outline">
+                <input id="search-input" type="search" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Search</label>
+            </div>
+            <button id="search-button" type="button" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div> -->
 
+        <h1>Available Events</h1>
 
-
-
-    <!-- Content Here -->
-
-
-
+        <div class="eventListings row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-4">
+            <div class="col singleEvent">
+                <div class="card">
+                    <img src="images/event1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Women's Figure Skating</h5>
+                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
+                            <strong>Time:</strong> 12:00PM - 15:30PM
+                        </p>
+                        <a class="viewEvent" href="single-event.html" role="button">View Event</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col singleEvent">
+                <div class="card">
+                    <img src="images/event2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Men's Ice Hockey</h5>
+                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
+                            <strong>Time:</strong> 12:00PM - 15:30PM
+                        </p>
+                        <a class="viewEvent" href="single-event.html" role="button">View Event</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col singleEvent">
+                <div class="card">
+                    <img src="images/event3.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Men's Ski Jumping</h5>
+                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
+                            <strong>Time:</strong> 12:00PM - 15:30PM
+                        </p>
+                        <a class="viewEvent" href="single-event.html" role="button">View Event</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col singleEvent">
+                <div class="card">
+                    <img src="images/event1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Women's Snowboarding</h5>
+                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
+                            <strong>Time:</strong> 12:00PM - 15:30PM
+                        </p>
+                        <a class="viewEvent" href="single-event.html" role="button">View Event</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col singleEvent">
+                <div class="card">
+                    <img src="images/event2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Women's Figure Skating</h5>
+                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
+                            <strong>Time:</strong> 12:00PM - 15:30PM
+                        </p>
+                        <a class="viewEvent" href="single-event.html" role="button">View Event</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col singleEvent">
+                <div class="card">
+                    <img src="images/event3.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Men's Ice Hockey</h5>
+                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
+                            <strong>Time:</strong> 12:00PM - 15:30PM
+                        </p>
+                        <a class="viewEvent" href="single-event.html" role="button">View Event</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col singleEvent">
+                <div class="card">
+                    <img src="images/event1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Men's Ski Jumping</h5>
+                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
+                            <strong>Time:</strong> 12:00PM - 15:30PM
+                        </p>
+                        <a class="viewEvent" href="single-event.html" role="button">View Event</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col singleEvent">
+                <div class="card">
+                    <img src="images/event2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Women's Snowboarding</h5>
+                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
+                            <strong>Time:</strong> 12:00PM - 15:30PM
+                        </p>
+                        <a class="viewEvent" href="single-event.html" role="button">View Event</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <div id="footerPlaceHolder"></div>
-    
+
     <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -56,7 +160,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
 
     <!-- Custom JS -->
     <script src="scripts/script.js"></script>
@@ -66,4 +170,5 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
