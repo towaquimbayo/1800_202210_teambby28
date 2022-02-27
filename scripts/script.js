@@ -1,3 +1,20 @@
+$(document).ready(function () {
+    loadSkeleton();
+});
+
+function loadSkeleton(){
+    console.log($('#navPlaceHolder').load('./temp/nav.html'));
+    console.log($('#footerPlaceHolder').load('./temp/footer.html'));
+}
+
+
+
+
+
+
+
+
+// Pre Template Code
 function sayHello() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
