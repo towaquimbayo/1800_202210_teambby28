@@ -1,12 +1,28 @@
 $(document).ready(function () {
+    // Load Nav and Footer
     loadSkeleton();
 
-    const searchButton = document.getElementById('search-button');
-    const searchInput = document.getElementById('search-input');
-    searchButton.addEventListener('click', () => {
-        const inputValue = searchInput.value;
-        alert(inputValue);
+    // Account Password
+    $("#show-hide-password .input-group-addon a").on('click', function (event) {
+        event.preventDefault();
+        if ($('#show-hide-password input').attr("type") == "text") {
+            $('#show-hide-password input').attr('type', 'password');
+            $('#show-hide-password .input-group-addon a i').addClass("fa-eye-slash");
+            $('#show-hide-password .input-group-addon a i').removeClass("fa-eye");
+        } else if ($('#show-hide-password input').attr("type") == "password") {
+            $('#show-hide-password input').attr('type', 'text');
+            $('#show-hide-password .input-group-addon a i').removeClass("fa-eye-slash");
+            $('#show-hide-password .input-group-addon a i').addClass("fa-eye");
+        }
     });
+
+    // Search Bar if needed
+    // const searchButton = document.getElementById('search-button');
+    // const searchInput = document.getElementById('search-input');
+    // searchButton.addEventListener('click', () => {
+    //     const inputValue = searchInput.value;
+    //     alert(inputValue);
+    // });
 });
 
 function loadSkeleton() {

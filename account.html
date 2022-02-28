@@ -36,19 +36,125 @@
     <!-- Navbar -->
     <div id="navPlaceHolder"></div>
 
+    <div class="row" id="accWrapper">
+        <div class="sideNav col-lg-4">
+            <h3>Account Settings</h3>
+            <ul class="sideNavMenu">
+                <li class="accNavLink active">
+                    <a href="account.html" class="row">
+                        <div class="col-lg-2">
+                            <img class="accIcon" src="images/user.svg" alt="Edit Profile" width="100%">
+                        </div>
+                        <h5 class="col-lg-8">My Profile</h5>
+                        <div class="accIcon col-lg-2">
+                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                    <hr />
+                </li>
 
+                <li class="accNavLink">
+                    <a href="#" class="row">
+                        <div class="col-lg-2">
+                            <img class="accIcon" src="images/notification.svg" alt="Notifications" width="100%">
+                        </div>
+                        <h5 class="col-lg-8">Notifications</h5>
+                        <div class="accIcon col-lg-2">
+                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                    <hr />
+                </li>
 
+                <li class="accNavLink">
+                    <a href="#" class="row">
+                        <div class="col-lg-2">
+                            <img class="accIcon" src="images/privacy.svg" alt="Privacy Policy" width="100%">
+                        </div>
+                        <h5 class="col-lg-8">Privacy Policy</h5>
+                        <div class="col-lg-2">
+                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                    <hr />
+                </li>
 
+                <li class="accNavLink">
+                    <a href="#" class="row">
+                        <div class="col-lg-2">
+                            <img class="accIcon" src="images/contact-details.svg" alt="Contact Details" width="100%">
+                        </div>
+                        <h5 class="col-lg-8">Contact Details</h5>
+                        <div class="col-lg-2">
+                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                    <hr />
+                </li>
 
+                <li class="accNavLink">
+                    <a href="#" class="row">
+                        <div class="col-lg-2">
+                            <img class="accIcon" src="images/logout.svg" alt="Log Out" width="100%">
+                        </div>
+                        <h5 class="col-lg-8">Log Out</h5>
+                        <div class="col-lg-2">
+                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-    <!-- Content Here -->
+        <div class="navContent col-lg-8">
+            <h2>Edit Profile</h2>
 
+            <form class="editProfileForm">
+                <div class="form-row">
+                    <div class="form-group col-lg-6 col-sm-12">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name ...">
+                    </div>
+                    <div class="form-group col-lg-6 col-sm-12">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name ...">
+                    </div>
+                </div>
 
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email ...">
+                    </div>
+                </div>
 
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="phone">Phone</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone ...">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="password">Password</label>
+                        <div class="input-group" id="show-hide-password">
+                            <input type="password" class="form-control" id="password">
+                            <div class="input-group-addon">
+                                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn accSubmit">Save Changes</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Footer -->
     <div id="footerPlaceHolder"></div>
-    
+
     <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -56,7 +162,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
 
     <!-- Custom JS -->
     <script src="scripts/script.js"></script>
@@ -66,4 +172,5 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
