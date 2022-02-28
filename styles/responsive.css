@@ -30,6 +30,65 @@
     .wrapper {
         padding: 1.5em 2em;
     }
+    .row .sideNav.col-lg-4,
+    .row .navContent.col-lg-8 {
+        width: 100%;
+    }
+    .row .sideNav,
+    .row .navContent {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        background-color: #fff;
+    }
+    .row .sideNav h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #000;
+    }
+    .row .sideNav .sideNavMenu .accNavLink {
+        opacity: 1;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a h5 {
+        color: #000;
+        font-size: 1.5rem;
+    }
+    .row .sideNav .sideNavMenu .accNavLink hr {
+        color: #000;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a .accIcon.desk {
+        display: none;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a .accIcon.mob{
+        display: block;
+    }
+    .row .sideNav .sideNavMenu .accNavLink#deskProfile {
+        display: none;
+    }
+    .row .sideNav .sideNavMenu .accNavLink#mobProfile {
+        display: block;
+    }
+    .row .navContent.desk {
+        display: none;
+    }
+    .row .navContent.mob a {
+        color: #6B46D1;
+        font-weight: 500;
+        text-decoration: underline;
+        text-underline-offset: 14px;
+        font-size: 1.2rem;
+    }
+    .row .navContent h2 {
+        font-size: 2rem;
+        padding-bottom: 2rem;
+        padding-top: 3rem;
+    }
+    .row .navContent .editProfileForm .form-row .form-group label {
+        font-size: 1rem;
+    }
+    .row .navContent .editProfileForm .form-row .form-group .form-control {
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -60,6 +119,65 @@
     .wrapper {
         padding: 1.5em 2em;
     }
+    .row .sideNav.col-lg-4,
+    .row .navContent.col-lg-8 {
+        width: 100%;
+    }
+    .row .sideNav,
+    .row .navContent {
+        padding-left: 3em;
+        padding-right: 3em;
+        background-color: #fff;
+    }
+    .row .sideNav h3 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #000;
+    }
+    .row .sideNav .sideNavMenu .accNavLink {
+        opacity: 1;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a h5 {
+        color: #000;
+        font-size: 1.75rem;
+    }
+    .row .sideNav .sideNavMenu .accNavLink hr {
+        color: #000;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a .accIcon.desk {
+        display: none;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a .accIcon.mob{
+        display: block;
+    }
+    .row .sideNav .sideNavMenu .accNavLink#deskProfile {
+        display: none;
+    }
+    .row .sideNav .sideNavMenu .accNavLink#mobProfile {
+        display: block;
+    }
+    .row .navContent.desk {
+        display: none;
+    }
+    .row .navContent.mob a {
+        color: #6B46D1;
+        font-weight: 500;
+        text-decoration: underline;
+        text-underline-offset: 14px;
+        font-size: 1.2rem;
+    }
+    .row .navContent h2 {
+        font-size: 2.5rem;
+        padding-bottom: 2rem;
+        padding-top: 3rem;
+    }
+    .row .navContent .editProfileForm .form-row .form-group label {
+        font-size: 1.2rem;
+    }
+    .row .navContent .editProfileForm .form-row .form-group .form-control {
+        padding: 1.2rem;
+        font-size: 1.5rem;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -86,11 +204,83 @@
     .wrapper {
         padding: 1.5em 3em;
     }
+    .row .sideNav.col-lg-4,
+    .row .navContent.col-lg-8 {
+        width: 100%;
+    }
+    .row .sideNav,
+    .row .navContent {
+        padding-left: 3em;
+        padding-right: 3em;
+        background-color: #fff;
+    }
+    .row .sideNav h3 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #000;
+    }
+    .row .sideNav .sideNavMenu .accNavLink {
+        opacity: 1;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a h5 {
+        color: #000;
+        font-size: 1.75rem;
+    }
+    .row .sideNav .sideNavMenu .accNavLink hr {
+        color: #000;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a .accIcon.desk {
+        display: none;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a .accIcon.mob{
+        display: block;
+    }
+    .row .sideNav .sideNavMenu .accNavLink#deskProfile {
+        display: none;
+    }
+    .row .sideNav .sideNavMenu .accNavLink#mobProfile {
+        display: block;
+    }
+    .row .navContent.desk {
+        display: none;
+    }
+    .row .navContent.mob a {
+        color: #6B46D1;
+        font-weight: 500;
+        text-decoration: underline;
+        text-underline-offset: 14px;
+        font-size: 1.2rem;
+    }
+    .row .navContent h2 {
+        font-size: 2.5rem;
+        padding-bottom: 2rem;
+        padding-top: 3rem;
+    }
+    .row .navContent .editProfileForm .form-row .form-group label {
+        font-size: 1.2rem;
+    }
+    .row .navContent .editProfileForm .form-row .form-group .form-control {
+        padding: 1.2rem;
+        font-size: 1.5rem;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .wrapper .row-cols-lg-4>* {
         width: 50%;
+    }
+    .row .sideNav {
+        padding-left: 4em;
+        padding-right: 4em;
+    }
+    .row .sideNav h3 {
+        font-size: 1.6rem;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a .accIcon {
+        width: 1.5rem;
+    }
+    .row .sideNav .sideNavMenu .accNavLink a h5 {
+        font-size: 1.2rem;
     }
 }
 

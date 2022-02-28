@@ -192,7 +192,7 @@ footer .social li a{
     padding-left: 5em;
     padding-right: 5em;
     padding-bottom: 3em;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #6B46D1;
 }
 
@@ -221,6 +221,10 @@ footer .social li a{
     opacity: 1;
 }
 
+.row .sideNav .sideNavMenu .accNavLink#mobProfile {
+    display: none;
+}
+
 .row .sideNav .sideNavMenu .accNavLink a {
     text-decoration: none;
     align-items: center;
@@ -237,6 +241,10 @@ footer .social li a{
     width: 2rem;
 }
 
+.row .sideNav .sideNavMenu .accNavLink a .accIcon.mob{
+    display: none;
+}
+
 .row .sideNav .sideNavMenu .accNavLink hr {
     margin: 1.8rem 0;
     color: #fff;
@@ -248,7 +256,7 @@ footer .social li a{
     padding-left: 5em;
     padding-right: 5em;
     padding-bottom: 3em;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .row .navContent h2 {
@@ -279,6 +287,7 @@ footer .social li a{
 .row .navContent .editProfileForm .form-row .form-group .form-control {
     color: #000;
     opacity: 1;
+    font-size: 1.2rem;
     padding: 1rem;
     font-weight: 500;
     border-bottom: solid #000 1px;

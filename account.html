@@ -37,17 +37,79 @@
     <div id="navPlaceHolder"></div>
 
     <div class="row" id="accWrapper">
-        <div class="sideNav col-lg-4">
+        <div class="sideNav col-lg-4 col-md-5">
             <h3>Account Settings</h3>
             <ul class="sideNavMenu">
-                <li class="accNavLink active">
+                <li class="accNavLink active" id="deskProfile">
                     <a href="account.html" class="row">
-                        <div class="col-lg-2">
-                            <img class="accIcon" src="images/user.svg" alt="Edit Profile" width="100%">
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/user.svg" alt="Edit Profile" width="100%">
+                            <img class="accIcon mob" src="images/user-bl.svg" alt="Edit Profile" width="100%">
                         </div>
-                        <h5 class="col-lg-8">My Profile</h5>
-                        <div class="accIcon col-lg-2">
-                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                        <h5 class="col-8">My Profile</h5>
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                            <img class="accIcon mob" src="images/chevron-right-bl.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                    <hr />
+                </li>
+
+                <li class="accNavLink active" id="mobProfile">
+                    <a href="my-account.html" class="row">
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/user.svg" alt="Edit Profile" width="100%">
+                            <img class="accIcon mob" src="images/user-bl.svg" alt="Edit Profile" width="100%">
+                        </div>
+                        <h5 class="col-8">My Profile</h5>
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                            <img class="accIcon mob" src="images/chevron-right-bl.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                    <hr />
+                </li>
+
+                <li class="accNavLink">
+                    <a href="notifications.html" class="row">
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/notification.svg" alt="Notifications" width="100%">
+                            <img class="accIcon mob" src="images/notification-bl.svg" alt="Notifications" width="100%">
+                        </div>
+                        <h5 class="col-8">Notifications</h5>
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                            <img class="accIcon mob" src="images/chevron-right-bl.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                    <hr />
+                </li>
+
+                <li class="accNavLink">
+                    <a href="privacy-policy.html" class="row">
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/privacy.svg" alt="Privacy Policy" width="100%">
+                            <img class="accIcon mob" src="images/privacy-bl.svg" alt="Privacy Policy" width="100%">
+                        </div>
+                        <h5 class="col-8">Privacy Policy</h5>
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                            <img class="accIcon mob" src="images/chevron-right-bl.svg" alt="Right Icon" width="100%">
+                        </div>
+                    </a>
+                    <hr />
+                </li>
+
+                <li class="accNavLink">
+                    <a href="contact-details.html" class="row">
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/contact-details.svg" alt="Contact Details" width="100%">
+                            <img class="accIcon mob" src="images/contact-details-bl.svg" alt="Contact Details" width="100%">
+                        </div>
+                        <h5 class="col-8">Contact Details</h5>
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                            <img class="accIcon mob" src="images/chevron-right-bl.svg" alt="Right Icon" width="100%">
                         </div>
                     </a>
                     <hr />
@@ -55,58 +117,21 @@
 
                 <li class="accNavLink">
                     <a href="#" class="row">
-                        <div class="col-lg-2">
-                            <img class="accIcon" src="images/notification.svg" alt="Notifications" width="100%">
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/logout.svg" alt="Log Out" width="100%">
+                            <img class="accIcon mob" src="images/logout-bl.svg" alt="Log Out" width="100%">
                         </div>
-                        <h5 class="col-lg-8">Notifications</h5>
-                        <div class="accIcon col-lg-2">
-                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
-                        </div>
-                    </a>
-                    <hr />
-                </li>
-
-                <li class="accNavLink">
-                    <a href="#" class="row">
-                        <div class="col-lg-2">
-                            <img class="accIcon" src="images/privacy.svg" alt="Privacy Policy" width="100%">
-                        </div>
-                        <h5 class="col-lg-8">Privacy Policy</h5>
-                        <div class="col-lg-2">
-                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
-                        </div>
-                    </a>
-                    <hr />
-                </li>
-
-                <li class="accNavLink">
-                    <a href="#" class="row">
-                        <div class="col-lg-2">
-                            <img class="accIcon" src="images/contact-details.svg" alt="Contact Details" width="100%">
-                        </div>
-                        <h5 class="col-lg-8">Contact Details</h5>
-                        <div class="col-lg-2">
-                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
-                        </div>
-                    </a>
-                    <hr />
-                </li>
-
-                <li class="accNavLink">
-                    <a href="#" class="row">
-                        <div class="col-lg-2">
-                            <img class="accIcon" src="images/logout.svg" alt="Log Out" width="100%">
-                        </div>
-                        <h5 class="col-lg-8">Log Out</h5>
-                        <div class="col-lg-2">
-                            <img class="accIcon" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                        <h5 class="col-8">Log Out</h5>
+                        <div class="col-2">
+                            <img class="accIcon desk" src="images/chevron-right.svg" alt="Right Icon" width="100%">
+                            <img class="accIcon mob" src="images/chevron-right-bl.svg" alt="Right Icon" width="100%">
                         </div>
                     </a>
                 </li>
             </ul>
         </div>
 
-        <div class="navContent col-lg-8">
+        <div class="navContent desk col-lg-8 col-md-7">
             <h2>Edit Profile</h2>
 
             <form class="editProfileForm">
@@ -146,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <button type="submit" class="btn accSubmit">Save Changes</button>
             </form>
         </div>
