@@ -2,3 +2,4 @@
 *.logs
 node_modules/
 firebaseAPI_TEAMBBY28.js
+.vscode/
