@@ -89,6 +89,15 @@
         padding: 1rem;
         font-size: 1.2rem;
     }
+    .wrapper-login {
+        margin-top: 10em;
+        padding: 1.5em 1.5em;
+        margin-bottom: 3em;
+    }
+    .wrapper-login .firebaseui-button {
+        width: 100%;
+        margin-left: 0;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {

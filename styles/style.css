@@ -113,6 +113,13 @@ footer .social li a{
     font-size: 1.7em;
 }
 
+/********** LOGIN ***********/
+.wrapper-login {
+    margin-top: 10em;
+    padding: 1.5em 5em;
+    margin-bottom: 3em;
+}
+
 /********** EVENT LISTINGS ***********/
 .wrapper {
     margin-top: 10em;
