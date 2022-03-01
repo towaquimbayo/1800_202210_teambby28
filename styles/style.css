@@ -330,3 +330,13 @@ footer .social li a{
     border: 2px solid #8C6FDB;
     background-color: #fff;
 }
+
+/********** SINGLE EVENT PAGE SETTINGS ***********/
+
+.card-img-top {
+    height: .3fr;
+}
+
+.card {
+    padding: 10px;
+}
