@@ -46,6 +46,7 @@
         padding-left: 2rem;
         padding-right: 2rem;
         background-color: var(--white);
+        margin-left: 0;
     }
     .row .sideNav h3 {
         font-size: 2rem;
@@ -74,20 +75,21 @@
     .row .sideNav .sideNavMenu .accNavLink.mobProfile {
         display: block;
     }
-    .row .navContent.desk {
+    .row .desk {
         display: none;
     }
-    .row .navContent.mob a {
+    .row .navContent.mob .returnBack {
+        display: block;
         color: var(--secondaryColor);
         font-weight: 500;
         text-decoration: underline;
         text-underline-offset: 14px;
         font-size: 1.2rem;
+        padding-bottom: 2.5rem;
     }
     .row .navContent h2 {
         font-size: 2rem;
         padding-bottom: 2rem;
-        padding-top: 3rem;
     }
     .row .navContent .editProfileForm .form-row .form-group label {
         font-size: 1rem;
@@ -104,6 +106,13 @@
     .wrapper-login .firebaseui-button {
         width: 100%;
         margin-left: 0;
+    }
+    .row .navContent.contactContainer {
+        margin-left: 0;
+    }
+    .row .contact-content .overlay-dark {
+        padding-left: 2em;
+        padding-right: 2em
     }
 }
 
@@ -145,6 +154,7 @@
         padding-right: 3em;
         padding-bottom: 8rem;
         background-color: var(--white);
+        margin-left: 0;
     }
     .row .sideNav h3 {
         font-size: 2.5rem;
@@ -173,20 +183,21 @@
     .row .sideNav .sideNavMenu .accNavLink.mobProfile {
         display: block;
     }
-    .row .navContent.desk {
+    .row .desk {
         display: none;
     }
-    .row .navContent.mob a {
+    .row .navContent.mob .returnBack {
+        display: block;
         color: var(--secondaryColor);
         font-weight: 500;
         text-decoration: underline;
         text-underline-offset: 14px;
         font-size: 1.2rem;
+        padding-bottom: 2.5rem;
     }
     .row .navContent h2 {
         font-size: 2.5rem;
         padding-bottom: 2rem;
-        padding-top: 3rem;
     }
     .row .navContent .editProfileForm .form-row .form-group label {
         font-size: 1.2rem;
@@ -194,6 +205,13 @@
     .row .navContent .editProfileForm .form-row .form-group .form-control {
         padding: 1.2rem;
         font-size: 1.5rem;
+    }
+    .row .navContent.contactContainer {
+        margin-left: 0;
+    }
+    .row .contact-content .overlay-dark {
+        padding-left: 3em;
+        padding-right: 3em
     }
 }
 
@@ -230,6 +248,7 @@
         padding-left: 3em;
         padding-right: 3em;
         background-color: var(--white);
+        margin-left: 0;
     }
     .row .sideNav h3 {
         font-size: 2.5rem;
@@ -258,20 +277,21 @@
     .row .sideNav .sideNavMenu .accNavLink.mobProfile {
         display: block;
     }
-    .row .navContent.desk {
+    .row .desk {
         display: none;
     }
-    .row .navContent.mob a {
-        color: var(--secondaryColor);
+    .row .navContent.mob .returnBack {
+        display: block;
+        color: var(--primaryColor);
         font-weight: 500;
         text-decoration: underline;
         text-underline-offset: 14px;
         font-size: 1.2rem;
+        padding-bottom: 2.5rem;
     }
     .row .navContent h2 {
         font-size: 2.5rem;
         padding-bottom: 2rem;
-        padding-top: 3rem;
     }
     .row .navContent .editProfileForm .form-row .form-group label {
         font-size: 1.2rem;
@@ -279,6 +299,13 @@
     .row .navContent .editProfileForm .form-row .form-group .form-control {
         padding: 1.2rem;
         font-size: 1.5rem;
+    }
+    .row .navContent.contactContainer {
+        margin-left: 0;
+    }
+    .row .contact-content .overlay-dark {
+        padding-left: 3em;
+        padding-right: 3em
     }
 }
 

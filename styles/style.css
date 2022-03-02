@@ -22,13 +22,13 @@ body {
 .navbar-nav .nav-item .nav-link {
     font-size: 18px;
     color: var(--black);
-    font-weight: 400;
+    font-weight: 300;
 }
 
 .navbar-nav .nav-item .nav-link.active {
     font-size: 18px;
     color: var(--secondaryColor);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 #carouselExampleCaptions .carousel-indicators { 
@@ -236,6 +236,11 @@ footer .social li a{
 .row .sideNav .sideNavMenu .accNavLink {
     width: 100%;
     opacity: 0.5;
+    transition: all ease-in-out 0.3s;
+}
+
+.row .sideNav .sideNavMenu .accNavLink:hover {
+    opacity: 0.8;
 }
 
 .row .sideNav .sideNavMenu .accNavLink.active {
@@ -279,6 +284,10 @@ footer .social li a{
     padding-bottom: 10em;
     margin-left: calc(100% / 3);
     min-height: 100vh;
+}
+
+.row .navContent.mob .returnBack {
+    display: none;
 }
 
 .row .navContent h2 {
@@ -346,6 +355,30 @@ footer .social li a{
     background-color: var(--white);
 }
 
+/********** NOTIFICATIONS ***********/
+.row .navContent .editProfileForm .noti-row {
+    padding: 1.2rem 0;
+}
+
+.row .navContent .editProfileForm .noti-row .form-switch {
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row .navContent .editProfileForm .noti-row .form-switch .form-check-label {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--black);
+    opacity: 1;
+}
+
+.row .navContent .editProfileForm .noti-row .form-switch .form-check-input {
+    width: 3rem;
+    height: 1.5rem;
+}
+
 /********** PRIVACY POLICY ***********/
 .privPolicy h3 {
     font-size: 1.5rem;
@@ -365,13 +398,14 @@ footer .social li a{
     color: var(--black);
 }
 
+/********** CONTACT DETAILS ***********/
 .row .navContent.contactContainer {
     padding: 0;
     margin-left: calc(100% / 3);
     min-height: 100vh;
 }
 
-.contact-content {
+.row .contact-content {
     background-image: url("../images/event3.jpg");
     height: 100%;
     width: 100%;
@@ -382,7 +416,7 @@ footer .social li a{
     object-position: center center;
     z-index:1;
 }
-.contact-content:after{
+.row .contact-content:after{
     content:"";
     position:absolute;
     left:0;
@@ -392,27 +426,51 @@ footer .social li a{
     margin:auto;
     width:100%;
     height:100%;
-    -webkit-backdrop-filter: blur(5px);
-    -o-backdrop-filter: blur(5px);
-    -moz-backdrop-filter: blur(5px);
-    -ms-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(7px);
+    -o-backdrop-filter: blur(7px);
+    -moz-backdrop-filter: blur(7px);
+    -ms-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
     z-index:-1;
 }
 
-.title {
-    margin: 0 auto;
-    width: 60%;
-    display: block;
-    font-size: 1.25em;
-    color: #ccc;
-    text-align: center;
-    padding-top: 120px;
-}
-.overlay-dark {
-    background: rgba(0, 0, 0, 0.5);
+.row .contact-content .overlay-dark {
+    background: rgba(0, 0, 0, 0.75);
     height:100%;   
-    padding: 10em 5em;
+    padding-top: 12em;
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-bottom: 10em;
+}
+
+.row .contact-content .overlay-dark h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    padding-bottom: 1rem;
+}
+
+.row .contact-content .overlay-dark hr {
+    margin: 2.5rem 0;
+    color: var(--white);
+    opacity: 0.5;
+}
+
+.row .contact-content .overlay-dark p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--white);
+    padding: 0.5rem 0;
+    line-height: 1rem;
+}
+
+.row .contact-content .overlay-dark p a {
+    color: var(--primaryColor);
+    transition: all ease-in-out 0.3s;
+}
+
+.row .contact-content .overlay-dark p a:hover {
+    color: var(--secondaryColor);
 }
 
 /********** SINGLE EVENT PAGE SETTINGS ***********/

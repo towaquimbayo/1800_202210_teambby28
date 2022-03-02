@@ -37,7 +37,7 @@
     <div id="navPlaceHolder"></div>
 
     <div class="row" id="accWrapper">
-        <div class="sideNav col-lg-4 col-md-5">
+        <div class="sideNav desk col-lg-4 col-md-5">
             <h3>Account Settings</h3>
             <ul class="sideNavMenu">
                 <li class="accNavLink deskProfile">
@@ -148,30 +148,60 @@
             </ul>
         </div>
 
-        <div class="navContent desk col-lg-8 col-md-7">
+        <div class="navContent mob col-lg-8 col-md-7">
+            <a class="returnBack" href="account.html">Go Back</a>
+
             <h2>Notification Settings</h2>
-
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
-            </div>
-
+            
             <form class="editProfileForm">
-                <div class="form-row">
-                    <div class="form-group custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="noti-1">
-                        <label class="custom-control-label" for="noti-1">Update status of my current position</label>
-                    </div>
+                <div class="form-row noti-row">
+                    <div class="form-group form-check form-switch col-12">
+                        <label class="form-check-label" for="switch1">Push notifications via text message</label>
+                        <input class="form-check-input" type="checkbox" id="switch1">
+                    </div>        
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <label for="phone">Phone</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone ...">
-                    </div>
+                <div class="form-row noti-row">
+                    <div class="form-group form-check form-switch col-12">
+                        <label class="form-check-label" for="switch2">Push notifications via email</label>
+                        <input class="form-check-input" type="checkbox" id="switch2" checked>
+                    </div>        
                 </div>
 
-                <button type="submit" class="btn accSubmit">Save Changes</button>
+                <div class="form-row noti-row">
+                    <div class="form-group form-check form-switch col-12">
+                        <label class="form-check-label" for="switch3">Update status of my current position</label>
+                        <input class="form-check-input" type="checkbox" id="switch3" checked>
+                    </div>        
+                </div>
+
+                <div class="form-row noti-row">
+                    <div class="form-group form-check form-switch col-12">
+                        <label class="form-check-label" for="switch4">Notify me ahead of time when wait time is less than 5 mins</label>
+                        <input class="form-check-input" type="checkbox" id="switch4">
+                    </div>        
+                </div>
+
+                <div class="form-row noti-row">
+                    <div class="form-group form-check form-switch col-12">
+                        <label class="form-check-label" for="switch5">Allow voice controls</label>
+                        <input class="form-check-input" type="checkbox" id="switch5" checked>
+                    </div>        
+                </div>
+
+                <div class="form-row noti-row">
+                    <div class="form-group form-check form-switch col-12">
+                        <label class="form-check-label" for="switch6">Allow vibration</label>
+                        <input class="form-check-input" type="checkbox" id="switch6" checked>
+                    </div>        
+                </div>
+
+                <div class="form-row noti-row">
+                    <div class="form-group form-check form-switch col-12">
+                        <label class="form-check-label" for="switch7">Allow sound</label>
+                        <input class="form-check-input" type="checkbox" id="switch7">
+                    </div>        
+                </div>
             </form>
         </div>
     </div>
