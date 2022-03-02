@@ -1,3 +1,10 @@
+:root {
+    --primaryColor: #8C6FDB;
+    --secondaryColor: #6B46D1;
+    --black: #000000;
+    --white: #ffffff;
+}
+
 @media (max-width: 575.98px) {
     .navbar {
         padding: 1em 1.5em;
@@ -38,22 +45,22 @@
     .row .navContent {
         padding-left: 2rem;
         padding-right: 2rem;
-        background-color: #fff;
+        background-color: var(--white);
     }
     .row .sideNav h3 {
         font-size: 2rem;
         font-weight: 700;
-        color: #000;
+        color: var(--black);
     }
     .row .sideNav .sideNavMenu .accNavLink {
         opacity: 1;
     }
     .row .sideNav .sideNavMenu .accNavLink a h5 {
-        color: #000;
+        color: var(--black);
         font-size: 1.5rem;
     }
     .row .sideNav .sideNavMenu .accNavLink hr {
-        color: #000;
+        color: var(--black);
     }
     .row .sideNav .sideNavMenu .accNavLink a .accIcon.desk {
         display: none;
@@ -61,17 +68,17 @@
     .row .sideNav .sideNavMenu .accNavLink a .accIcon.mob{
         display: block;
     }
-    .row .sideNav .sideNavMenu .accNavLink#deskProfile {
+    .row .sideNav .sideNavMenu .accNavLink.deskProfile {
         display: none;
     }
-    .row .sideNav .sideNavMenu .accNavLink#mobProfile {
+    .row .sideNav .sideNavMenu .accNavLink.mobProfile {
         display: block;
     }
     .row .navContent.desk {
         display: none;
     }
     .row .navContent.mob a {
-        color: #6B46D1;
+        color: var(--secondaryColor);
         font-weight: 500;
         text-decoration: underline;
         text-underline-offset: 14px;
@@ -137,22 +144,22 @@
         padding-left: 3em;
         padding-right: 3em;
         padding-bottom: 8rem;
-        background-color: #fff;
+        background-color: var(--white);
     }
     .row .sideNav h3 {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #000;
+        color: var(--black);
     }
     .row .sideNav .sideNavMenu .accNavLink {
         opacity: 1;
     }
     .row .sideNav .sideNavMenu .accNavLink a h5 {
-        color: #000;
+        color: var(--black);
         font-size: 1.75rem;
     }
     .row .sideNav .sideNavMenu .accNavLink hr {
-        color: #000;
+        color: var(--black);
     }
     .row .sideNav .sideNavMenu .accNavLink a .accIcon.desk {
         display: none;
@@ -160,17 +167,17 @@
     .row .sideNav .sideNavMenu .accNavLink a .accIcon.mob{
         display: block;
     }
-    .row .sideNav .sideNavMenu .accNavLink#deskProfile {
+    .row .sideNav .sideNavMenu .accNavLink.deskProfile {
         display: none;
     }
-    .row .sideNav .sideNavMenu .accNavLink#mobProfile {
+    .row .sideNav .sideNavMenu .accNavLink.mobProfile {
         display: block;
     }
     .row .navContent.desk {
         display: none;
     }
     .row .navContent.mob a {
-        color: #6B46D1;
+        color: var(--secondaryColor);
         font-weight: 500;
         text-decoration: underline;
         text-underline-offset: 14px;
@@ -222,22 +229,22 @@
     .row .navContent {
         padding-left: 3em;
         padding-right: 3em;
-        background-color: #fff;
+        background-color: var(--white);
     }
     .row .sideNav h3 {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #000;
+        color: var(--black);
     }
     .row .sideNav .sideNavMenu .accNavLink {
         opacity: 1;
     }
     .row .sideNav .sideNavMenu .accNavLink a h5 {
-        color: #000;
+        color: var(--black);
         font-size: 1.75rem;
     }
     .row .sideNav .sideNavMenu .accNavLink hr {
-        color: #000;
+        color: var(--black);
     }
     .row .sideNav .sideNavMenu .accNavLink a .accIcon.desk {
         display: none;
@@ -245,17 +252,17 @@
     .row .sideNav .sideNavMenu .accNavLink a .accIcon.mob{
         display: block;
     }
-    .row .sideNav .sideNavMenu .accNavLink#deskProfile {
+    .row .sideNav .sideNavMenu .accNavLink.deskProfile {
         display: none;
     }
-    .row .sideNav .sideNavMenu .accNavLink#mobProfile {
+    .row .sideNav .sideNavMenu .accNavLink.mobProfile {
         display: block;
     }
     .row .navContent.desk {
         display: none;
     }
     .row .navContent.mob a {
-        color: #6B46D1;
+        color: var(--secondaryColor);
         font-weight: 500;
         text-decoration: underline;
         text-underline-offset: 14px;
@@ -303,7 +310,7 @@
 @media (min-width: 2000px) {
     .navbar-nav .nav-item .nav-link {
         font-size: 1.3em;
-        color: #000;
+        color: var(--black);
     }
     #carouselExampleCaptions .carousel-inner #overlay #caroCaption {
         position: absolute;

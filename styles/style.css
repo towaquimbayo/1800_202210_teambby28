@@ -1,3 +1,10 @@
+:root {
+    --primaryColor: #8C6FDB;
+    --secondaryColor: #6B46D1;
+    --black: #000000;
+    --white: #ffffff;
+}
+
 /********** HOME ***********/
 body {
     margin: 0;
@@ -14,8 +21,14 @@ body {
 
 .navbar-nav .nav-item .nav-link {
     font-size: 18px;
-    color: #000;
+    color: var(--black);
     font-weight: 400;
+}
+
+.navbar-nav .nav-item .nav-link.active {
+    font-size: 18px;
+    color: var(--secondaryColor);
+    font-weight: 600;
 }
 
 #carouselExampleCaptions .carousel-indicators { 
@@ -29,8 +42,8 @@ body {
     margin-right: 5px;
     margin-bottom: 3em;
     border-radius: 50%;
-    border: 1px solid #8C6FDB;
-    background-color: #8C6FDB;
+    border: 1px solid var(--primaryColor);
+    background-color: var(--primaryColor);
     z-index: 200;
 }
 
@@ -68,7 +81,7 @@ body {
     display: block;
     font-size: 4em;
     font-weight: 700;
-    color: #fff;
+    color: var(--white);
     margin-bottom: 1em;
 }
 
@@ -76,7 +89,7 @@ body {
     display: none;
     font-size: 4em;
     font-weight: 700;
-    color: #fff;
+    color: var(--white);
     margin-bottom: 1em;
 }
 
@@ -84,32 +97,32 @@ body {
     font-size: 1.1rem;
     font-weight: 400;
     text-decoration: none;
-    color: #fff;
-    border: 1px solid #6B46D1;
-    background-color: #6B46D1;
+    color: var(--white);
+    border: 1px solid var(--secondaryColor);
+    background-color: var(--secondaryColor);
     border-radius: 500px;
     padding: 20px 40px;
     transition: all ease-in-out 0.3s;
 }
 
 #carouselExampleCaptions .carousel-inner #overlay #caroCaption .ctaButton:hover {
-    color: #fff;
-    border: 1px solid #8C6FDB;
-    background-color: #8C6FDB;
+    color: var(--white);
+    border: 1px solid var(--primaryColor);
+    background-color: var(--primaryColor);
 }
 
 footer {
     padding: 1em 5em;
-    background-color:#6B46D1;
+    background-color: var(--secondaryColor);
 }
 
 footer .copyright .text-muted p {
-    color: #fff;
+    color: var(--white);
     margin-bottom: 0;
 }
 
 footer .social li a{
-    color: #fff;
+    color: var(--white);
     font-size: 1.7em;
 }
 
@@ -131,12 +144,12 @@ footer .social li a{
     font-size: 2.5em;
     font-weight: 700;
     margin-bottom: 1.5em;
-    color: #000;
+    color: var(--black);
 }
 
 .wrapper .eventListings .singleEvent .card {
     border-radius: 5%;
-    background-color: #fafafa;
+    background-color: var(--white);
     box-shadow: 0px 0px 16px -3px rgba(0,0,0,0.2);
 }
 
@@ -159,7 +172,7 @@ footer .social li a{
 .wrapper .eventListings .singleEvent .card .card-body .card-title {
     font-size: 1.5em;
     font-weight: 600;
-    color: #000;
+    color: var(--black);
     text-transform: capitalize;
     margin-bottom: 1em;
 }
@@ -167,7 +180,7 @@ footer .social li a{
 .wrapper .eventListings .singleEvent .card .card-body .card-text {
     font-size: 16px;
     font-weight: 400;
-    color: #000;
+    color: var(--black);
     margin-bottom: 30px;
 }
 
@@ -176,17 +189,17 @@ footer .social li a{
     text-align: center;
     font-weight: 400;
     text-decoration: none;
-    color: #fff;
-    border: 1px solid #6B46D1;
-    background-color: #6B46D1;
+    color: var(--white);
+    border: 1px solid var(--secondaryColor);
+    background-color: var(--secondaryColor);
     border-radius: 500px;
     padding: 20px 20px;
     transition: all ease-in-out 0.3s;
 }
 
 .wrapper .eventListings .singleEvent .card .card-body .viewEvent:hover {
-    border: 1px solid #8C6FDB;
-    background-color: #8C6FDB;
+    border: 1px solid var(--primaryColor);
+    background-color: var(--primaryColor);
 }
 
 /********** ACCOUNT SETTINGS ***********/
@@ -200,13 +213,13 @@ footer .social li a{
     padding-right: 5em;
     padding-bottom: 3em;
     min-height: 100vh;
-    background-color: #6B46D1;
+    background-color: var(--secondaryColor);
 }
 
 .row .sideNav h3 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--white);
 }
 
 .row .sideNav .sideNavMenu {
@@ -228,7 +241,7 @@ footer .social li a{
     opacity: 1;
 }
 
-.row .sideNav .sideNavMenu .accNavLink#mobProfile {
+.row .sideNav .sideNavMenu .accNavLink.mobProfile {
     display: none;
 }
 
@@ -238,7 +251,7 @@ footer .social li a{
 }
 
 .row .sideNav .sideNavMenu .accNavLink a h5 {
-    color: #fff;
+    color: var(--white);
     font-size: 1.3rem;
     font-weight: 400;
     margin: 0;
@@ -254,7 +267,7 @@ footer .social li a{
 
 .row .sideNav .sideNavMenu .accNavLink hr {
     margin: 1.8rem 0;
-    color: #fff;
+    color: var(--white);
     opacity: 0.3;
 }
 
@@ -267,10 +280,10 @@ footer .social li a{
 }
 
 .row .navContent h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: #000;
-    padding-bottom: 3rem;
+    color: var(--black);
+    padding-bottom: 1rem;
 }
 
 .row .navContent .editProfileForm .form-row {
@@ -285,19 +298,19 @@ footer .social li a{
 }
 
 .row .navContent .editProfileForm .form-row .form-group label {
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 400;
-    color: #000;
+    color: var(--black);
     opacity: 0.5;
 }
 
 .row .navContent .editProfileForm .form-row .form-group .form-control {
-    color: #000;
+    color: var(--black);
     opacity: 1;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 1rem;
     font-weight: 500;
-    border-bottom: solid #000 1px;
+    border-bottom: solid var(--black) 1px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -306,7 +319,7 @@ footer .social li a{
 }
 
 .row .navContent .editProfileForm .form-row .form-group .form-control:focus {
-    border-bottom: solid #000 1px;
+    border-bottom: solid var(--black) 1px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -318,25 +331,25 @@ footer .social li a{
     font-size: 1.2rem;
     font-weight: 600;
     padding: 20px 40px;
-    color: #fff;
-    background-color: #6B46D1;
-    border: solid #6B46D1 2px; 
+    color: var(--white);
+    background-color: var(--secondaryColor);
+    border: solid var(--secondaryColor) 2px; 
     border-radius: 500px; 
     transition: all ease-in-out 0.3s;
 }
 
 .row .navContent .editProfileForm .accSubmit:hover {
-    color: #8C6FDB;
-    border: 2px solid #8C6FDB;
-    background-color: #fff;
+    color: var(--primaryColor);
+    border: 2px solid var(--primaryColor);
+    background-color: var(--white);
 }
 
 /********** SINGLE EVENT PAGE SETTINGS ***********/
 
-.card-img-top {
+/* .card-img-top {
     height: .3fr;
-}
-
+} */
+/* 
 .card {
     padding: 10px;
-}
+} */

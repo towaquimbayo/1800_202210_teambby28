@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // Load Nav and Footer
     loadSkeleton();
-
+    
     // Account Password
     $("#show-hide-password .input-group-addon a").on('click', function (event) {
         event.preventDefault();
@@ -26,15 +26,13 @@ $(document).ready(function () {
 });
 
 function loadSkeleton() {
-    console.log($('#navPlaceHolder').load('./temp/nav.html'));
+    $('#navPlaceHolder').load('./temp/nav.html', function () {
+        $('.navbar-nav .nav-item .nav-link').each(function () {
+            $(this).toggleClass('active', this.getAttribute('href') === location.pathname);
+        })
+    });
     console.log($('#footerPlaceHolder').load('./temp/footer.html'));
 }
-
-
-
-
-
-
 
 
 // Pre Template Code
