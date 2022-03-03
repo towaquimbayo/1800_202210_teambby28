@@ -370,6 +370,7 @@ footer .social li a{
 .row .navContent .editProfileForm .noti-row .form-switch .form-check-label {
     font-size: 18px;
     font-weight: 400;
+    width: 80%;
     color: var(--black);
     opacity: 1;
 }
