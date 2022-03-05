@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="comp1800 boilerplate code" content="my bcit project" />
+    <meta name="description" content="COMP 1800 - Group BBY28" />
+    <meta name="author" content="BCIT" />
+
+    <title>D-Line - Check In</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../images/favicon.png" />
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/4c4952e8ff.js" crossorigin="anonymous"></script>
+
+    <!-- Adobe Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/pqo2lzg.css" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+    <!-- Firebase UI CSS -->
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/responsive.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="navPlaceHolder"></div>
+
+    <div class="container-fluid">
+        <!-- Content Here -->
+        <div class="card border-0 mb-3;" style="width: 1fr">
+            <img class="card-img-top" src="../images/event1.jpg" alt="Event 1" />
+            <div class="card-body">
+                <h1 class="card-title">Checking in to:</h1>
+                <h3 class="card-text">Women's Figure Skating</h3>
+                <p class="card-text">
+                <h5>
+                    Women's Figure Skating is taking place on February 29th, 2030.
+                    Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae
+                    praesentium eius, laudantium itaque veniam?</h5>
+                </p>
+            </div>
+        </div>
+        <div class="card border-0 mb-3" style="width: 1fr">
+            <div class="card-body">
+                <h1 class="card-title">Welcome to Canada Place</h1>
+                <p class="card-text">
+                <h3>Please go to Gate A and complete the check-in manually</h3>
+                </p>
+            </div>
+        </div>
+        <br>
+        <div class="card-group">
+            <div class="card border-0 mb-3">
+                <div class="card-body">
+                    <a href="/check-in-confirmation/" class="btn btn-primary btn-lg btn-block">Manual</a>
+                </div>
+            </div>
+            <div class="card border-0 mb-3">
+                <div class="card-body">
+                    <div class="float-end">
+                        <a href="/check-in-confirmation/" class="btn btn-primary btn-lg btn-block">QR Scan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <!-- Footer -->
+    <div id="footerPlaceHolder"></div>
+
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Firebase UI and Authentication JS -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <script src="../scripts/firebaseAPI_TEAMBBY28.js"></script>
+    <script src="../scripts/authentication.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../scripts/script.js"></script>
+
+    <!-- Bootstrap Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>

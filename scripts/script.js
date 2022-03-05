@@ -26,12 +26,12 @@ $(document).ready(function () {
 });
 
 function loadSkeleton() {
-    $('#navPlaceHolder').load('./temp/nav.html', function () {
+    $('#navPlaceHolder').load('../temp/nav.html', function () {
         $('.navbar-nav .nav-item .nav-link').each(function () {
             $(this).toggleClass('active', this.getAttribute('href') === location.pathname);
         })
     });
-    console.log($('#footerPlaceHolder').load('./temp/footer.html'));
+    console.log($('#footerPlaceHolder').load('../temp/footer.html'));
 }
 
 

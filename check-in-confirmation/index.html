@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,10 +8,10 @@
     <meta name="description" content="COMP 1800 - Group BBY28" />
     <meta name="author" content="BCIT" />
 
-    <title>D-Line - Current Event</title>
+    <title>D-Line - Check In Confirmation</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="../images/favicon.png" />
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/4c4952e8ff.js" crossorigin="anonymous"></script>
@@ -28,46 +27,37 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="styles/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/responsive.css" />
 </head>
 
 <body>
     <!-- Navbar -->
-
     <div id="navPlaceHolder"></div>
-    
+
     <div class="container-fluid">
-        <!-- Content Here -->
-        <div class="card border-0 mb-3;" style="width: 1fr">
-            <img class="card-img-top" src="/images/event1.jpg" alt="Event 1" />
+        <div class="card border-0 mb-3;">
+            <img class="card-img-top" src="../images/event1.jpg" alt="Event 1" />
             <div class="card-body">
-                <h2>Women's Figure Skating</h2>
-                <h5 class="card-title">Event Details</h5>
+                <h1 class="card-title">Check-In Confirmed!</h1>
                 <p class="card-text">
-                    Women's Figure Skating is taking place on February 29th, 2030.
-                    Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur
-                    adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae
-                    praesentium eius, laudantium itaque veniam?
+                <h3> Feel free to hang about nearby. You will be informed shortly when you can go inside.</h3>
                 </p>
             </div>
         </div>
         <div class="card border-0 mb-3" style="width: 1fr">
-            <img id="gmaps-placeholder" class="card-img-top" src="/images/gmaps-placeholder.png"
-                alt="gmaps placeholder" />
             <div class="card-body">
-                <h5 class="card-title">Location Details</h5>
-                <p class="card-text">3700 Willingdon Ave, Burnaby, BC V5G 3H2</p>
-                <p class="card-text">Entry at SW Lot #3</p>
-                <a href="#" class="btn btn-primary">Open in Maps</a>
+                <h3 class="card-title">Estimated Wait time:</h3>
+                <h2 class="card-text">25 - 35 minutes</h2>
+                <h3 class="card-text">Entry at SW Lot </h3>
+                <h3 class="card-text">Line Cohort ID: EFDG-8973</h3>
             </div>
-        </div>
-        <div class="card border-0 mb-3" style="width: 1fr">
-            <a href="check-in.html" class="btn btn-primary btn-lg btn-block">Check In</a>
-
         </div>
     </div>
     <br>
+    <br>
+    <br>
+
     <!-- Footer -->
     <div id="footerPlaceHolder"></div>
 
@@ -79,16 +69,15 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <script src="./scripts/firebaseAPI_TEAMBBY28.js"></script>
-    <script src="./scripts/authentication.js"></script>
+    <script src="../scripts/firebaseAPI_TEAMBBY28.js"></script>
+    <script src="../scripts/authentication.js"></script>
 
     <!-- Custom JS -->
-    <script src="scripts/script.js"></script>
+    <script src="../scripts/script.js"></script>
 
     <!-- Bootstrap Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

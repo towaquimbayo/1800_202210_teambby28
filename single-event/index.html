@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,16 +8,16 @@
     <meta name="description" content="COMP 1800 - Group BBY28" />
     <meta name="author" content="BCIT" />
 
-    <title>D-Line</title>
+    <title>D-Line - Current Event</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="../images/favicon.png" />
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/4c4952e8ff.js" crossorigin="anonymous"></script>
 
     <!-- Adobe Fonts -->
-    <link rel="stylesheet" href="https://use.typekit.net/pqo2lzg.css">
+    <link rel="stylesheet" href="https://use.typekit.net/pqo2lzg.css" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,47 +27,47 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="styles/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/responsive.css" />
 </head>
-
 <body>
     <!-- Navbar -->
     <div id="navPlaceHolder"></div>
-
-    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel"
-        data-bs-interval="5000">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
+    
+    <div class="container-fluid">
+        <!-- Content Here -->
+        <div class="card border-0 mb-3;" style="width: 1fr">
+            <img class="card-img-top" src="..//images/event1.jpg" alt="Event 1" />
+            <div class="card-body">
+                <h2>Women's Figure Skating</h2>
+                <h5 class="card-title">Event Details</h5>
+                <p class="card-text">
+                    Women's Figure Skating is taking place on February 29th, 2030.
+                    Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae
+                    praesentium eius, laudantium itaque veniam?
+                </p>
+            </div>
         </div>
-        <div class="carousel-inner">
-            <div id="overlay">
-                <div id="caroCaption">
-                    <h1 id="descHead">The Heart Of What We Do <br> And Why We Do It</h1>
-                    <h1 id="mobHead">The Heart Of What We Do And Why We Do It</h1>
-                    <a class="ctaButton" href="/login/" role="button">Login or Sign Up</a>
-                </div>
+        <div class="card border-0 mb-3" style="width: 1fr">
+            <img id="gmaps-placeholder" class="card-img-top" src="../images/gmaps-placeholder.png"
+                alt="gmaps placeholder" />
+            <div class="card-body">
+                <h5 class="card-title">Location Details</h5>
+                <p class="card-text">3700 Willingdon Ave, Burnaby, BC V5G 3H2</p>
+                <p class="card-text">Entry at SW Lot #3</p>
+                <a href="#" class="btn btn-primary">Open in Maps</a>
             </div>
-            <div class="carousel-item active">
-                <img src="images/hero1.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="images/hero2.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="images/hero3.jpg" class="d-block w-100" alt="...">
-            </div>
+        </div>
+        <div class="card border-0 mb-3" style="width: 1fr">
+            <a href="/check-in/" class="btn btn-primary btn-lg btn-block">Check In</a>
+
         </div>
     </div>
-
+    <br>
     <!-- Footer -->
     <div id="footerPlaceHolder"></div>
-    
+
     <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -77,11 +76,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <script src="./scripts/firebaseAPI_TEAMBBY28.js"></script>
-    <script src="./scripts/authentication.js"></script> 
+    <script src="../scripts/firebaseAPI_TEAMBBY28.js"></script>
+    <script src="../scripts/authentication.js"></script>
 
     <!-- Custom JS -->
-    <script src="scripts/script.js"></script>
+    <script src="../scripts/script.js"></script>
 
     <!-- Bootstrap Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
