@@ -116,7 +116,7 @@
                 </li>
 
                 <li class="accNavLink">
-                    <a href="/login/" class="row">
+                    <a href="#" id="logout" class="row">
                         <div class="col-2">
                             <img class="accIcon desk" src="../images/logout.svg" alt="Log Out" width="100%">
                             <img class="accIcon mob" src="../images/logout-bl.svg" alt="Log Out" width="100%">
@@ -134,29 +134,29 @@
         <div class="navContent desk col-lg-8 col-md-7">
             <h2>Edit Profile</h2>
 
-            <form class="editProfileForm">
+            <form class="editProfileForm" id="profileForm">
                 <div class="form-row">
                     <div class="form-group col-lg-6 col-sm-12">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name ...">
+                        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter first name ...">
                     </div>
                     <div class="form-group col-lg-6 col-sm-12">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name ...">
+                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter last name ...">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-12">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email ...">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email ...">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-12">
                         <label for="phone">Phone</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone ...">
+                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter phone ...">
                     </div>
                 </div>
 
@@ -164,7 +164,7 @@
                     <div class="form-group col-12">
                         <label for="password">Password</label>
                         <div class="input-group" id="show-hide-password">
-                            <input type="password" class="form-control" id="password">
+                            <input type="password" name="password" class="form-control" id="password">
                             <div class="input-group-addon">
                                 <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
@@ -172,7 +172,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn accSubmit">Save Changes</button>
+                <button type="submit" id="updateChanges" class="btn accSubmit">Save Changes</button>
             </form>
         </div>
     </div>
