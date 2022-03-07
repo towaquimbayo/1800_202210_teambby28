@@ -33,38 +33,41 @@
 <body>
     <!-- Navbar -->
     <div id="navPlaceHolder"></div>
-    
-    <div class="container-fluid">
-        <!-- Content Here -->
-        <div class="card border-0 mb-3;" style="width: 1fr">
-            <img class="card-img-top" src="..//images/event1.jpg" alt="Event 1" />
-            <div class="card-body">
-                <h2>Women's Figure Skating</h2>
-                <h5 class="card-title">Event Details</h5>
-                <p class="card-text">
-                    Women's Figure Skating is taking place on February 29th, 2030.
-                    Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur
-                    adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae
-                    praesentium eius, laudantium itaque veniam?
-                </p>
-            </div>
-        </div>
-        <div class="card border-0 mb-3" style="width: 1fr">
-            <img id="gmaps-placeholder" class="card-img-top" src="../images/gmaps-placeholder.png"
-                alt="gmaps placeholder" />
-            <div class="card-body">
-                <h5 class="card-title">Location Details</h5>
-                <p class="card-text">3700 Willingdon Ave, Burnaby, BC V5G 3H2</p>
-                <p class="card-text">Entry at SW Lot #3</p>
-                <a href="#" class="btn btn-primary">Open in Maps</a>
-            </div>
-        </div>
-        <div class="card border-0 mb-3" style="width: 1fr">
-            <a href="/check-in/" class="btn btn-primary btn-lg btn-block">Check In</a>
 
+    <div id="eventHero">
+        <div id="eventOverlay">
+            <div class="eventHeader">
+                <h1>Women's Figure Skating</h1>
+                <figcaption class="eventDate"><span>May 24, 2022</span></figcaption>
+            </div>
         </div>
     </div>
-    <br>
+
+    <div class="wrapper eventWrapper">
+        <div class="eventDetails row">
+            <div class="eventDescRow col-md-6 col-sm-12">
+                <p><strong>Location: </strong>3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br>Entry at SW Lot #3</p>
+            </div>
+            <div class="eventDescRow col-md-6 col-sm-12" id="eventTime">
+                <p><strong>Time: </strong>12:00PM - 15:30PM</p>
+            </div>
+
+            <div class="eventDescRow col-12">
+                <p><strong>Event Details</strong></p>
+                <p>Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?</p>
+            </div>
+
+            <div class="eventDescRow col-12">
+                <p><strong>Google Maps</strong></p>
+                <p>[Insert Google Maps Here!]</p>
+            </div>
+
+            <div class="eventDescRow col-12 card">
+                <a class="checkInBtn" href="/check-in/" role="button">Check In</a>
+            </div>
+        </div>
+    </div>
+    
     <!-- Footer -->
     <div id="footerPlaceHolder"></div>
 

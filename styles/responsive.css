@@ -114,6 +114,50 @@
         padding-left: 2em;
         padding-right: 2em
     }
+    #eventHero {
+        height: 92vh;
+    }
+    #eventHero #eventOverlay .eventHeader {
+        padding: 0rem 2rem;
+    }
+    #eventHero #eventOverlay .eventHeader h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        bottom: 10rem;
+    }
+    #eventHero #eventOverlay .eventHeader .eventDate { 
+        font-size: 1.5rem;
+        font-weight: 500;
+        padding: 1.5rem 3rem;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        text-align: center;
+        background-color: rgba(141, 112, 219, 0.8);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .eventWrapper {
+        margin-top: 2.5rem;
+        margin-bottom: 7rem;
+    }
+    .eventWrapper .eventDetails .eventDescRow {
+        padding: 0.7rem 0;
+    }
+    .eventWrapper .eventDetails .eventDescRow p {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: var(--black);
+        line-height: 2rem;
+    }
+    .eventWrapper .eventDetails .eventDescRow#eventTime {
+        text-align: left;
+    }
+    .eventWrapper .eventDetails .eventDescRow .checkInBtn {
+        font-size: 1.3rem;
+        border-radius: 500px;
+        padding: 20px 20px;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -213,6 +257,27 @@
         padding-left: 3em;
         padding-right: 3em
     }
+    #eventHero {
+        height: 94vh;
+    }
+    #eventHero #eventOverlay .eventHeader {
+        padding: 0rem 3rem;
+    }
+    #eventHero #eventOverlay .eventHeader .eventDate { 
+        font-size: 2rem;
+        font-weight: 500;
+        padding: 2rem 3rem;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        text-align: center;
+        background-color: rgba(141, 112, 219, 0.8);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .eventWrapper .eventDetails .eventDescRow#eventTime {
+        text-align: left;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -306,6 +371,24 @@
     .row .contact-content .overlay-dark {
         padding-left: 3em;
         padding-right: 3em
+    }
+    #eventHero {
+        height: 94vh;
+    }
+    #eventHero #eventOverlay .eventHeader {
+        padding: 0rem 3rem;
+    }
+    #eventHero #eventOverlay .eventHeader .eventDate { 
+        font-size: 2rem;
+        font-weight: 500;
+        padding: 2rem 3rem;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        text-align: center;
+        background-color: rgba(141, 112, 219, 0.8);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 }
 

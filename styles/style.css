@@ -176,7 +176,7 @@ footer .social li a{
 
 .wrapper .eventListings .singleEvent .card .card-body .card-title {
     font-size: 1.5em;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--black);
     text-transform: capitalize;
     margin-bottom: 1em;
@@ -481,10 +481,130 @@ footer .social li a{
 
 /********** SINGLE EVENT PAGE SETTINGS ***********/
 
-/* .card-img-top {
-    height: .3fr;
-} */
-/* 
-.card {
-    padding: 10px;
-} */
+#eventHero {
+    background-image: url("../images/event1.jpg");
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+#eventHero:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#eventHero #eventOverlay {
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+}
+
+#eventHero #eventOverlay .eventHeader {
+    padding: 0rem 5rem;
+    display: flex;
+    flex-direction: row;
+}
+
+#eventHero #eventOverlay .eventHeader h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    position: absolute;
+    bottom: 12rem;
+    color: var(--white);
+}
+
+#eventHero #eventOverlay .eventHeader .eventDate {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 2rem 5rem;
+    color: var(--white);
+    position: absolute;
+    bottom: 12rem;
+    right: 0;
+    background-color: rgba(141, 112, 219, 0.5);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#eventHero #eventOverlay .eventHeader .eventDate:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(141, 112, 219, 0.5);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    z-index: 0;
+}
+
+#eventHero #eventOverlay .eventHeader .eventDate span {
+    position: relative;
+    z-index: 1;
+}
+
+.eventWrapper {
+    margin-top: 0;
+    padding: 7.5em 5em;
+    margin-bottom: 5rem;
+}
+
+.eventWrapper .eventDetails {
+    width: 100%;
+    margin: 0;
+}
+
+.eventWrapper .eventDetails .eventDescRow {
+    padding: 1.5rem 0;
+}
+
+.eventWrapper .eventDetails .eventDescRow#eventTime {
+    text-align: right;
+}
+
+.eventWrapper .eventDetails .eventDescRow p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--black);
+    line-height: 2rem;
+}
+
+.eventWrapper .eventDetails .eventDescRow.card {
+    border: none;
+}
+
+.eventWrapper .eventDetails .eventDescRow .checkInBtn {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    color: var(--white);
+    border: 1px solid var(--secondaryColor);
+    background-color: var(--secondaryColor);
+    border-radius: 500px;
+    padding: 24px 20px;
+    transition: all ease-in-out 0.3s;
+}
+
+.eventWrapper .eventDetails .eventDescRow .checkInBtn:hover {
+    color: var(--white);
+    border: 1px solid var(--primaryColor);
+    background-color: var(--primaryColor);
+}
