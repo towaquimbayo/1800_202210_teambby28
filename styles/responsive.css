@@ -148,6 +148,9 @@
     .eventWrapper .eventDetails .eventDescRow {
         padding: 0.7rem 0;
     }
+    .eventWrapper .eventDetails .eventDescRow h3 {
+        font-size: 1.7rem;
+    }
     .eventWrapper .eventDetails .eventDescRow p {
         font-size: 1.2rem;
         font-weight: 400;
@@ -161,6 +164,9 @@
         font-size: 1.3rem;
         border-radius: 500px;
         padding: 20px 20px;
+    }
+    .checkWrapper {
+        margin-top: 10rem;
     }
 }
 
@@ -282,6 +288,9 @@
     .eventWrapper .eventDetails .eventDescRow#eventTime {
         text-align: left;
     }
+    .checkWrapper {
+        margin-top: 10rem;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -393,6 +402,9 @@
         background-color: rgba(141, 112, 219, 0.8);
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+    }
+    .checkWrapper {
+        margin-top: 10rem;
     }
 }
 

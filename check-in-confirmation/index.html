@@ -30,34 +30,30 @@
     <link rel="stylesheet" type="text/css" href="../styles/style.css" />
     <link rel="stylesheet" type="text/css" href="../styles/responsive.css" />
 </head>
-
 <body>
     <!-- Navbar -->
     <div id="navPlaceHolder"></div>
 
-    <div class="container-fluid">
-        <div class="card border-0 mb-3;">
-            <img class="card-img-top" src="../images/event1.jpg" alt="Event 1" />
-            <div class="card-body">
-                <h1 class="card-title">Check-In Confirmed!</h1>
-                <p class="card-text">
-                <h3> Feel free to hang about nearby. You will be informed shortly when you can go inside.</h3>
-                </p>
+    <div class="wrapper eventWrapper checkWrapper">
+        <div class="eventDetails row">
+            <div class="eventDescRow col-12">
+                <h3>Check-In Confirmed!</h3>
+                <p>You have been added to the waitlist.</p>
+                <p>Feel free to hang about nearby. You will be informed shortly when you can go inside.</p>
+                <p>Please view your <a href="/my-events/">Events</a> in your accounts page, for more updates on your wait time!</p>
             </div>
-        </div>
-        <div class="card border-0 mb-3" style="width: 1fr">
-            <div class="card-body">
-                <h3 class="card-title">Estimated Wait time:</h3>
-                <h2 class="card-text">25 - 35 minutes</h2>
-                <h3 class="card-text">Entry at SW Lot </h3>
-                <h3 class="card-text">Line Cohort ID: EFDG-8973</h3>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <br>
 
+            <div class="eventDescRow col-12 card">
+                <a class="checkInBtn" href="/event-listings/" role="button">Return to Home</a>
+            </div>
+        </div>
+
+        <!-- <h3 class="card-title">Estimated Wait time:</h3>
+        <h2 class="card-text">25 - 35 minutes</h2>
+        <h3 class="card-text">Entry at SW Lot </h3>
+        <h3 class="card-text">Line Cohort ID: EFDG-8973</h3> -->
+    </div>
+    
     <!-- Footer -->
     <div id="footerPlaceHolder"></div>
 

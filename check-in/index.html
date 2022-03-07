@@ -30,53 +30,38 @@
     <link rel="stylesheet" type="text/css" href="../styles/style.css" />
     <link rel="stylesheet" type="text/css" href="../styles/responsive.css" />
 </head>
-
 <body>
     <!-- Navbar -->
     <div id="navPlaceHolder"></div>
 
-    <div class="container-fluid">
-        <!-- Content Here -->
-        <div class="card border-0 mb-3;" style="width: 1fr">
-            <img class="card-img-top" src="../images/event1.jpg" alt="Event 1" />
-            <div class="card-body">
-                <h1 class="card-title">Checking in to:</h1>
-                <h3 class="card-text">Women's Figure Skating</h3>
-                <p class="card-text">
-                <h5>
-                    Women's Figure Skating is taking place on February 29th, 2030.
-                    Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur
-                    adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae
-                    praesentium eius, laudantium itaque veniam?</h5>
-                </p>
-            </div>
-        </div>
-        <div class="card border-0 mb-3" style="width: 1fr">
-            <div class="card-body">
-                <h1 class="card-title">Welcome to Canada Place</h1>
-                <p class="card-text">
-                <h3>Please go to Gate A and complete the check-in manually</h3>
-                </p>
-            </div>
-        </div>
-        <br>
-        <div class="card-group">
-            <div class="card border-0 mb-3">
-                <div class="card-body">
-                    <a href="/check-in-confirmation/" class="btn btn-primary btn-lg btn-block">Manual</a>
-                </div>
-            </div>
-            <div class="card border-0 mb-3">
-                <div class="card-body">
-                    <div class="float-end">
-                        <a href="/check-in-confirmation/" class="btn btn-primary btn-lg btn-block">QR Scan</a>
-                    </div>
-                </div>
+    <div id="eventHero">
+        <div id="eventOverlay">
+            <div class="eventHeader">
+                <a href="/single-event/">Go Back</a>
+                <h1>Women's Figure Skating</h1>
+                <figcaption class="eventDate"><span>May 24, 2022</span></figcaption>
             </div>
         </div>
     </div>
-    <br>
-    <br>
+
+    <div class="wrapper eventWrapper">
+        <div class="eventDetails row">
+            <div class="eventDescRow col-12">
+                <h3>Check In For: <span>Women's Figure Skating</span></h3>
+                <p><strong>Event Details</strong></p>
+                <p>Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?</p>
+            </div>
+
+            <div class="eventDescRow col-12">
+                <label for="eTicketPhoto">Choose a profile picture: <strong style="color: #ff0000;">(Only JPG, JPEG or PNG)</strong></label> <br>
+                <input type="file" id="eTicketPhoto" name="eTicketPhoto" accept=".jpg, .jpeg, .png">
+            </div>
+
+            <div class="eventDescRow col-12 card">
+                <a class="checkInBtn" href="/check-in-confirmation/" role="button">Confirm Check-In</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <div id="footerPlaceHolder"></div>
