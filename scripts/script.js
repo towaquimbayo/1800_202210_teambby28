@@ -33,6 +33,8 @@ function loadSkeleton() {
     $('#navPlaceHolder').load('../temp/nav.html', function () {
         $('.navbar-nav .nav-item .nav-link').each(function () {
             $(this).toggleClass('active', this.getAttribute('href') === location.pathname);
+            // Hide specific nav links depending if the user is logged in or not
+            hideLoggedNav();
         })
     });
     console.log($('#footerPlaceHolder').load('../temp/footer.html'));
@@ -147,6 +149,25 @@ function signOut() {
             window.location.replace("/login/");
         })
     })
+}
+
+function hideLoggedNav() {
+    const loggedOutLinks = document.querySelectorAll('.logged-out');
+    const loggedInLinks = document.querySelectorAll('.logged-in');
+
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            // toggle UI Elements
+            console.log('user logged in!!!!!');
+            loggedInLinks.forEach(item => item.style.display = 'block');
+            loggedOutLinks.forEach(item => item.style.display = 'none');
+        } else {
+            console.log('user logged out!!!!!');
+            // toggle UI elements
+            loggedInLinks.forEach(item => item.style.display = 'none');
+            loggedOutLinks.forEach(item => item.style.display = 'block');
+        }
+    });
 }
 
 
