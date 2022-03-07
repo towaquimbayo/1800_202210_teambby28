@@ -524,6 +524,16 @@ footer .social li a{
     color: var(--white);
 }
 
+#eventHero #eventOverlay .eventHeader a {
+    font-size: 1.3rem;
+    text-decoration: underline;
+    font-weight: 400;
+    position: absolute;
+    bottom: 18rem;
+    color: var(--white);
+    cursor: pointer;
+}
+
 #eventHero #eventOverlay .eventHeader .eventDate {
     font-size: 2rem;
     font-weight: 500;
