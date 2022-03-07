@@ -154,21 +154,35 @@ function signOut() {
 function hideLoggedNav() {
     const loggedOutLinks = document.querySelectorAll('.logged-out');
     const loggedInLinks = document.querySelectorAll('.logged-in');
+    const loggedInLBtn = document.querySelectorAll('.logged-in-btn');
 
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             // toggle UI Elements
-            console.log('user logged in!!!!!');
             loggedInLinks.forEach(item => item.style.display = 'block');
             loggedOutLinks.forEach(item => item.style.display = 'none');
+            loggedInLBtn.forEach(item => item.style.display = 'flex');
         } else {
-            console.log('user logged out!!!!!');
             // toggle UI elements
             loggedInLinks.forEach(item => item.style.display = 'none');
             loggedOutLinks.forEach(item => item.style.display = 'block');
+            loggedInLBtn.forEach(item => item.style.display = 'none');
         }
     });
 }
+
+
+/** NEXT STEPS */
+/**
+ * 1) Fix password change on my account
+ * 2) Edit User collection -> Add 1) waitList: false 2) activeList: false 3) My-Events: []
+ * 3) Add Events collection -> 1) Name 2) Location 3) Time 4) User-Waitlist: []
+ * 4) User confirms check in -> User collection -> 1) waitList: true 2) activeList false 3) My-Events: [add checked in events from Events collection]
+ * 5) User confirms check in -> Events collection -> 4) User-Waitlist: [add users with waitList: true]
+ * 6) If a event reaches 10 users in waitList -> User collection (waitList: true) -> 1) waitList: false 2) activeList: true 
+ * 7) Run a foreach loop to start countdown() for each user, add 3 mins to wait time incrementally 
+ * 8) Display User wait time in accounts page, under My Events
+ */
 
 
 // Pre Template Code

@@ -41,10 +41,18 @@
     .row .navContent.col-lg-8 {
         width: 100%;
     }
-    .row .sideNav,
+    .row .sideNav {
+        position: relative;
+        padding-left: 2em;
+        padding-right: 2em;
+        padding-bottom: 10rem;
+        background-color: var(--white);
+        margin-left: 0;
+    }
     .row .navContent {
         padding-left: 2rem;
         padding-right: 2rem;
+        padding-bottom: 10rem;
         background-color: var(--white);
         margin-left: 0;
     }
@@ -202,11 +210,18 @@
     .row .navContent.col-lg-8 {
         width: 100%;
     }
-    .row .sideNav,
+    .row .sideNav {
+        position: relative;
+        padding-left: 3em;
+        padding-right: 3em;
+        padding-bottom: 10rem;
+        background-color: var(--white);
+        margin-left: 0;
+    }
     .row .navContent {
         padding-left: 3em;
         padding-right: 3em;
-        padding-bottom: 8rem;
+        padding-bottom: 10rem;
         background-color: var(--white);
         margin-left: 0;
     }
@@ -321,7 +336,14 @@
     .row .navContent.col-lg-8 {
         width: 100%;
     }
-    .row .sideNav,
+    .row .sideNav {
+        position: relative;
+        padding-left: 3em;
+        padding-right: 3em;
+        padding-bottom: 10rem;
+        background-color: var(--white);
+        margin-left: 0;
+    }
     .row .navContent {
         padding-left: 3em;
         padding-right: 3em;

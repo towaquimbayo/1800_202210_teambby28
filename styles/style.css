@@ -214,7 +214,7 @@ footer .social li a{
 
 .row .sideNav {
     position: fixed;
-    padding-top: 12em;
+    padding-top: 10em;
     padding-left: 5em;
     padding-right: 5em;
     padding-bottom: 3em;
@@ -283,7 +283,7 @@ footer .social li a{
 }
 
 .row .navContent {
-    padding-top: 12em;
+    padding-top: 10em;
     padding-left: 5em;
     padding-right: 5em;
     padding-bottom: 10em;
@@ -299,6 +299,13 @@ footer .social li a{
     font-size: 2rem;
     font-weight: 700;
     color: var(--black);
+    padding-bottom: 1rem;
+}
+
+.row .navContent p a {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primaryColor);
     padding-bottom: 1rem;
 }
 
@@ -358,6 +365,32 @@ footer .social li a{
     color: var(--primaryColor);
     border: 2px solid var(--primaryColor);
     background-color: var(--white);
+}
+
+/********** MY EVENTS ***********/
+.row .navContent #checkinEventListing {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.row .navContent #checkinEventListing #noEventMessage {
+    margin-bottom: 1rem;
+}
+
+.row .navContent #checkinEventListing .listCheckedEvents {
+    background-color: var(--white);
+    border-radius: 500px;
+    box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.15);
+    padding: 1.5rem 2rem;
+    margin: 0.5rem 0;
+}
+
+.row .navContent #checkinEventListing .listCheckedEvents h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+
 }
 
 /********** NOTIFICATIONS ***********/
@@ -480,7 +513,6 @@ footer .social li a{
 }
 
 /********** SINGLE EVENT PAGE SETTINGS ***********/
-
 #eventHero {
     background-image: url("../images/event1.jpg");
     height: 100vh;
