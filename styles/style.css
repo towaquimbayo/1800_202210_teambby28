@@ -445,7 +445,7 @@ footer .social li a{
 }
 
 .row .contact-content {
-    background-image: url("../images/event3.jpg");
+    background-image: url("../images/events3.jpg");
     height: 100%;
     width: 100%;
     position: relative;
@@ -514,7 +514,7 @@ footer .social li a{
 
 /********** SINGLE EVENT PAGE SETTINGS ***********/
 #eventHero {
-    background-image: url("../images/event1.jpg");
+    background-image: url("../images/events1.jpg");
     height: 100vh;
     width: 100%;
     position: relative;

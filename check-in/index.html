@@ -38,7 +38,7 @@
         <div id="eventOverlay">
             <div class="eventHeader">
                 <a href="/single-event/">Go Back</a>
-                <h1>Women's Figure Skating</h1>
+                <h1>Men's Ice Hockey</h1>
                 <figcaption class="eventDate"><span>May 24, 2022</span></figcaption>
             </div>
         </div>
@@ -47,9 +47,9 @@
     <div class="wrapper eventWrapper">
         <div class="eventDetails row">
             <div class="eventDescRow col-12">
-                <h3>Check In For: <span>Women's Figure Skating</span></h3>
+                <h3>Check In For: <span>Men's Ice Hockey</span></h3>
                 <p><strong>Event Details</strong></p>
-                <p>Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?</p>
+                <p>Men's Ice Hockey is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?</p>
             </div>
 
             <div class="eventDescRow col-12">
@@ -57,9 +57,9 @@
                 <input type="file" id="eTicketPhoto" name="eTicketPhoto" accept=".jpg, .jpeg, .png">
             </div>
 
-            <div class="eventDescRow col-12 card">
-                <a class="checkInBtn" href="/check-in-confirmation/" role="button">Confirm Check-In</a>
-            </div>
+            <form class="eventDescRow col-12 card" id="checkInConfirmForm">
+                <a class="checkInBtn confirmCheckIn" href="/check-in-confirmation/" type="submit" role="button">Confirm Check-In</a>
+            </form>
         </div>
     </div>
 
