@@ -5,6 +5,9 @@ $(document).ready(function () {
     // Display User Name in Event Listings
     insertName();
 
+    // Display Event Cards
+    displayEvents('events');
+
     // Get profile in accounts page
     getProfile();
 
@@ -13,6 +16,8 @@ $(document).ready(function () {
 
     // Signout user
     signOut();
+    
+    
 
     // Account Password
     $("#show-hide-password .input-group-addon a").on('click', function (event) {
@@ -102,15 +107,15 @@ function updateProfile() {
         if (user) {
             const form = document.querySelector("#profileForm");
             currentUser = db.collection("users").doc(user.uid);
+            var newPassword = form.password.value;
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                // updatePassword();
                 currentUser.update({
                     firstName: form.firstName.value,
                     lastName: form.lastName.value,
                     phone: form.phone.value,
-                    email: form.email.value
+                    email: form.email.value,
                 })
                 .then(userDoc => {
                     window.location.replace(location.pathname);
@@ -118,27 +123,22 @@ function updateProfile() {
             });
         }
     })
-
-    // getProfile();
 }
 
-function updatePassword() {
-
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            const form = document.querySelector("#profileForm");
-            alert("Password Change!");
-            var user = firebase.auth().currentUser;
-            var newPassword = form.password.value;
-
-            user.updatePassword(newPassword).then(function () {
-                // Update successful.
-            }).catch(function (error) {
-                // An error happened.
-            });
-        }
-    })
-}
+// Doesnt work, may not need
+// function updatePassword() {
+//     const form = document.querySelector("#profileForm");
+//     var newPassword = form.password.value;
+//     firebase.auth().onAuthStateChanged(user => {
+//         if (user) {
+//             user.updatePassword(newPassword).then(function() {
+//                 console.log('successful password change!');
+//             }).catch(function(error) {
+//                 console.log("Theres a error here! " + error);
+//             })
+//         }
+//     })   
+// }
 
 function signOut() {
     const logout = document.querySelector('#logout');
@@ -171,6 +171,107 @@ function hideLoggedNav() {
     });
 }
 
+// Only used to populate data to firestore
+function pushEvents() {
+    var eventRef = db.collection("events");
+
+    eventRef.add({
+        name: "Women's Figure Skating",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Burnaby",
+        province: "BC",
+        time: "12:00PM - 15:30PM",
+        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Men's Ice Hockey",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Surrey",
+        province: "BC",
+        time: "09:45AM - 11:00PM",
+        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Men's Ski Jumping",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Vancouver",
+        province: "BC",
+        time: "12:00PM - 15:30PM",
+        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Women's Snowboarding",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Burnaby",
+        province: "BC",
+        time: "12:00PM - 15:30PM",
+        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Women's Figure Skating",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Burnaby",
+        province: "BC",
+        time: "12:00PM - 15:30PM",
+        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Men's Ice Hockey",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Richmond",
+        province: "BC",
+        time: "12:00PM - 15:30PM",
+        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Men's Ski Jumping",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Kamloops",
+        province: "BC",
+        time: "12:00PM - 15:30PM",
+        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Women's Snowboarding",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Vancouver",
+        province: "BC",
+        time: "12:00PM - 15:30PM",
+        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+}
+
+// Display event cards
+function displayEvents(collection) {
+    let cardTemplate = document.getElementById("eventCardTemplate");
+
+    db.collection(collection).get()
+        .then(snap => {
+            var i = 1;
+            snap.forEach(doc => { //iterate thru each doc
+                var title = doc.data().name;   // get value of the "name" key
+                var location = doc.data().location;   // get value of the "name" key
+                var time = doc.data().time;   // get value of the "time" key
+                let newcard = cardTemplate.content.cloneNode(true);
+
+                //update title and text and image
+                newcard.querySelector('.eventName').innerHTML = title;
+                newcard.querySelector('.eventLocation').innerHTML = location;
+                newcard.querySelector('.eventTime').innerHTML = time;
+                newcard.querySelector('.eventImage').src = "../images/" + collection + i + ".jpg"; //hikes.jpg
+
+                //give unique ids to all elements for future use
+                // newcard.querySelector('.eventName').setAttribute("id", "ctitle" + i);
+                // newcard.querySelector('.eventLocation').setAttribute("id", "cloc" + i);
+                // newcard.querySelector('.eventTime').setAttribute("id", "ctime" + i);
+                // newcard.querySelector('.eventImage').setAttribute("id", "cimage" + i);
+
+                //attach to gallery
+                document.getElementById(collection + "-display").appendChild(newcard);
+                i++;
+            })
+        })
+}
 
 /** NEXT STEPS */
 /**
@@ -179,8 +280,8 @@ function hideLoggedNav() {
  * 3) Add Events collection -> 1) Name 2) Location 3) Time 4) User-Waitlist: []
  * 4) User confirms check in -> User collection -> 1) waitList: true 2) activeList false 3) My-Events: [add checked in events from Events collection]
  * 5) User confirms check in -> Events collection -> 4) User-Waitlist: [add users with waitList: true]
- * 6) If a event reaches 10 users in waitList -> User collection (waitList: true) -> 1) waitList: false 2) activeList: true 
- * 7) Run a foreach loop to start countdown() for each user, add 3 mins to wait time incrementally 
+ * 6) If a event reaches 10 users in waitList -> User collection (waitList: true) -> 1) waitList: false 2) activeList: true
+ * 7) Run a foreach loop to start countdown() for each user, add 3 mins to wait time incrementally
  * 8) Display User wait time in accounts page, under My Events
  */
 

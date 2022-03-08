@@ -41,103 +41,20 @@
         <h1 id="welcomeUser">Hi <span style="color: #8C6FDB;" id="displayUserName"></span>!</h1>  
         <h1>Available Events</h1>
 
-        <div class="eventListings row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-4">
-            <div class="col singleEvent">
-                <div class="card">
-                    <img src="../images/event1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Women's Figure Skating</h5>
-                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
-                            <strong>Time:</strong> 12:00PM - 15:30PM
-                        </p>
-                        <a class="viewEvent" href="/single-event/" role="button">View Event</a>
+        <div class="eventListings row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-4" id="events-display">
+            <template id="eventCardTemplate">
+                <div class="col singleEvent">
+                    <div class="card">
+                        <img src="" class="card-img-top eventImage" alt="Event Card">
+                        <div class="card-body">
+                            <h5 class="card-title eventName"></h5>
+                            <p class="card-text"><strong>Location: </strong><span class="eventLocation"></span><br />
+                                <strong>Time: </strong><span class="eventTime"></span></p>
+                            <a class="viewEvent" href="/single-event/" role="button">View Event</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col singleEvent">
-                <div class="card">
-                    <img src="../images/event2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Men's Ice Hockey</h5>
-                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
-                            <strong>Time:</strong> 12:00PM - 15:30PM
-                        </p>
-                        <a class="viewEvent" href="/single-event/" role="button">View Event</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col singleEvent">
-                <div class="card">
-                    <img src="../images/event3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Men's Ski Jumping</h5>
-                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
-                            <strong>Time:</strong> 12:00PM - 15:30PM
-                        </p>
-                        <a class="viewEvent" href="/single-event/" role="button">View Event</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col singleEvent">
-                <div class="card">
-                    <img src="../images/event1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Women's Snowboarding</h5>
-                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
-                            <strong>Time:</strong> 12:00PM - 15:30PM
-                        </p>
-                        <a class="viewEvent" href="/single-event/" role="button">View Event</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col singleEvent">
-                <div class="card">
-                    <img src="../images/event2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Women's Figure Skating</h5>
-                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
-                            <strong>Time:</strong> 12:00PM - 15:30PM
-                        </p>
-                        <a class="viewEvent" href="/single-event/" role="button">View Event</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col singleEvent">
-                <div class="card">
-                    <img src="../images/event3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Men's Ice Hockey</h5>
-                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
-                            <strong>Time:</strong> 12:00PM - 15:30PM
-                        </p>
-                        <a class="viewEvent" href="/single-event/" role="button">View Event</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col singleEvent">
-                <div class="card">
-                    <img src="../images/event1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Men's Ski Jumping</h5>
-                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
-                            <strong>Time:</strong> 12:00PM - 15:30PM
-                        </p>
-                        <a class="viewEvent" href="/single-event/" role="button">View Event</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col singleEvent">
-                <div class="card">
-                    <img src="../images/event2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Women's Snowboarding</h5>
-                        <p class="card-text"><strong>Location:</strong> 3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br />
-                            <strong>Time:</strong> 12:00PM - 15:30PM
-                        </p>
-                        <a class="viewEvent" href="/single-event/" role="button">View Event</a>
-                    </div>
-                </div>
-            </div>
+            </template>
         </div>
     </div>
 
