@@ -680,3 +680,7 @@ footer .social li a{
 .checkWrapper {
     margin-top: 5rem;
 }
+
+#map-widget {
+    width: 100%
+}
