@@ -105,6 +105,7 @@ function updateProfile() {
         if (user) {
             const form = document.querySelector("#profileForm");
             currentUser = db.collection("users").doc(user.uid);
+            updatePassword();
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -122,41 +123,20 @@ function updateProfile() {
     })
 }
 
-// User confirms check in -> User collection -> 1) waitList: true 2) activeList false 3) My-Events: [add checked in events from Events collection]
-function checkIn() {
+// Doesnt work, may not need
+function updatePassword() {
+    const form = document.querySelector("#profileForm");
+    var newPassword = form.password.value;
     firebase.auth().onAuthStateChanged(user => {
-        if(user) {
-            const form = document.querySelector('#checkInConfirmForm');
-            currentuser = db.collection('users').doc(user.uid);
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                currentUser.update({
-                    waitList: true
-                }, 
-                currentUser.add({
-                    
-                }))
+        if (user) {
+            user.updatePassword(newPassword).then(function() {
+                console.log('successful password change!');
+            }).catch(function(error) {
+                console.log("Theres a error here! " + error);
             })
         }
-    })
+    })   
 }
-
-
-// Doesnt work, may not need
-// function updatePassword() {
-//     const form = document.querySelector("#profileForm");
-//     var newPassword = form.password.value;
-//     firebase.auth().onAuthStateChanged(user => {
-//         if (user) {
-//             user.updatePassword(newPassword).then(function() {
-//                 console.log('successful password change!');
-//             }).catch(function(error) {
-//                 console.log("Theres a error here! " + error);
-//             })
-//         }
-//     })   
-// }
 
 function signOut() {
     const logout = document.querySelector('#logout');
@@ -282,6 +262,26 @@ function displayEvents(collection) {
                 i++;
             })
         })
+}
+
+// User confirms check in -> User collection -> 1) waitList: true 2) activeList false 3) My-Events: [add checked in events from Events collection]
+function checkIn() {
+    firebase.auth().onAuthStateChanged(user => {
+        if(user) {
+            const form = document.querySelector('#checkInConfirmForm');
+            currentuser = db.collection('users').doc(user.uid);
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                currentUser.update({
+                    waitList: true
+                }, 
+                currentUser.add({
+                    timestamp:  firebase.firestore.FieldValue.serverTimestamp()
+                }))
+            })
+        }
+    })
 }
 
 /** NEXT STEPS */

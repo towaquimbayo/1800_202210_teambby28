@@ -52,14 +52,15 @@
                 <p>Men's Ice Hockey is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?</p>
             </div>
 
-            <div class="eventDescRow col-12 col-lg-2 float-lg-start">
-                <label for="eTicketPhoto">Choose a profile picture: <strong style="color: #ff0000;">(Only JPG, JPEG or PNG)</strong></label> <br>
-                <input type="file" id="eTicketPhoto" name="eTicketPhoto" accept=".jpg, .jpeg, .png">
-            </div>
-            <div class="eventDescRow col-0 col-lg-1">
-            </div>
-            <form class="eventDescRow col-12 col-lg-9 card float-lg-end" id="checkInConfirmForm">
-                <a class="checkInBtn confirmCheckIn" href="/check-in-confirmation/" type="submit" role="button">Confirm Check-In</a>
+            <form id="checkInConfirmForm">
+                <div class="eventDescRow col-12">
+                    <label for="eTicketPhoto">Choose a profile picture: <strong style="color: #ff0000;">(Only JPG, JPEG or PNG)</strong></label> <br>
+                    <input type="file" id="eTicketPhoto" name="eTicketPhoto" accept=".jpg, .jpeg, .png">
+                </div>
+    
+                <div class="eventDescRow col-12 card">
+                    <a class="checkInBtn confirmCheckIn" href="/check-in-confirmation/" type="submit" role="button">Confirm Check-In</a>
+                </div>
             </form>
         </div>
     </div>
