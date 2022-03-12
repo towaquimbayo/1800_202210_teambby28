@@ -284,18 +284,20 @@ function checkIn() {
     })
 }
 
-/** NEXT STEPS */
+/*********** NEXT STEPS ************/
 /**
- * 1) Fix password change on my account
- * 2) Edit User collection -> Add 1) waitList: false 2) activeList: false 3) My-Events: []
- * 3) Add Events collection -> 1) Name 2) Location 3) Time 4) User-Waitlist: []
- * 
- * 4) User confirms check in -> User collection -> 1) waitList: true 2) activeList false 3) My-Events: [add checked in events from Events collection]
- * 5) User confirms check in -> Events collection -> 4) User-Waitlist: [add users with waitList: true]
- * 
- * 6) If a event reaches 10 users in waitList -> User collection (waitList: true) -> 1) waitList: false 2) activeList: true
- * 7) Run a foreach loop to start countdown() for each user, add 3 mins to wait time incrementally
- * 8) Display User wait time in accounts page, under My Events
+ * 1) Single events page populated from database (local session, grab event ID)
+ * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID
+ * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue
+ * 4) My Events page -> Display "Please Wait" button (disabled)  
+ * 5) User Collection (Checked in User) -> Update the status: "Wait";
+ * 6) Function for batchManager() -> Run a loop for every 90 seconds -> 
+ *          7) Add checked in event to checked in user (currentEvent: event1IDName);
+ *          8) Check if there are 3 users in the batch 
+ *          9) If there are 3 users -> 
+ *                 10) Display a "Enter Now" button on My Events for all queued user 
+ *                 11) Reset the batch (timer and delete all users from current queue)
+ *                 12) Updates user status: "Enter Now";
  */
 
 
