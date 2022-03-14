@@ -554,6 +554,8 @@ footer .social li a{
     position: absolute;
     bottom: 12rem;
     color: var(--white);
+    padding: 1rem 1rem;
+    background-color: rgba(81, 64, 128, 0.5);
 }
 
 #eventHero #eventOverlay .eventHeader a {
@@ -574,7 +576,7 @@ footer .social li a{
     position: absolute;
     bottom: 12rem;
     right: 0;
-    background-color: rgba(141, 112, 219, 0.5);
+    background-color: rgba(114, 90, 179, 0.418);
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 }
@@ -619,6 +621,7 @@ footer .social li a{
 
 .eventWrapper .eventDetails .eventDescRow#eventTime {
     text-align: right;
+    font-size: 1.7rem;
 }
 
 .eventWrapper .eventDetails .eventDescRow h3 {
@@ -653,6 +656,9 @@ footer .social li a{
     margin-bottom: 1.5rem;
 }
 
+.eventWrapper .eventDetails .eventDescRow #eventDetails {
+    font-size: 1.2rem;
+}
 .eventWrapper .eventDetails .eventDescRow.card {
     border: none;
 }

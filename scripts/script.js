@@ -178,6 +178,8 @@ function pushEvents() {
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Burnaby",
         province: "BC",
+        id: "AA1",
+        date: "February 1th, 2030",
         time: "12:00PM - 15:30PM",
         description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
@@ -186,6 +188,8 @@ function pushEvents() {
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Surrey",
         province: "BC",
+        id: "AA2",
+        date: "February 2nd, 2030",
         time: "09:45AM - 11:00PM",
         description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
@@ -194,6 +198,8 @@ function pushEvents() {
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Vancouver",
         province: "BC",
+        id: "AA3",
+        date: "February 3rd, 2030",
         time: "12:00PM - 15:30PM",
         description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
@@ -202,6 +208,8 @@ function pushEvents() {
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Burnaby",
         province: "BC",
+        id: "AA4",
+        date: "February 4th, 2030",
         time: "12:00PM - 15:30PM",
         description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
@@ -210,6 +218,8 @@ function pushEvents() {
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Burnaby",
         province: "BC",
+        id: "AA5",
+        date: "February 5th, 2030",
         time: "12:00PM - 15:30PM",
         description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
@@ -218,6 +228,8 @@ function pushEvents() {
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Richmond",
         province: "BC",
+        id: "AA5",
+        date: "February 6th, 2030",
         time: "12:00PM - 15:30PM",
         description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
@@ -226,6 +238,8 @@ function pushEvents() {
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Kamloops",
         province: "BC",
+        id: "AA6",
+        date: "February 7th, 2030",
         time: "12:00PM - 15:30PM",
         description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
@@ -234,6 +248,8 @@ function pushEvents() {
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Vancouver",
         province: "BC",
+        id: "AA7",
+        date: "February 8th, 2030",
         time: "12:00PM - 15:30PM",
         description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
@@ -250,6 +266,8 @@ function displayEvents(collection) {
                 var title = doc.data().name;   // get value of the "name" key
                 var location = doc.data().location;   // get value of the "location" key
                 var time = doc.data().time;   // get value of the "time" key
+                var eventID = doc.data().id; // get "id" key the of event
+                console.log(eventID);
                 let newcard = cardTemplate.content.cloneNode(true);
 
                 // update title and text and image
@@ -257,6 +275,7 @@ function displayEvents(collection) {
                 newcard.querySelector('.eventLocation').innerHTML = location;
                 newcard.querySelector('.eventTime').innerHTML = time;
                 newcard.querySelector('.eventImage').src = "../images/" + collection + i + ".jpg"; 
+                newcard.querySelector('a').onclick = () => setEventData(eventID);
                 //attach to gallery
                 document.getElementById(collection + "-display").appendChild(newcard);
                 i++;
@@ -283,6 +302,65 @@ function checkIn() {
         }
     })
 }
+
+// function to set event id 
+function setEventData(id){
+    localStorage.setItem ('eventID', id);
+}
+
+// test function to see if local changes
+function testID() {
+    let eventID = localStorage.getItem("eventID");
+    console.log(eventID);
+}
+  
+// function to populate the single events page
+function populatePage() {
+  // get collection 
+  let eventID = localStorage.getItem("eventID");
+  db.collection("events").where("id", "==", eventID)
+    .get()
+    .then(queryEvent => {
+        // see how many results are found for this query
+        size = queryEvent.size;
+        // get docs of query
+        EventsQ = queryEvent.docs;
+
+        // check to see no duplicate events under 1 id
+        if (size = 1) {
+            var thisEvent = EventsQ[0].data();
+
+            eventName = thisEvent.name;
+            // console.log(eventName);
+            document.getElementById("eventName").innerHTML = eventName;
+
+            eventDesc = thisEvent.description;
+            // console.log(eventName);
+            document.getElementById("eventDetails").innerHTML = eventDesc;
+
+            eventLocation = thisEvent.location;
+            // console.log(eventName);
+            document.getElementById("eventLocation").innerHTML = eventLocation;
+
+            eventTime = thisEvent.time;
+            // console.log(eventName);
+            document.getElementById("eventTime").innerHTML = eventTime;
+            
+            eventDate = thisEvent.date;
+            document.getElementById("eventDate").innerHTML = eventDate;
+
+        } else {
+            console.log("Query has > 1 data")
+        }
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
+
+}
+  
+populatePage();
+
 
 /*********** NEXT STEPS ************/
 /**

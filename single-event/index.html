@@ -38,32 +38,32 @@
         <div id="eventOverlay">
             <div class="eventHeader">
                 <a href="/event-listings/">Return to Events</a>
-                <h1>Men's Ice Hockey</h1>
-                <figcaption class="eventDate"><span>May 24, 2022</span></figcaption>
+                <h1 id="eventName">Event name goes here</h1>
+                <figcaption><span class="eventDate" id="eventDate">Date goes here</span></figcaption>
             </div>
         </div>
     </div>
 
     <div class="wrapper eventWrapper">
         <div class="eventDetails row">
-            <div class="eventDescRow col-md-6 col-sm-12">
-                <p><strong>Location: </strong>3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br>Entry at SW Lot #3</p>
+            <div class="eventDescRow location col-md-6 col-sm-12">
+                <p><strong>Location: </strong> <span id="eventLocation">Location Goes Here</span></p>
             </div>
-            <div class="eventDescRow col-md-6 col-sm-12" id="eventTime">
-                <p><strong>Time: </strong>12:00PM - 15:30PM</p>
+            <div class="eventDescRow time col-md-6 col-sm-12" id="eventTime">
+                <p><strong>Time: </strong>Time goes here</p>
             </div>
 
-            <div class="eventDescRow col-12">
+            <div class="eventDescRow details col-12">
                 <p><strong>Event Details</strong></p>
-                <p>Men's Ice Hockey is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?</p>
+                <span id="eventDetails">Event details goes here</span>
             </div>
 
-            <div class="eventDescRow col-12">
+            <div class="eventDescRow map col-12">
                 <p><strong>Google Maps</strong></p>
                 <iframe id="map-widget" height="450" style="border:0" loading="lazy" allowfullscreen></iframe>
             </div>
 
-            <div class="eventDescRow col-12 card logged-in-btn">
+            <div class="eventDescRow check col-12 card logged-in-btn">
                 <a class="checkInBtn" href="/check-in/" role="button">Check In</a>
             </div>
         </div>
@@ -86,6 +86,7 @@
     <!-- Custom JS -->
     <script src="../scripts/script.js"></script>
     <script src="../scripts/loadMap.js"></script>
+    <script src="../scripts/single_event.js"></script>
 
     <!-- Bootstrap Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
