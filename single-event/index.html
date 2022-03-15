@@ -38,8 +38,10 @@
         <div id="eventOverlay">
             <div class="eventHeader">
                 <a href="/event-listings/">Return to Events</a>
-                <h1 id="eventName">Event name goes here</h1>
-                <figcaption><span class="eventDate" id="eventDate">Date goes here</span></figcaption>
+                <!-- Event name goes here -->
+                <h1 id="eventName"></h1>
+                <!-- Date goes here -->
+                <span class="eventDate" id="eventDate"></span>
             </div>
         </div>
     </div>
@@ -47,15 +49,18 @@
     <div class="wrapper eventWrapper">
         <div class="eventDetails row">
             <div class="eventDescRow location col-md-6 col-sm-12">
-                <p><strong>Location: </strong> <span id="eventLocation">Location Goes Here</span></p>
+                <!-- Location Goes Here -->
+                <p><strong>Location: </strong><span id="eventLocation"></span></p>
             </div>
-            <div class="eventDescRow time col-md-6 col-sm-12" id="eventTime">
-                <p><strong>Time: </strong>Time goes here</p>
+            <div class="eventDescRow time col-md-6 col-sm-12" id="disRight">
+                <!-- Time goes here -->
+                <p><strong>Time: </strong><span id="eventTime"></span></p>
             </div>
 
             <div class="eventDescRow details col-12">
                 <p><strong>Event Details</strong></p>
-                <span id="eventDetails">Event details goes here</span>
+                <!-- Event details goes here -->
+                <p><span id="eventDetails"></span></p>
             </div>
 
             <div class="eventDescRow map col-12">
@@ -86,7 +91,6 @@
     <!-- Custom JS -->
     <script src="../scripts/script.js"></script>
     <script src="../scripts/loadMap.js"></script>
-    <script src="../scripts/single_event.js"></script>
 
     <!-- Bootstrap Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

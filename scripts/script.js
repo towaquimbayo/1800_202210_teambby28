@@ -115,9 +115,9 @@ function updateProfile() {
                     phone: form.phone.value,
                     email: form.email.value,
                 })
-                .then(userDoc => {
-                    window.location.replace(location.pathname);
-                })
+                    .then(userDoc => {
+                        window.location.replace(location.pathname);
+                    })
             });
         }
     })
@@ -129,13 +129,13 @@ function updatePassword() {
     var newPassword = form.password.value;
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            user.updatePassword(newPassword).then(function() {
+            user.updatePassword(newPassword).then(function () {
                 console.log('successful password change!');
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log("Theres a error here! " + error);
             })
         }
-    })   
+    })
 }
 
 function signOut() {
@@ -172,86 +172,85 @@ function hideLoggedNav() {
 // Only used to populate data to firestore
 function pushEvents() {
     var eventRef = db.collection("events");
-
-    eventRef.add({
-        name: "Women's Figure Skating",
-        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
-        city: "Burnaby",
-        province: "BC",
-        id: "AA1",
-        date: "February 1th, 2030",
-        time: "12:00PM - 15:30PM",
-        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
-    });
     eventRef.add({
         name: "Men's Ice Hockey",
-        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        location: "3700 Willingdon Ave, Surrey, BC V5G 3H2",
         city: "Surrey",
         province: "BC",
-        id: "AA2",
-        date: "February 2nd, 2030",
+        id: "AA1",
+        date: "April 2nd, 2030",
         time: "09:45AM - 11:00PM",
-        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
-    });
-    eventRef.add({
-        name: "Men's Ski Jumping",
-        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
-        city: "Vancouver",
-        province: "BC",
-        id: "AA3",
-        date: "February 3rd, 2030",
-        time: "12:00PM - 15:30PM",
-        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
-    });
-    eventRef.add({
-        name: "Women's Snowboarding",
-        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
-        city: "Burnaby",
-        province: "BC",
-        id: "AA4",
-        date: "February 4th, 2030",
-        time: "12:00PM - 15:30PM",
-        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+        description: "Men's Ice Hockey is taking place on April 2nd, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
     eventRef.add({
         name: "Women's Figure Skating",
         location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
         city: "Burnaby",
         province: "BC",
-        id: "AA5",
-        date: "February 5th, 2030",
+        id: "AA2",
+        date: "April 6th, 2030",
         time: "12:00PM - 15:30PM",
-        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+        description: "Women's Figure Skating is taking place on April 6th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
     eventRef.add({
-        name: "Men's Ice Hockey",
-        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        name: "Women's Ski Jumping",
+        location: "3700 Willingdon Ave, Richmond, BC V5G 3H2",
         city: "Richmond",
         province: "BC",
-        id: "AA5",
-        date: "February 6th, 2030",
-        time: "12:00PM - 15:30PM",
-        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+        id: "AA3",
+        date: "April 15th, 2030",
+        time: "11:00AM - 14:30PM",
+        description: "Women's Ski Jumping is taking place on April 15th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
     eventRef.add({
         name: "Men's Ski Jumping",
-        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
-        city: "Kamloops",
+        location: "3700 Willingdon Ave, Vancouver, BC V5G 3H2",
+        city: "Vancouver",
         province: "BC",
-        id: "AA6",
-        date: "February 7th, 2030",
-        time: "12:00PM - 15:30PM",
-        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+        id: "AA4",
+        date: "April 21st, 2030",
+        time: "09:45AM - 11:00PM",
+        description: "Men's Ski Jumping is taking place on April 21st, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Men's Figure Skating",
+        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        city: "Burnaby",
+        province: "BC",
+        id: "AA5",
+        date: "April 30th, 2030",
+        time: "13:00PM - 16:00PM",
+        description: "Men's Figure Skating is taking place on April 30th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
     eventRef.add({
         name: "Women's Snowboarding",
-        location: "3700 Willingdon Ave, Burnaby, BC V5G 3H2",
+        location: "3700 Willingdon Ave, Vancouver, BC V5G 3H2",
         city: "Vancouver",
         province: "BC",
+        id: "AA6",
+        date: "May 1st, 2030",
+        time: "08:45AM - 11:00AM",
+        description: "Women's Snowboarding is taking place on May 1st, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Women's Ski Jumping",
+        location: "3700 Willingdon Ave, Richmond, BC V5G 3H2",
+        city: "Richmond",
+        province: "BC",
         id: "AA7",
-        date: "February 8th, 2030",
+        date: "May 5th, 2030",
         time: "12:00PM - 15:30PM",
-        description: "Women's Figure Skating is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+        description: "Women's Ski Jumping is taking place on May 5th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+    });
+    eventRef.add({
+        name: "Men's Snowboarding",
+        location: "3700 Willingdon Ave, Surrey, BC V5G 3H2",
+        city: "Surrey",
+        province: "BC",
+        id: "AA8",
+        date: "May 9th, 2030",
+        time: "09:00AM - 11:30AM",
+        description: "Men's Snowboarding is taking place on May 9th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
 }
 
@@ -267,15 +266,15 @@ function displayEvents(collection) {
                 var location = doc.data().location;   // get value of the "location" key
                 var time = doc.data().time;   // get value of the "time" key
                 var eventID = doc.data().id; // get "id" key the of event
-                console.log(eventID);
+                // console.log("EVENT ID HERE: " + eventID);
                 let newcard = cardTemplate.content.cloneNode(true);
 
                 // update title and text and image
                 newcard.querySelector('.eventName').innerHTML = title;
                 newcard.querySelector('.eventLocation').innerHTML = location;
                 newcard.querySelector('.eventTime').innerHTML = time;
-                newcard.querySelector('.eventImage').src = "../images/" + collection + i + ".jpg"; 
-                newcard.querySelector('a').onclick = () => setEventData(eventID);
+                newcard.querySelector('.eventImage').src = "../images/" + eventID + ".jpg";
+                newcard.querySelector('.viewEvent').onclick = () => setEventData(eventID);
                 //attach to gallery
                 document.getElementById(collection + "-display").appendChild(newcard);
                 i++;
@@ -286,7 +285,7 @@ function displayEvents(collection) {
 // User confirms check in -> User collection -> 1) waitList: true 2) activeList false 3) My-Events: [add checked in events from Events collection]
 function checkIn() {
     firebase.auth().onAuthStateChanged(user => {
-        if(user) {
+        if (user) {
             const form = document.querySelector('#checkInConfirmForm');
             currentuser = db.collection('users').doc(user.uid);
 
@@ -294,71 +293,63 @@ function checkIn() {
                 e.preventDefault();
                 currentUser.update({
                     waitList: true
-                }, 
-                currentUser.add({
-                    timestamp:  firebase.firestore.FieldValue.serverTimestamp()
-                }))
+                },
+                    currentUser.add({
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    }))
             })
         }
     })
 }
 
 // function to set event id 
-function setEventData(id){
-    localStorage.setItem ('eventID', id);
+function setEventData(id) {
+    localStorage.setItem('eventID', id);
 }
 
-// test function to see if local changes
-function testID() {
-    let eventID = localStorage.getItem("eventID");
-    console.log(eventID);
-}
-  
 // function to populate the single events page
 function populatePage() {
-  // get collection 
-  let eventID = localStorage.getItem("eventID");
-  db.collection("events").where("id", "==", eventID)
-    .get()
-    .then(queryEvent => {
-        // see how many results are found for this query
-        size = queryEvent.size;
-        // get docs of query
-        EventsQ = queryEvent.docs;
-
-        // check to see no duplicate events under 1 id
-        if (size = 1) {
-            var thisEvent = EventsQ[0].data();
-
-            eventName = thisEvent.name;
-            // console.log(eventName);
-            document.getElementById("eventName").innerHTML = eventName;
-
-            eventDesc = thisEvent.description;
-            // console.log(eventName);
-            document.getElementById("eventDetails").innerHTML = eventDesc;
-
-            eventLocation = thisEvent.location;
-            // console.log(eventName);
-            document.getElementById("eventLocation").innerHTML = eventLocation;
-
-            eventTime = thisEvent.time;
-            // console.log(eventName);
-            document.getElementById("eventTime").innerHTML = eventTime;
+    // get collection 
+    let eventID = localStorage.getItem("eventID");
+    db.collection("events").where("id", "==", eventID)
+        .get()
+        .then(queryEvent => {
+            // see how many results are found for this query
+            size = queryEvent.size;
+            // get docs of query
+            EventsQ = queryEvent.docs;
             
-            eventDate = thisEvent.date;
-            document.getElementById("eventDate").innerHTML = eventDate;
+            // check to see no duplicate events under 1 id
+            if (size == 1) {
+                var thisEvent = EventsQ[0].data();
+                
+                eventName = thisEvent.name;
+                document.getElementById("eventName").innerHTML = eventName;
+                
+                document.getElementById("eventHero").style.backgroundImage = "url(../images/" + eventID + ".jpg)";
 
-        } else {
-            console.log("Query has > 1 data")
-        }
-    })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
+                eventDesc = thisEvent.description;
+                document.getElementById("eventDetails").innerHTML = eventDesc;
+
+                eventLocation = thisEvent.location;
+                document.getElementById("eventLocation").innerHTML = eventLocation;
+
+                eventTime = thisEvent.time;
+                document.getElementById("eventTime").innerHTML = eventTime;
+
+                eventDate = thisEvent.date;
+                document.getElementById("eventDate").innerHTML = eventDate;
+
+            } else {
+                console.log("Query has > 1 data");
+            }
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
 
 }
-  
+
 populatePage();
 
 
@@ -367,13 +358,13 @@ populatePage();
  * 1) Single events page populated from database (local session, grab event ID)
  * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID
  * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue
- * 4) My Events page -> Display "Please Wait" button (disabled)  
+ * 4) My Events page -> Display "Please Wait" button (disabled)
  * 5) User Collection (Checked in User) -> Update the status: "Wait";
- * 6) Function for batchManager() -> Run a loop for every 90 seconds -> 
+ * 6) Function for batchManager() -> Run a loop for every 90 seconds ->
  *          7) Add checked in event to checked in user (currentEvent: event1IDName);
- *          8) Check if there are 3 users in the batch 
- *          9) If there are 3 users -> 
- *                 10) Display a "Enter Now" button on My Events for all queued user 
+ *          8) Check if there are 3 users in the batch
+ *          9) If there are 3 users ->
+ *                 10) Display a "Enter Now" button on My Events for all queued user
  *                 11) Reset the batch (timer and delete all users from current queue)
  *                 12) Updates user status: "Enter Now";
  */

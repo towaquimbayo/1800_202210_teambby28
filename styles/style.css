@@ -514,7 +514,7 @@ footer .social li a{
 
 /********** SINGLE EVENT PAGE SETTINGS ***********/
 #eventHero {
-    background-image: url("../images/events1.jpg");
+    /* background-image: url("../images/events1.jpg"); */
     height: 100vh;
     width: 100%;
     position: relative;
@@ -554,8 +554,6 @@ footer .social li a{
     position: absolute;
     bottom: 12rem;
     color: var(--white);
-    padding: 1rem 1rem;
-    background-color: rgba(81, 64, 128, 0.5);
 }
 
 #eventHero #eventOverlay .eventHeader a {
@@ -566,6 +564,7 @@ footer .social li a{
     bottom: 18rem;
     color: var(--white);
     cursor: pointer;
+    padding-bottom: 1.5rem;
 }
 
 #eventHero #eventOverlay .eventHeader .eventDate {
@@ -576,7 +575,7 @@ footer .social li a{
     position: absolute;
     bottom: 12rem;
     right: 0;
-    background-color: rgba(114, 90, 179, 0.418);
+    background-color: rgba(140, 111, 219, 0.5);
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 }
@@ -596,7 +595,7 @@ footer .social li a{
     -moz-filter: blur(3px);
     -o-filter: blur(3px);
     -ms-filter: blur(3px);
-    z-index: 0;
+    z-index: -1;
 }
 
 #eventHero #eventOverlay .eventHeader .eventDate span {
@@ -619,9 +618,8 @@ footer .social li a{
     padding: 1.5rem 0;
 }
 
-.eventWrapper .eventDetails .eventDescRow#eventTime {
+.eventWrapper .eventDetails .eventDescRow#disRight {
     text-align: right;
-    font-size: 1.7rem;
 }
 
 .eventWrapper .eventDetails .eventDescRow h3 {
@@ -656,9 +654,6 @@ footer .social li a{
     margin-bottom: 1.5rem;
 }
 
-.eventWrapper .eventDetails .eventDescRow #eventDetails {
-    font-size: 1.2rem;
-}
 .eventWrapper .eventDetails .eventDescRow.card {
     border: none;
 }

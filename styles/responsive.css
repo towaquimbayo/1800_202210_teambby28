@@ -165,7 +165,7 @@
         color: var(--black);
         line-height: 2rem;
     }
-    .eventWrapper .eventDetails .eventDescRow#eventTime {
+    .eventWrapper .eventDetails .eventDescRow#disRight {
         text-align: left;
     }
     .eventWrapper .eventDetails .eventDescRow .checkInBtn {
@@ -300,7 +300,7 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-    .eventWrapper .eventDetails .eventDescRow#eventTime {
+    .eventWrapper .eventDetails .eventDescRow#disRight {
         text-align: left;
     }
     .checkWrapper {
