@@ -8,6 +8,12 @@ $(document).ready(function () {
     // Display Event Cards
     displayEvents('events');
 
+    // Poplate Single Events
+    populatePage();
+
+    // Check In
+    checkIn();
+
     // Get profile in accounts page
     getProfile();
 
@@ -48,20 +54,19 @@ function insertName() {
         // Check if user is signed in:
         if (user) {
             // Do something for the current logged-in user here: 
-            console.log(user.uid);
-            console.log("User is logged in!");
+            // console.log(user.uid);
+            // console.log("User is logged in!");
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
             //get the document for current user.
             currentUser.get()
                 .then(userDoc => {
-                    var user_Name = userDoc.data().firstName;
-                    console.log(user_Name);
-                    document.getElementById("displayUserName").innerText = user_Name;
+                    var userName = userDoc.data().firstName;
+                    document.getElementById("displayUserName").innerText = userName;
                 })
         } else {
             welcomeMessage = document.getElementById("welcomeUser").style.display = "none";
-            console.log("User not logged in!");
+            // console.log("User not logged in!");
         }
     });
 }
@@ -69,8 +74,8 @@ function insertName() {
 function getProfile() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            console.log(user.uid);
-            console.log("User is account details here!");
+            // console.log(user.uid);
+            // console.log("User is account details here!");
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
             //get the document for current user.
@@ -170,6 +175,7 @@ function hideLoggedNav() {
 }
 
 // Only used to populate data to firestore
+// pushEvents()
 function pushEvents() {
     var eventRef = db.collection("events");
     eventRef.add({
@@ -282,26 +288,6 @@ function displayEvents(collection) {
         })
 }
 
-// User confirms check in -> User collection -> 1) waitList: true 2) activeList false 3) My-Events: [add checked in events from Events collection]
-function checkIn() {
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            const form = document.querySelector('#checkInConfirmForm');
-            currentuser = db.collection('users').doc(user.uid);
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                currentUser.update({
-                    waitList: true
-                },
-                    currentUser.add({
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                    }))
-            })
-        }
-    })
-}
-
 // function to set event id 
 function setEventData(id) {
     localStorage.setItem('eventID', id);
@@ -318,14 +304,14 @@ function populatePage() {
             size = queryEvent.size;
             // get docs of query
             EventsQ = queryEvent.docs;
-            
+
             // check to see no duplicate events under 1 id
             if (size == 1) {
                 var thisEvent = EventsQ[0].data();
-                
+
                 eventName = thisEvent.name;
                 document.getElementById("eventName").innerHTML = eventName;
-                
+
                 document.getElementById("eventHero").style.backgroundImage = "url(../images/" + eventID + ".jpg)";
 
                 eventDesc = thisEvent.description;
@@ -347,19 +333,41 @@ function populatePage() {
         .catch((error) => {
             console.log("Error getting documents: ", error);
         });
-
 }
 
-populatePage();
-
+// User confirms check in 
+function checkIn() {
+    firebase.auth().onAuthStateChanged(user => {
+        var currEvent = localStorage.getItem("eventID");
+        if (user) {
+            const form = document.querySelector('#checkInConfirmForm');
+            currentuser = db.collection('users').doc(user.uid);
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                currentUser.update({
+                    checkinTime: firebase.firestore.FieldValue.serverTimestamp(),
+                    currentevent: currEvent,
+                    status: "Wait"
+                })
+                .then(userDoc => {
+                    window.location.replace("/check-in-confirmation/");
+                })
+            });
+        }
+    })
+}
 
 /*********** NEXT STEPS ************/
 /**
- * 1) Single events page populated from database (local session, grab event ID)
+ * 1) Single events page populated from database (local session, grab event ID) // DONE
+ * 5) User Collection (Checked in User) -> Update the status: "Wait"; // DONE
+ *
+ *
+ *
  * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID
  * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue
  * 4) My Events page -> Display "Please Wait" button (disabled)
- * 5) User Collection (Checked in User) -> Update the status: "Wait";
  * 6) Function for batchManager() -> Run a loop for every 90 seconds ->
  *          7) Add checked in event to checked in user (currentEvent: event1IDName);
  *          8) Check if there are 3 users in the batch
