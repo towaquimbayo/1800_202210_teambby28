@@ -513,7 +513,8 @@ footer .social li a{
 }
 
 /********** SINGLE EVENT PAGE SETTINGS ***********/
-#eventHero {
+#eventHero,
+#eventHeroCheck {
     /* background-image: url("../images/events1.jpg"); */
     height: 100vh;
     width: 100%;
@@ -524,7 +525,8 @@ footer .social li a{
     z-index: 1;
 }
 
-#eventHero:after {
+#eventHero:after,
+#eventHeroCheck:after {
     content: "";
     position: absolute;
     left: 0;
@@ -537,18 +539,21 @@ footer .social li a{
     z-index: -1;
 }
 
-#eventHero #eventOverlay {
+#eventHero #eventOverlay,
+#eventHeroCheck #eventOverlay {
     background: linear-gradient(0deg, var(--black), transparent, transparent);
     height: 100%;
 }
 
-#eventHero #eventOverlay .eventHeader {
+#eventHero #eventOverlay .eventHeader,
+#eventHeroCheck #eventOverlay .eventHeader {
     padding: 0rem 5rem;
     display: flex;
     flex-direction: row;
 }
 
-#eventHero #eventOverlay .eventHeader h1 {
+#eventHero #eventOverlay .eventHeader h1,
+#eventHeroCheck #eventOverlay .eventHeader h1 {
     font-size: 3rem;
     font-weight: 700;
     position: absolute;
@@ -556,7 +561,8 @@ footer .social li a{
     color: var(--white);
 }
 
-#eventHero #eventOverlay .eventHeader a {
+#eventHero #eventOverlay .eventHeader a,
+#eventHeroCheck #eventOverlay .eventHeader a {
     font-size: 1.3rem;
     text-decoration: underline;
     font-weight: 400;
@@ -567,7 +573,8 @@ footer .social li a{
     padding-bottom: 1.5rem;
 }
 
-#eventHero #eventOverlay .eventHeader .eventDate {
+#eventHero #eventOverlay .eventHeader #eventDate,
+#eventHeroCheck #eventOverlay .eventHeader #eventDateCheck {
     font-size: 2rem;
     font-weight: 500;
     padding: 2rem 5rem;
@@ -580,7 +587,8 @@ footer .social li a{
     border-bottom-left-radius: 20px;
 }
 
-#eventHero #eventOverlay .eventHeader .eventDate:before {
+#eventHero #eventOverlay .eventHeader #eventDate:before,
+#eventHeroCheck #eventOverlay .eventHeader #eventDateCheck:before {
     content: "";
     position: absolute;
     width: 100%;
@@ -598,7 +606,8 @@ footer .social li a{
     z-index: -1;
 }
 
-#eventHero #eventOverlay .eventHeader .eventDate span {
+#eventHero #eventOverlay .eventHeader #eventDate span,
+#eventHeroCheck #eventOverlay .eventHeader #eventDateCheck span {
     position: relative;
     z-index: 1;
 }
@@ -609,20 +618,20 @@ footer .social li a{
     margin-bottom: 5rem;
 }
 
-.eventWrapper .eventDetails {
+.eventWrapper .eventContent {
     width: 100%;
     margin: 0;
 }
 
-.eventWrapper .eventDetails .eventDescRow {
+.eventWrapper .eventContent .eventDescRow {
     padding: 1.5rem 0;
 }
 
-.eventWrapper .eventDetails .eventDescRow#disRight {
+.eventWrapper .eventContent .eventDescRow#disRight {
     text-align: right;
 }
 
-.eventWrapper .eventDetails .eventDescRow h3 {
+.eventWrapper .eventContent .eventDescRow h3 {
     font-size: 2rem;
     font-weight: 700;
     color: var(--black);
@@ -630,23 +639,23 @@ footer .social li a{
     margin-bottom: 1.5rem;
 }
 
-.eventWrapper .eventDetails .eventDescRow h3 span {
+.eventWrapper .eventContent .eventDescRow h3 span {
     color: var(--primaryColor);
 }
 
-.eventWrapper .eventDetails .eventDescRow p {
+.eventWrapper .eventContent .eventDescRow p {
     font-size: 1.5rem;
     font-weight: 400;
     color: var(--black);
     line-height: 2rem;
 }
 
-.eventWrapper .eventDetails .eventDescRow p a {
+.eventWrapper .eventContent .eventDescRow p a {
     font-weight: 700;
     color: var(--primaryColor);
 }
 
-.eventWrapper .eventDetails .eventDescRow label {
+.eventWrapper .eventContent .eventDescRow label {
     font-size: 1.2rem;
     font-weight: 400;
     color: var(--black);
@@ -654,11 +663,11 @@ footer .social li a{
     margin-bottom: 1.5rem;
 }
 
-.eventWrapper .eventDetails .eventDescRow.card {
+.eventWrapper .eventContent .eventDescRow.card {
     border: none;
 }
 
-.eventWrapper .eventDetails .eventDescRow .checkInBtn {
+.eventWrapper .eventContent .eventDescRow .checkInBtn {
     font-size: 1.5rem;
     font-weight: 600;
     text-decoration: none;
@@ -672,7 +681,7 @@ footer .social li a{
     margin: 1rem 0;
 }
 
-.eventWrapper .eventDetails .eventDescRow .checkInBtn:hover {
+.eventWrapper .eventContent .eventDescRow .checkInBtn:hover {
     color: var(--white);
     border: 1px solid var(--primaryColor);
     background-color: var(--primaryColor);

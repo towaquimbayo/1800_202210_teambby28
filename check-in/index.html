@@ -34,22 +34,24 @@
     <!-- Navbar -->
     <div id="navPlaceHolder"></div>
 
-    <div id="eventHero">
+    <div id="eventHeroCheck">
         <div id="eventOverlay">
             <div class="eventHeader">
                 <a href="/single-event/">Go Back</a>
-                <h1>Men's Ice Hockey</h1>
-                <figcaption class="eventDate"><span>May 24, 2022</span></figcaption>
+                <!-- Event name goes here -->
+                <h1 id="eventNameCheck"></h1>
+                <!-- Date goes here -->
+                <p><span id="eventDateCheck"></span></p>
             </div>
         </div>
     </div>
-
+    
     <div class="wrapper eventWrapper">
-        <div class="eventDetails row">
+        <div class="eventContent row">
             <div class="eventDescRow col-12">
-                <h3>Check In For: <span>Men's Ice Hockey</span></h3>
+                <h3>Check In Information</h3>
                 <p><strong>Event Details</strong></p>
-                <p>Men's Ice Hockey is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?</p>
+                <p><span id="eventDetailsCheck"></span></p>
             </div>
 
             <form id="checkInConfirmForm">
@@ -57,9 +59,9 @@
                     <label for="eTicketPhoto">Choose a profile picture: <strong style="color: #ff0000;">(Only JPG, JPEG or PNG)</strong></label> <br>
                     <input type="file" id="eTicketPhoto" name="eTicketPhoto" accept=".jpg, .jpeg, .png">
                 </div>
-                <button class="checkInBtn confirmCheckIn" type="submit">Confirm Check-In</button>
-                <!-- <div class="eventDescRow col-12 card">
-                </div> -->
+                <div class="eventDescRow col-12 card">
+                    <button class="checkInBtn confirmCheckIn" id="confirmCheckInID" type="submit">Confirm Check-In</button>
+                </div>
             </form>
         </div>
     </div>

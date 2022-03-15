@@ -9,7 +9,14 @@ $(document).ready(function () {
     displayEvents('events');
 
     // Poplate Single Events
-    populatePage();
+    if (window.location.pathname == '/single-event/') {
+        populateSingleEvent();
+    }
+
+    // Poplate Check In
+    if (window.location.pathname == '/check-in/') {
+        populateCheckin();
+    }
 
     // Check In
     checkIn();
@@ -78,6 +85,7 @@ function getProfile() {
             // console.log("User is account details here!");
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
+
             //get the document for current user.
             currentUser.get()
                 .then(userDoc => {
@@ -294,7 +302,7 @@ function setEventData(id) {
 }
 
 // function to populate the single events page
-function populatePage() {
+function populateSingleEvent() {
     // get collection 
     let eventID = localStorage.getItem("eventID");
     db.collection("events").where("id", "==", eventID)
@@ -304,11 +312,12 @@ function populatePage() {
             size = queryEvent.size;
             // get docs of query
             EventsQ = queryEvent.docs;
+            // console.log("THIS EVENT: " + queryEvent.docs[0].id);
 
             // check to see no duplicate events under 1 id
             if (size == 1) {
                 var thisEvent = EventsQ[0].data();
-
+                
                 eventName = thisEvent.name;
                 document.getElementById("eventName").innerHTML = eventName;
 
@@ -335,27 +344,89 @@ function populatePage() {
         });
 }
 
+// function to populate check in page
+function populateCheckin() {
+    // get collection 
+    let eventID = localStorage.getItem("eventID");
+    db.collection("events").where("id", "==", eventID)
+        .get()
+        .then(queryEvent => {
+            // see how many results are found for this query
+            size = queryEvent.size;
+            // get docs of query
+            EventsQ = queryEvent.docs;
+            // console.log("THIS EVENT: " + queryEvent.docs[0].id);
+
+            // check to see no duplicate events under 1 id
+            if (size == 1) {
+                var thisEvent = EventsQ[0].data();
+                
+                eventName = thisEvent.name;
+                document.getElementById("eventNameCheck").innerHTML = eventName;
+
+                document.getElementById("eventHeroCheck").style.backgroundImage = "url(../images/" + eventID + ".jpg)";
+
+                eventDesc = thisEvent.description;
+                document.getElementById("eventDetailsCheck").innerHTML = eventDesc;
+
+                eventDate = thisEvent.date;
+                document.getElementById("eventDateCheck").innerHTML = eventDate;
+
+            } else {
+                console.log("Query has > 1 data");
+            }
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+}
+
 // User confirms check in 
 function checkIn() {
     firebase.auth().onAuthStateChanged(user => {
         var currEvent = localStorage.getItem("eventID");
         if (user) {
             const form = document.querySelector('#checkInConfirmForm');
-            currentuser = db.collection('users').doc(user.uid);
-            
+            currentUser = db.collection('users').doc(user.uid);
+
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
+                document.getElementById("confirmCheckInID").disabled = true;
                 currentUser.update({
                     checkinTime: firebase.firestore.FieldValue.serverTimestamp(),
                     currentevent: currEvent,
                     status: "Wait"
-                })
-                .then(userDoc => {
+                }).then(userDoc => {
                     window.location.replace("/check-in-confirmation/");
                 })
+
+                db.collection('events').where("id", "==", currEvent)
+                .get()
+                .then(queryEvent => {
+                    size = queryEvent.size;
+                    EventsQ = queryEvent.docs;
+                    
+                    if (size == 1) {
+                        var thisEvent = EventsQ[0].id;              
+                        console.log("THIS EVENT: " + thisEvent);          
+                        // console.log("THIS EVENT: " + queryEvent);
+                        currentUser.get()
+                            .then(userDoc => {
+                                db.collection('events').doc(thisEvent).collection('queue').add({
+                                        userID: user.uid,
+                                        userName: userDoc.data().firstName,
+                                        hereTime: userDoc.data().checkinTime
+                                    });
+                                });
+                                console.log("Checked in user added to event!");
+                    }
+                })
+                .catch((error) => {
+                    console.log("Error adding new user: ", error);
+                });
             });
         }
-    })
+    });
 }
 
 /*********** NEXT STEPS ************/
@@ -364,8 +435,8 @@ function checkIn() {
  * 5) User Collection (Checked in User) -> Update the status: "Wait"; // DONE
  *
  *
- *
  * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID
+ *
  * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue
  * 4) My Events page -> Display "Please Wait" button (disabled)
  * 6) Function for batchManager() -> Run a loop for every 90 seconds ->
