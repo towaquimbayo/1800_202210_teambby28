@@ -18,14 +18,14 @@ $(document).ready(function () {
         populateCheckin();
     }
     
+    // Check In
+    // checkIn();
+    
     // Disable button for checked in users
     disableReCheckin();
     
     // Display current queue in my Events
     displayQueue();
-
-    // Check In
-    checkIn();
 
     // Get profile in accounts page
     getProfile();
@@ -287,8 +287,6 @@ function displayEvents(collection) {
                 var location = doc.data().location;   // get value of the "location" key
                 var time = doc.data().time;   // get value of the "time" key
                 var eventID = doc.data().id; // get "id" key the of event
-                // console.log(doc.id);
-                // console.log("EVENT ID HERE: " + eventID);
                 let newcard = cardTemplate.content.cloneNode(true);
 
                 // update title and text and image
@@ -297,7 +295,6 @@ function displayEvents(collection) {
                 newcard.querySelector('.eventTime').innerHTML = time;
                 newcard.querySelector('.eventImage').src = "../images/" + eventID + ".jpg";
                 newcard.querySelector('.viewEvent').onclick = () => setEventData(eventID, doc.id);
-
                 //attach to gallery
                 document.getElementById(collection + "-display").appendChild(newcard);
                 i++;
@@ -382,6 +379,8 @@ function populateCheckin() {
                 eventDate = thisEvent.date;
                 document.getElementById("eventDateCheck").innerHTML = eventDate;
 
+                checkIn();
+
             } else {
                 console.log("Query has > 1 data");
             }
@@ -393,12 +392,12 @@ function populateCheckin() {
 
 // User confirms check in 
 function checkIn() {
+    var currEvent = localStorage.getItem("eventID");
     firebase.auth().onAuthStateChanged(user => {
-        var currEvent = localStorage.getItem("eventID");
         if (user) {
-            const form = document.querySelector('#checkInConfirmForm');
+            const form = document.getElementById("checkInConfirmForm");
             currentUser = db.collection('users').doc(user.uid);
-            form.addEventListener('submit', (e) => {
+            form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 currentUser.update({
                     checkinTime: firebase.firestore.FieldValue.serverTimestamp(),
@@ -416,12 +415,15 @@ function checkIn() {
 
                         if (size == 1) {
                             var thisEvent = EventsQ[0].id;
+                            localStorage.setItem('permanentEventID', thisEvent);
+                            var permEventID = localStorage.getItem('permanentEventID');
                             currentUser.get()
                                 .then(userDoc => {
                                     db.collection('events').doc(thisEvent).collection('queue').add({
                                         userID: user.uid,
                                         userName: userDoc.data().firstName,
-                                        hereTime: userDoc.data().checkinTime
+                                        hereTime: userDoc.data().checkinTime,
+                                        currEventID: permEventID
                                     });
 
                                 });
@@ -478,7 +480,7 @@ function disableReCheckin() {
 
 // Display queue for how many people in the current batch for the checked in event 
 function displayQueue() {
-    const docID = localStorage.getItem('eventDocID');
+    const docID = localStorage.getItem('permanentEventID');
     db.collection('events').doc(docID).collection('queue')
         .get()
         .then(querySnapshot => {
@@ -502,7 +504,7 @@ function displayQueue() {
                                         eventDate = thisEvent.date;
                                         eventTime = thisEvent.time;
                                         document.getElementById("myEventInfo").innerHTML = eventName + " at " + eventDate + ", " + eventTime;
-                                        document.getElementById("myEventQueue").innerHTML = querySnapshot.size + "/5";
+                                        document.getElementById("myEventQueue").innerHTML = querySize + "/5";
                                     }
                                 })
                                 .catch((error) => {
@@ -518,11 +520,11 @@ function displayQueue() {
 /**
  * 1) Single events page populated from database (local session, grab event ID) // DONE
  * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID // DONE
+ * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue // DONE
  * 4) My Events page -> Display "Please Wait" button (disabled)
  * 5) User Collection (Checked in User) -> Update the status: "Wait"; // DONE
  *
  *
- * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue
  *
  * 6) Function for batchManager() -> Run a loop for every 90 seconds ->
  *          7) Add checked in event to checked in user (currentEvent: event1IDName);
