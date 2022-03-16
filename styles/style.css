@@ -687,6 +687,18 @@ footer .social li a{
     background-color: var(--primaryColor);
 }
 
+.eventWrapper .eventContent .eventDescRow .disabled {
+    background-color: rgba(240, 240, 240, 1);
+    color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.eventWrapper .eventContent .eventDescRow .disabled:hover {
+    background-color: rgb(216, 216, 216);
+    color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
 .checkWrapper {
     margin-top: 5rem;
 }

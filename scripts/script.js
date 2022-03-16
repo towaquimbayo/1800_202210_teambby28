@@ -12,12 +12,15 @@ $(document).ready(function () {
     if (window.location.pathname == '/single-event/') {
         populateSingleEvent();
     }
-
+    
     // Poplate Check In
     if (window.location.pathname == '/check-in/') {
         populateCheckin();
     }
-
+    
+    // Disable button for checked in users
+    disableReCheckin();
+    
     // Check In
     checkIn();
 
@@ -217,14 +220,14 @@ function pushEvents() {
         description: "Women's Ski Jumping is taking place on April 15th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
     eventRef.add({
-        name: "Men's Ski Jumping",
+        name: "Men's Ice Hockey",
         location: "3700 Willingdon Ave, Vancouver, BC V5G 3H2",
         city: "Vancouver",
         province: "BC",
         id: "AA4",
         date: "April 21st, 2030",
         time: "09:45AM - 11:00PM",
-        description: "Men's Ski Jumping is taking place on April 21st, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
+        description: "Men's Ice Hockey is taking place on April 21st, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
     eventRef.add({
         name: "Men's Figure Skating",
@@ -381,6 +384,70 @@ function populateCheckin() {
         });
 }
 
+
+function disableReCheckin() {
+    firebase.auth().onAuthStateChanged(user => {
+        var currEvent = localStorage.getItem("eventID");
+        var checkBtn = document.getElementById("checkinIDBtn");
+        var href = checkBtn.getAttribute("href");
+
+        if (user) {
+            currentUser = db.collection('users').doc(user.uid);
+            db.collection('events').where("id", "==", currEvent)
+                .get()
+                .then(queryEvent => {
+                    size = queryEvent.size;
+                    EventsQ = queryEvent.docs;
+                    
+                    if (size == 1) {
+                        var thisEvent = EventsQ[0].id;
+                        currentUser.get()
+                        .then(userDoc => {
+                            console.log(userDoc.data().firstName);
+                            db.collection('events').doc(thisEvent).collection('queue')
+                                .get()
+                                .then(snap => {
+                                    // if ((!userDoc.data().status.exists) && (userDoc.data().currentevent == currEvent)) {
+                                    if (!userDoc.data().status.exists) {
+                                        checkBtn.innerHTML = "Please Wait";
+                                        checkBtn.removeAttribute("href");
+                                        checkBtn.classList.add('disabled');
+                                    } else {
+                                        console.log('The user hasnt checked in yet')
+                                    }
+                                });
+
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log("Error disabling button: ", error);
+                });
+        }
+    });
+
+    // db.collection('events').where("id", "==", id)
+    //     .get()
+    //     .then(queryEvent => {
+    //         size = queryEvent.size;
+    //         EventsQ = queryEvent.docs;
+            
+    //         if (size == 1) {
+    //             if (href && href != "#") {
+    //                 checkBtn.innerHTML = "Please Wait";
+    //                 checkBtn.removeAttribute("href");
+    //                 checkBtn.classList.add('disabled');
+    //             } else {
+    //                 console.log('The user already checked in, so button is disabled.')
+    //             }
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.log("Error disabling button: ", error);
+    //     });
+
+}
+
 // User confirms check in 
 function checkIn() {
     firebase.auth().onAuthStateChanged(user => {
@@ -388,10 +455,8 @@ function checkIn() {
         if (user) {
             const form = document.querySelector('#checkInConfirmForm');
             currentUser = db.collection('users').doc(user.uid);
-
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                document.getElementById("confirmCheckInID").disabled = true;
                 currentUser.update({
                     checkinTime: firebase.firestore.FieldValue.serverTimestamp(),
                     currentevent: currEvent,
@@ -399,7 +464,7 @@ function checkIn() {
                 }).then(userDoc => {
                     window.location.replace("/check-in-confirmation/");
                 })
-
+                
                 db.collection('events').where("id", "==", currEvent)
                 .get()
                 .then(queryEvent => {
@@ -407,18 +472,17 @@ function checkIn() {
                     EventsQ = queryEvent.docs;
                     
                     if (size == 1) {
-                        var thisEvent = EventsQ[0].id;              
-                        console.log("THIS EVENT: " + thisEvent);          
-                        // console.log("THIS EVENT: " + queryEvent);
+                        var thisEvent = EventsQ[0].id;
                         currentUser.get()
-                            .then(userDoc => {
-                                db.collection('events').doc(thisEvent).collection('queue').add({
-                                        userID: user.uid,
-                                        userName: userDoc.data().firstName,
-                                        hereTime: userDoc.data().checkinTime
-                                    });
-                                });
-                                console.log("Checked in user added to event!");
+                        .then(userDoc => {
+                            db.collection('events').doc(thisEvent).collection('queue').add({
+                                userID: user.uid,
+                                userName: userDoc.data().firstName,
+                                hereTime: userDoc.data().checkinTime
+                            });
+
+                        });
+                        console.log("Checked in user added to event!");
                     }
                 })
                 .catch((error) => {
@@ -432,12 +496,12 @@ function checkIn() {
 /*********** NEXT STEPS ************/
 /**
  * 1) Single events page populated from database (local session, grab event ID) // DONE
+ * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID // DONE
  * 5) User Collection (Checked in User) -> Update the status: "Wait"; // DONE
  *
  *
- * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID
- *
  * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue
+ *
  * 4) My Events page -> Display "Please Wait" button (disabled)
  * 6) Function for batchManager() -> Run a loop for every 90 seconds ->
  *          7) Add checked in event to checked in user (currentEvent: event1IDName);
