@@ -402,6 +402,14 @@ footer .social li a{
 
 }
 
+.row .navContent #checkinEventListing .waitTimeCounter {
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 5rem 0;
+    font-weight: 500;
+}
+
 /********** NOTIFICATIONS ***********/
 .row .navContent .editProfileForm .noti-row {
     padding: 1.2rem 0;

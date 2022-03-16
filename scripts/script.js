@@ -17,13 +17,10 @@ $(document).ready(function () {
     if (window.location.pathname == '/check-in/') {
         populateCheckin();
     }
-    
-    // Check In
-    // checkIn();
-    
+
     // Disable button for checked in users
     disableReCheckin();
-    
+
     // Display current queue in my Events
     displayQueue();
 
@@ -514,6 +511,22 @@ function displayQueue() {
                 }
             });
         });
+}
+
+function displayClock() {
+    var refresh = 1000;
+    currentTime = setTimeout('displayClockTime()', refresh);
+}
+
+function displayClockTime() {
+    var x = new Date();
+    document.getElementById('clock').innerHTML = x;
+    displayClock();
+    console.log('START TIME:' + x);
+    var interval = setInterval(function () {
+        console.log('EVENT HAS STARTED!');
+    },  60 * 1000);
+    clearInterval(interval);
 }
 
 /*********** NEXT STEPS ************/
