@@ -12,7 +12,7 @@ $(document).ready(function () {
     if (window.location.pathname == '/single-event/') {
         populateSingleEvent();
     }
-    
+
     // Poplate Check In
     if (window.location.pathname == '/check-in/') {
         populateCheckin();
@@ -21,6 +21,9 @@ $(document).ready(function () {
     // Disable button for checked in users
     disableReCheckin();
     
+    // Display current queue in my Events
+    displayQueue();
+
     // Check In
     checkIn();
 
@@ -68,6 +71,7 @@ function insertName() {
             // console.log("User is logged in!");
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
+
             //get the document for current user.
             currentUser.get()
                 .then(userDoc => {
@@ -283,6 +287,7 @@ function displayEvents(collection) {
                 var location = doc.data().location;   // get value of the "location" key
                 var time = doc.data().time;   // get value of the "time" key
                 var eventID = doc.data().id; // get "id" key the of event
+                // console.log(doc.id);
                 // console.log("EVENT ID HERE: " + eventID);
                 let newcard = cardTemplate.content.cloneNode(true);
 
@@ -291,7 +296,8 @@ function displayEvents(collection) {
                 newcard.querySelector('.eventLocation').innerHTML = location;
                 newcard.querySelector('.eventTime').innerHTML = time;
                 newcard.querySelector('.eventImage').src = "../images/" + eventID + ".jpg";
-                newcard.querySelector('.viewEvent').onclick = () => setEventData(eventID);
+                newcard.querySelector('.viewEvent').onclick = () => setEventData(eventID, doc.id);
+
                 //attach to gallery
                 document.getElementById(collection + "-display").appendChild(newcard);
                 i++;
@@ -300,8 +306,9 @@ function displayEvents(collection) {
 }
 
 // function to set event id 
-function setEventData(id) {
-    localStorage.setItem('eventID', id);
+function setEventData(eventID, docID) {
+    localStorage.setItem('eventID', eventID);
+    localStorage.setItem('eventDocID', docID);
 }
 
 // function to populate the single events page
@@ -320,7 +327,7 @@ function populateSingleEvent() {
             // check to see no duplicate events under 1 id
             if (size == 1) {
                 var thisEvent = EventsQ[0].data();
-                
+
                 eventName = thisEvent.name;
                 document.getElementById("eventName").innerHTML = eventName;
 
@@ -363,7 +370,7 @@ function populateCheckin() {
             // check to see no duplicate events under 1 id
             if (size == 1) {
                 var thisEvent = EventsQ[0].data();
-                
+
                 eventName = thisEvent.name;
                 document.getElementById("eventNameCheck").innerHTML = eventName;
 
@@ -384,70 +391,6 @@ function populateCheckin() {
         });
 }
 
-
-function disableReCheckin() {
-    firebase.auth().onAuthStateChanged(user => {
-        var currEvent = localStorage.getItem("eventID");
-        var checkBtn = document.getElementById("checkinIDBtn");
-        var href = checkBtn.getAttribute("href");
-
-        if (user) {
-            currentUser = db.collection('users').doc(user.uid);
-            db.collection('events').where("id", "==", currEvent)
-                .get()
-                .then(queryEvent => {
-                    size = queryEvent.size;
-                    EventsQ = queryEvent.docs;
-                    
-                    if (size == 1) {
-                        var thisEvent = EventsQ[0].id;
-                        currentUser.get()
-                        .then(userDoc => {
-                            console.log(userDoc.data().firstName);
-                            db.collection('events').doc(thisEvent).collection('queue')
-                                .get()
-                                .then(snap => {
-                                    // if ((!userDoc.data().status.exists) && (userDoc.data().currentevent == currEvent)) {
-                                    if (!userDoc.data().status.exists) {
-                                        checkBtn.innerHTML = "Please Wait";
-                                        checkBtn.removeAttribute("href");
-                                        checkBtn.classList.add('disabled');
-                                    } else {
-                                        console.log('The user hasnt checked in yet')
-                                    }
-                                });
-
-                        });
-                    }
-                })
-                .catch((error) => {
-                    console.log("Error disabling button: ", error);
-                });
-        }
-    });
-
-    // db.collection('events').where("id", "==", id)
-    //     .get()
-    //     .then(queryEvent => {
-    //         size = queryEvent.size;
-    //         EventsQ = queryEvent.docs;
-            
-    //         if (size == 1) {
-    //             if (href && href != "#") {
-    //                 checkBtn.innerHTML = "Please Wait";
-    //                 checkBtn.removeAttribute("href");
-    //                 checkBtn.classList.add('disabled');
-    //             } else {
-    //                 console.log('The user already checked in, so button is disabled.')
-    //             }
-    //         }
-    //     })
-    //     .catch((error) => {
-    //         console.log("Error disabling button: ", error);
-    //     });
-
-}
-
 // User confirms check in 
 function checkIn() {
     firebase.auth().onAuthStateChanged(user => {
@@ -464,45 +407,123 @@ function checkIn() {
                 }).then(userDoc => {
                     window.location.replace("/check-in-confirmation/");
                 })
-                
+
                 db.collection('events').where("id", "==", currEvent)
+                    .get()
+                    .then(queryEvent => {
+                        size = queryEvent.size;
+                        EventsQ = queryEvent.docs;
+
+                        if (size == 1) {
+                            var thisEvent = EventsQ[0].id;
+                            currentUser.get()
+                                .then(userDoc => {
+                                    db.collection('events').doc(thisEvent).collection('queue').add({
+                                        userID: user.uid,
+                                        userName: userDoc.data().firstName,
+                                        hereTime: userDoc.data().checkinTime
+                                    });
+
+                                });
+                            console.log("Checked in user added to event!");
+                        }
+                    })
+                    .catch((error) => {
+                        console.log("Error adding new user: ", error);
+                    });
+            });
+        }
+    });
+}
+
+// Disable check in button for all events if user already checked in for one event
+function disableReCheckin() {
+    firebase.auth().onAuthStateChanged(user => {
+        var currEvent = localStorage.getItem("eventID");
+        var checkBtn = document.getElementById("checkinIDBtn");
+
+        if (user) {
+            currentUser = db.collection('users').doc(user.uid);
+            db.collection('events').where("id", "==", currEvent)
                 .get()
                 .then(queryEvent => {
                     size = queryEvent.size;
                     EventsQ = queryEvent.docs;
-                    
+
                     if (size == 1) {
                         var thisEvent = EventsQ[0].id;
                         currentUser.get()
-                        .then(userDoc => {
-                            db.collection('events').doc(thisEvent).collection('queue').add({
-                                userID: user.uid,
-                                userName: userDoc.data().firstName,
-                                hereTime: userDoc.data().checkinTime
+                            .then(userDoc => {
+                                db.collection('events').doc(thisEvent).collection('queue')
+                                    .get()
+                                    .then(snap => {
+                                        // if ((!userDoc.data().status.exists) && (userDoc.data().currentevent == currEvent)) {
+                                        if (!userDoc.data().status.exists) {
+                                            checkBtn.innerHTML = "Please Wait";
+                                            checkBtn.removeAttribute("href");
+                                            checkBtn.classList.add('disabled');
+                                        } else {
+                                            console.log('The user hasnt checked in yet')
+                                        }
+                                    });
                             });
-
-                        });
-                        console.log("Checked in user added to event!");
                     }
                 })
                 .catch((error) => {
-                    console.log("Error adding new user: ", error);
+                    console.log("Error disabling button: ", error);
                 });
-            });
         }
     });
+}
+
+// Display queue for how many people in the current batch for the checked in event 
+function displayQueue() {
+    const docID = localStorage.getItem('eventDocID');
+    db.collection('events').doc(docID).collection('queue')
+        .get()
+        .then(querySnapshot => {
+            var querySize = querySnapshot.size;
+            // console.log("CURRENT EVENT BATCH SIZE: " + querySize);
+
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    currentUser = db.collection('users').doc(user.uid);
+                    currentUser.get()
+                        .then(userDoc => {
+                            myCurrEvent = userDoc.data().currentevent;
+                            db.collection('events').where("id", "==", myCurrEvent)
+                                .get()
+                                .then(queryEvent => {
+                                    size = queryEvent.size;
+                                    EventsQ = queryEvent.docs;
+                                    if (size == 1) {
+                                        var thisEvent = EventsQ[0].data();
+                                        eventName = thisEvent.name;
+                                        eventDate = thisEvent.date;
+                                        eventTime = thisEvent.time;
+                                        document.getElementById("myEventInfo").innerHTML = eventName + " at " + eventDate + ", " + eventTime;
+                                        document.getElementById("myEventQueue").innerHTML = querySnapshot.size + "/5";
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log("Error adding my event info: ", error);
+                                });
+                        });
+                }
+            });
+        });
 }
 
 /*********** NEXT STEPS ************/
 /**
  * 1) Single events page populated from database (local session, grab event ID) // DONE
  * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID // DONE
+ * 4) My Events page -> Display "Please Wait" button (disabled)
  * 5) User Collection (Checked in User) -> Update the status: "Wait"; // DONE
  *
  *
  * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue
  *
- * 4) My Events page -> Display "Please Wait" button (disabled)
  * 6) Function for batchManager() -> Run a loop for every 90 seconds ->
  *          7) Add checked in event to checked in user (currentEvent: event1IDName);
  *          8) Check if there are 3 users in the batch

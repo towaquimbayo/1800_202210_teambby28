@@ -181,6 +181,20 @@
     .checkWrapper {
         margin-top: 10rem;
     }
+    .row .navContent #checkinEventListing .listCheckedEvents {
+        border-radius: 30px;
+        padding: 1.5rem 2rem;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents .listRow {
+        width: 100%;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents #queueRight {
+        text-align: left;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents .listRow h4 {
+        font-size: 1em;
+        line-height: 2rem;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -313,6 +327,19 @@
     }
     .checkWrapper {
         margin-top: 10rem;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents {
+        padding: 1.5rem 3rem;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents .listRow {
+        width: 100%;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents #queueRight {
+        text-align: left;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents .listRow h4 {
+        font-size: 1.2em;
+        line-height: 2rem;
     }
 }
 
