@@ -388,6 +388,7 @@ footer .social li a{
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .row .navContent #checkinEventListing .listCheckedEvents #queueRight {
@@ -399,7 +400,13 @@ footer .social li a{
     margin: 0;
     font-size: 1rem;
     font-weight: 600;
+}
 
+.row .navContent #checkinEventListing .listCheckedEvents .listRow p {
+    margin: 0;
+    padding-top: 5px;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .row .navContent #checkinEventListing .waitTimeCounter {
