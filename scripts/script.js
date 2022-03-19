@@ -23,13 +23,13 @@ $(document).ready(function () {
 
     // Batch Manager
     batchManager();
-    
+
     // Display current queue in my Events
     displayQueue();
-    
+
     // Get profile in accounts page
     getProfile();
-    
+
     // Update profile in accounts page after save changes
     updateProfile();
 
@@ -551,7 +551,7 @@ function updateCheckInStatus(eID) {
                         const userCurrEvent = userDoc.data().currentevent;
                         if (userCurrEvent == eventID) {
                             // console.log(userDoc.id);
-                            db.collection('users').doc(userDoc.id).update({status: "Enter Now"});
+                            db.collection('users').doc(userDoc.id).update({ status: "Enter Now" });
                         }
                     })
                 })
@@ -559,14 +559,12 @@ function updateCheckInStatus(eID) {
 }
 
 setInterval(updateTime, 1000);
-
 function updateTime() {
     let now = new Date();
     var m = now.getMinutes();
     var s = now.getSeconds();
     document.getElementById("clock").innerHTML = "Minutes: " + m + " Seconds: " + s;
 }
-
 
 // GET MINUTE AND TIME FROM UPADTETIME() FUNCTION TO USE IN BATCH MANAGER FUNCTION
 
@@ -590,49 +588,7 @@ function batchManager() {
                                 var thisUserID = EventsQ[0].id;
                                 currentUser.get()
                                     .then(userDoc => {
-                                        db.collection('events').doc(docID).collection('queue').doc(thisUserID)
-                                            .get()
-                                            .then(userDoc => {
-                                                var myTime = userDoc.data().hereTime;
-                                                var myTimeSplit = myTime.split(":");
-                                                var x = new Date();
-                                                var myCheckInTime = new Date(parseInt(x.getFullYear(),10),(parseInt(x.getMonth(),10)),parseInt(x.getDay(),10), parseInt(myTimeSplit[0],10), parseInt(myTimeSplit[1],10), parseInt(myTimeSplit[2],10));
-                                                var myCheckInTimeV = myCheckInTime.valueOf();
-                                                document.getElementById("myCheckTime").innerHTML = myCheckInTime;
-
-                                                const myMin = myTimeSplit[1];
-                                                var currentMin = x.getMinutes();
-                                                var currentSec = x.getSeconds();
-                                                console.log("Current Min: " + currentMin);
-                                                var bacthValue;
-                                                var currMinValidation;
-                                                if (myMin > 9) {
-                                                    var floorValue = Math.floor(myMin / 10) * 10;
-                                                    bacthValue = myMin - floorValue;
-                                                    var currFloorValue = Math.floor(currentMin / 10) * 10;
-                                                    currMinValidation = currentMin - currFloorValue;
-                                                } else {
-                                                    batchValue = myMin;
-                                                    currMinValidation = currentMin;
-                                                }
-
-                                                // console.log("Current Min: " + currMinValidation);
-                                                
-                                                if ((bacthValue >= 0 && bacthValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
-                                                    console.log("You are in the first batch");
-                                                    console.log("Current Queue: " + currentQueueSize);
-                                                    if ((currentQueueSize == 3) || (currMinValidation == 4 && currentSec == 59)) {
-                                                        const thisEventID = userDoc.data().currEventID;
-                                                        updateCheckInStatus(thisEventID);
-                                                    }
-                                                } else if ((bacthValue >= 5 && bacthValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
-                                                    console.log("You are in the second batch");
-                                                    if ((currentQueueSize == 3) || (currMinValidation == 9 && currentSec == 59)) {
-                                                        const thisEventID = userDoc.data().currEventID;
-                                                        updateCheckInStatus(thisEventID);
-                                                    }
-                                                }
-                                            });
+                                        updateBatch(docID, thisUserID, currentQueueSize);
                                     });
                             }
                         })
@@ -641,6 +597,52 @@ function batchManager() {
                         });
                 }
             });
+        });
+}
+
+function updateBatch(docID, thisUserID, currentQueueSize) {
+    db.collection('events').doc(docID).collection('queue').doc(thisUserID)
+        .get()
+        .then(userDoc => {
+            var myTime = userDoc.data().hereTime;
+            var myTimeSplit = myTime.split(":");
+            var x = new Date();
+            var myCheckInTime = new Date(parseInt(x.getFullYear(), 10), (parseInt(x.getMonth(), 10)), parseInt(x.getDay(), 10), parseInt(myTimeSplit[0], 10), parseInt(myTimeSplit[1], 10), parseInt(myTimeSplit[2], 10));
+            document.getElementById("myCheckTime").innerHTML = myCheckInTime;
+
+            const myMin = myTimeSplit[1];
+            var currentMin = x.getMinutes();
+            var currentSec = x.getSeconds();
+
+            console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
+            var bacthValue;
+            var currMinValidation;
+            if (myMin > 9) {
+                var floorValue = Math.floor(myMin / 10) * 10;
+                bacthValue = myMin - floorValue;
+                var currFloorValue = Math.floor(currentMin / 10) * 10;
+                currMinValidation = currentMin - currFloorValue;
+            } else {
+                batchValue = myMin;
+                currMinValidation = currentMin;
+            }
+
+            console.log("Current Min: " + currMinValidation);
+
+            if ((bacthValue >= 0 && bacthValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
+                console.log("You are in the first batch");
+                console.log("Current Queue: " + currentQueueSize);
+                if ((currentQueueSize == 3) || (currMinValidation == 4 && currentSec == 59)) {
+                    const thisEventID = userDoc.data().currEventID;
+                    updateCheckInStatus(thisEventID);
+                }
+            } else if ((bacthValue >= 5 && bacthValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
+                console.log("You are in the second batch");
+                if ((currentQueueSize == 3) || (currMinValidation == 9 && currentSec == 59)) {
+                    const thisEventID = userDoc.data().currEventID;
+                    updateCheckInStatus(thisEventID);
+                }
+            }
         });
 }
 
