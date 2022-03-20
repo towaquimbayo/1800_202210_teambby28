@@ -563,7 +563,9 @@ function updateTime() {
     let now = new Date();
     var m = now.getMinutes();
     var s = now.getSeconds();
-    document.getElementById("clock").innerHTML = "Minutes: " + m + " Seconds: " + s;
+    // document.getElementById("clock").innerHTML = "Minutes: " + m + " Seconds: " + s;
+    document.getElementById("currentMin").innerHTML = m;
+    document.getElementById("currentSec").innerHTML = s;
 }
 
 // GET MINUTE AND TIME FROM UPADTETIME() FUNCTION TO USE IN BATCH MANAGER FUNCTION
@@ -612,7 +614,9 @@ function updateBatch(docID, thisUserID, currentQueueSize) {
 
             const myMin = myTimeSplit[1];
             var currentMin = x.getMinutes();
-            var currentSec = x.getSeconds();
+            // var currentSec = x.getSeconds();
+            var currentSec = document.getElementById("currentSec").innerHTML;
+            console.log(currentSec);
 
             console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
             var bacthValue;
@@ -650,10 +654,10 @@ function updateBatch(docID, thisUserID, currentQueueSize) {
 // log out func
 function logOut() {
     firebase.auth().signOut().then(() => {
-        // Sign-out successful.
-      }).catch((error) => {
-        // An error happened.
-      });
+        window.location.replace("/login/");
+    }).catch((error) => {
+        console.log(error);
+    });
 }
 
 
