@@ -122,22 +122,27 @@
         padding-left: 2em;
         padding-right: 2em
     }
-    #eventHero {
+    #eventHero,
+    #eventHeroCheck {
         height: 92vh;
     }
-    #eventHero #eventOverlay .eventHeader {
+    #eventHero #eventOverlay .eventHeader,
+    #eventHeroCheck #eventOverlay .eventHeader {
         padding: 0rem 2rem;
     }
-    #eventHero #eventOverlay .eventHeader h1 {
+    #eventHero #eventOverlay .eventHeader h1,
+    #eventHeroCheck #eventOverlay .eventHeader h1 {
         font-size: 1.7rem;
         font-weight: 700;
         bottom: 10rem;
     }
-    #eventHero #eventOverlay .eventHeader a {
+    #eventHero #eventOverlay .eventHeader a,
+    #eventHeroCheck #eventOverlay .eventHeader a {
         font-size: 1rem;
         bottom: 14rem;
     }
-    #eventHero #eventOverlay .eventHeader .eventDate { 
+    #eventHero #eventOverlay .eventHeader #eventDate,
+    #eventHeroCheck #eventOverlay .eventHeader #eventDateCheck { 
         font-size: 1.5rem;
         font-weight: 500;
         padding: 1.5rem 3rem;
@@ -153,28 +158,42 @@
         margin-top: 2.5rem;
         margin-bottom: 7rem;
     }
-    .eventWrapper .eventDetails .eventDescRow {
+    .eventWrapper .eventContent .eventDescRow {
         padding: 0.7rem 0;
     }
-    .eventWrapper .eventDetails .eventDescRow h3 {
+    .eventWrapper .eventContent .eventDescRow h3 {
         font-size: 1.7rem;
     }
-    .eventWrapper .eventDetails .eventDescRow p {
+    .eventWrapper .eventContent .eventDescRow p {
         font-size: 1.2rem;
         font-weight: 400;
         color: var(--black);
         line-height: 2rem;
     }
-    .eventWrapper .eventDetails .eventDescRow#eventTime {
+    .eventWrapper .eventContent .eventDescRow#disRight {
         text-align: left;
     }
-    .eventWrapper .eventDetails .eventDescRow .checkInBtn {
+    .eventWrapper .eventContent .eventDescRow .checkInBtn {
         font-size: 1.3rem;
         border-radius: 500px;
         padding: 20px 20px;
     }
     .checkWrapper {
         margin-top: 10rem;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents {
+        border-radius: 30px;
+        padding: 1.5rem 2rem;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents .listRow {
+        width: 100%;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents #queueRight {
+        text-align: left;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents .listRow h4 {
+        font-size: 1em;
+        line-height: 2rem;
     }
 }
 
@@ -282,13 +301,16 @@
         padding-left: 3em;
         padding-right: 3em
     }
-    #eventHero {
+    #eventHero,
+    #eventHeroCheck {
         height: 94vh;
     }
-    #eventHero #eventOverlay .eventHeader {
+    #eventHero #eventOverlay .eventHeader,
+    #eventHeroCheck #eventOverlay .eventHeader {
         padding: 0rem 3rem;
     }
-    #eventHero #eventOverlay .eventHeader .eventDate { 
+    #eventHero #eventOverlay .eventHeader #eventDate,
+    #eventHeroCheck #eventOverlay .eventHeader #eventDateCheck {
         font-size: 2rem;
         font-weight: 500;
         padding: 2rem 3rem;
@@ -300,11 +322,24 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-    .eventWrapper .eventDetails .eventDescRow#eventTime {
+    .eventWrapper .eventContent .eventDescRow#disRight {
         text-align: left;
     }
     .checkWrapper {
         margin-top: 10rem;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents {
+        padding: 1.5rem 3rem;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents .listRow {
+        width: 100%;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents #queueRight {
+        text-align: left;
+    }
+    .row .navContent #checkinEventListing .listCheckedEvents .listRow h4 {
+        font-size: 1.2em;
+        line-height: 2rem;
     }
 }
 
@@ -407,13 +442,16 @@
         padding-left: 3em;
         padding-right: 3em
     }
-    #eventHero {
+    #eventHero,
+    #eventHeroCheck {
         height: 94vh;
     }
-    #eventHero #eventOverlay .eventHeader {
+    #eventHero #eventOverlay .eventHeader,
+    #eventHeroCheck #eventOverlay .eventHeader {
         padding: 0rem 3rem;
     }
-    #eventHero #eventOverlay .eventHeader .eventDate { 
+    #eventHero #eventOverlay .eventHeader #eventDate,
+    #eventHeroCheck #eventOverlay .eventHeader #eventDateCheck { 
         font-size: 2rem;
         font-weight: 500;
         padding: 2rem 3rem;

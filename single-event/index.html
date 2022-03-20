@@ -38,33 +38,38 @@
         <div id="eventOverlay">
             <div class="eventHeader">
                 <a href="/event-listings/">Return to Events</a>
-                <h1>Men's Ice Hockey</h1>
-                <figcaption class="eventDate"><span>May 24, 2022</span></figcaption>
+                <!-- Event name goes here -->
+                <h1 id="eventName"></h1>
+                <!-- Date goes here -->
+                <p><span id="eventDate"></span></p>
             </div>
         </div>
     </div>
 
     <div class="wrapper eventWrapper">
-        <div class="eventDetails row">
-            <div class="eventDescRow col-md-6 col-sm-12">
-                <p><strong>Location: </strong>3700 Willingdon Ave, Burnaby, BC V5G 3H2 <br>Entry at SW Lot #3</p>
+        <div class="eventContent row">
+            <div class="eventDescRow location col-md-6 col-sm-12">
+                <!-- Location Goes Here -->
+                <p><strong>Location: </strong><span id="eventLocation"></span></p>
             </div>
-            <div class="eventDescRow col-md-6 col-sm-12" id="eventTime">
-                <p><strong>Time: </strong>12:00PM - 15:30PM</p>
+            <div class="eventDescRow time col-md-6 col-sm-12" id="disRight">
+                <!-- Time goes here -->
+                <p><strong>Time: </strong><span id="eventTime"></span></p>
             </div>
 
-            <div class="eventDescRow col-12">
+            <div class="eventDescRow details col-12">
                 <p><strong>Event Details</strong></p>
-                <p>Men's Ice Hockey is taking place on February 29th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?</p>
+                <!-- Event details goes here -->
+                <p><span id="eventDetails"></span></p>
             </div>
 
-            <div class="eventDescRow col-12">
+            <div class="eventDescRow map col-12">
                 <p><strong>Google Maps</strong></p>
                 <iframe id="map-widget" height="450" style="border:0" loading="lazy" allowfullscreen></iframe>
             </div>
 
-            <div class="eventDescRow col-12 card logged-in-btn">
-                <a class="checkInBtn" href="/check-in/" role="button">Check In</a>
+            <div class="eventDescRow check col-12 card logged-in-btn">
+                <a class="checkInBtn" id="checkinIDBtn" href="/check-in/" role="button">Check In</a>
             </div>
         </div>
     </div>
