@@ -1,4 +1,4 @@
-const address = "3700+Willingdon+Ave,+Burnaby,+BC+V5G+3H2" // for now since the single-event view is hardcoded, so is this address
+const address = encodeURI("10153 King George Blvd, Surrey, BC V3T 2W1") // for now since the single-event view is hardcoded, so is this address
 const addressURL = "https://www.google.com/maps/embed/v1/place?q="+ address + "&key="
 const apiKey = firebaseConfig.apiKey;
 
