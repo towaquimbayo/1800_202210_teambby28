@@ -647,6 +647,17 @@ function updateBatch(docID, thisUserID, currentQueueSize) {
 }
 
 
+// log out func
+function logOut() {
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+      }).catch((error) => {
+        // An error happened.
+      });
+}
+
+
+
 /*********** NEXT STEPS ************/
 /**
  * 1) Single events page populated from database (local session, grab event ID) // DONE
