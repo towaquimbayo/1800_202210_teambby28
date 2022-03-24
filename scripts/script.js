@@ -492,7 +492,13 @@ function displayQueue() {
                     currentUser.get()
                         .then(userDoc => {
                             myCurrEvent = userDoc.data().currentevent;
-                            db.collection('events').where("id", "==", myCurrEvent)
+                            if (myCurrEvent == "No Event") {
+                                document.getElementById("noEventMessage").style.visibility = "visible";
+                                document.getElementById("checkedInEventInfo").style.visibility = "hidden";
+                            } else {
+                                document.getElementById("noEventMessage").style.visibility = "hidden";
+                                document.getElementById("checkedInEventInfo").style.visibility = "visible";
+                                db.collection('events').where("id", "==", myCurrEvent)
                                 .get()
                                 .then(queryEvent => {
                                     size = queryEvent.size;
@@ -509,6 +515,7 @@ function displayQueue() {
                                 .catch((error) => {
                                     console.log("Error adding my event info: ", error);
                                 });
+                            }
                         });
                 }
             });
@@ -538,11 +545,13 @@ function displayQueue() {
 
 // Update check in status for all users if current event queue is full (3/3)
 function updateCheckInStatus(eID) {
+    alert('YOU MAY ENTER NOW!');
     db.collection('events').doc(eID)
         .get()
         .then(eDoc => {
             // console.log(eDoc.data().id);
             const eventID = eDoc.data().id;
+            
             db.collection('users')
                 .get()
                 .then(querySnapshot => {
@@ -551,14 +560,29 @@ function updateCheckInStatus(eID) {
                         const userCurrEvent = userDoc.data().currentevent;
                         if (userCurrEvent == eventID) {
                             // console.log(userDoc.id);
-                            db.collection('users').doc(userDoc.id).update({ status: "Enter Now" });
+                            db.collection('users').doc(userDoc.id)
+                                .update({ 
+                                    status: "Enter Now",
+                                    currentevent: "No Event"
+                                });
                         }
                     })
                 })
-        })
+        });
+    
+    db.collection('events').doc(localStorage.getItem('queueUserID')).collection('queue').get()
+        .then(snap => [
+            snap.forEach(doc => {
+                console.log(doc.id);
+                doc.ref.delete();
+            })
+        ]);
+
+    document.location.reload(true);
 }
 
 setInterval(updateTime, 1000);
+
 function updateTime() {
     let now = new Date();
     var m = now.getMinutes();
@@ -568,8 +592,6 @@ function updateTime() {
     document.getElementById("currentSec").innerHTML = s;
 }
 
-// GET MINUTE AND TIME FROM UPADTETIME() FUNCTION TO USE IN BATCH MANAGER FUNCTION
-
 // Batch manager function 
 function batchManager() {
     const docID = localStorage.getItem('permanentEventID');
@@ -578,6 +600,7 @@ function batchManager() {
         .get()
         .then(snap => {
             currentQueueSize = snap.size;
+            localStorage.setItem("queueSize", currentQueueSize);
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     currentUser = user.uid;
@@ -590,7 +613,7 @@ function batchManager() {
                                 var thisUserID = EventsQ[0].id;
                                 currentUser.get()
                                     .then(userDoc => {
-                                        updateBatch(docID, thisUserID, currentQueueSize);
+                                        updateBatch(docID, thisUserID);
                                     });
                             }
                         })
@@ -602,7 +625,7 @@ function batchManager() {
         });
 }
 
-function updateBatch(docID, thisUserID, currentQueueSize) {
+function updateBatch(docID, thisUserID) {
     db.collection('events').doc(docID).collection('queue').doc(thisUserID)
         .get()
         .then(userDoc => {
@@ -613,41 +636,47 @@ function updateBatch(docID, thisUserID, currentQueueSize) {
             document.getElementById("myCheckTime").innerHTML = myCheckInTime;
 
             const myMin = myTimeSplit[1];
-            var currentMin = x.getMinutes();
-            // var currentSec = x.getSeconds();
-            var currentSec = document.getElementById("currentSec").innerHTML;
-            console.log(currentSec);
-
-            console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
-            var bacthValue;
-            var currMinValidation;
-            if (myMin > 9) {
-                var floorValue = Math.floor(myMin / 10) * 10;
-                bacthValue = myMin - floorValue;
-                var currFloorValue = Math.floor(currentMin / 10) * 10;
-                currMinValidation = currentMin - currFloorValue;
-            } else {
-                batchValue = myMin;
-                currMinValidation = currentMin;
-            }
-
-            console.log("Current Min: " + currMinValidation);
-
-            if ((bacthValue >= 0 && bacthValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
-                console.log("You are in the first batch");
-                console.log("Current Queue: " + currentQueueSize);
-                if ((currentQueueSize == 3) || (currMinValidation == 4 && currentSec == 59)) {
-                    const thisEventID = userDoc.data().currEventID;
-                    updateCheckInStatus(thisEventID);
-                }
-            } else if ((bacthValue >= 5 && bacthValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
-                console.log("You are in the second batch");
-                if ((currentQueueSize == 3) || (currMinValidation == 9 && currentSec == 59)) {
-                    const thisEventID = userDoc.data().currEventID;
-                    updateCheckInStatus(thisEventID);
-                }
-            }
+            localStorage.setItem("userMin", myMin);
+            localStorage.setItem("queueUserID", userDoc.data().currEventID);
         });
+    validateBatchTime();
+}
+
+setInterval(validateBatchTime, 1000);
+function validateBatchTime() {
+    var currentQueueSize = localStorage.getItem('queueSize');
+    let x = new Date();
+    const userMin = localStorage.getItem('userMin');
+    var currentMin = x.getMinutes();
+    var currentSec = x.getSeconds();
+    console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
+    var bacthValue = 0;
+    var currMinValidation = 0;
+    if (userMin > 9) {
+        var floorValue = Math.floor(userMin / 10) * 10;
+        bacthValue = userMin - floorValue;
+        var currFloorValue = Math.floor(currentMin / 10) * 10;
+        currMinValidation = currentMin - currFloorValue;
+    } else {
+        batchValue = userMin;
+        currMinValidation = currentMin;
+    }
+
+    console.log("Min Validation: " + currMinValidation);
+
+    if ((bacthValue >= 0 && bacthValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
+        console.log("You are in the first batch");
+        if ((currentQueueSize == 3) || ((currMinValidation == 4) && (currentSec == 59))) {
+            const thisEventID = localStorage.getItem('queueUserID');
+            updateCheckInStatus(thisEventID);
+        }
+    } else if ((bacthValue >= 5 && bacthValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
+        console.log("You are in the second batch");
+        if ((currentQueueSize == 3) || ((currMinValidation == 9) && (currentSec == 59))) {
+            const thisEventID = localStorage.getItem('queueUserID');
+            updateCheckInStatus(thisEventID);
+        }
+    }
 }
 
 

@@ -389,6 +389,7 @@ footer .social li a{
     width: 100%;
     flex-wrap: wrap;
     align-items: center;
+    visibility: hidden;
 }
 
 .row .navContent #checkinEventListing .listCheckedEvents #queueRight {
