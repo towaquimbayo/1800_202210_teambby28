@@ -5,6 +5,12 @@ $(document).ready(function () {
     // Display User Name in Event Listings
     insertName();
 
+    // Get profile in accounts page
+    getProfile();
+
+    // Update profile in accounts page after save changes
+    updateProfile();
+
     // Display Event Cards
     displayEvents('events');
 
@@ -18,6 +24,10 @@ $(document).ready(function () {
         populateCheckin();
     }
 
+    if (window.location.pathname == '/my-events/') {
+        setInterval(updateTime, 1000);
+    }
+
     // Disable button for checked in users
     disableReCheckin();
 
@@ -27,11 +37,6 @@ $(document).ready(function () {
     // Display current queue in my Events
     displayQueue();
 
-    // Get profile in accounts page
-    getProfile();
-
-    // Update profile in accounts page after save changes
-    updateProfile();
 
     // Signout user
     signOut();
@@ -124,16 +129,15 @@ function updateProfile() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             const form = document.querySelector("#profileForm");
-            currentUser = db.collection("users").doc(user.uid);
-            updatePassword();
+            // updatePassword();
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                currentUser.update({
+                db.collection("users").doc(user.uid).update({
                     firstName: form.firstName.value,
                     lastName: form.lastName.value,
                     phone: form.phone.value,
-                    email: form.email.value,
+                    email: form.email.value
                 })
                     .then(userDoc => {
                         window.location.replace(location.pathname);
@@ -167,6 +171,15 @@ function signOut() {
             window.location.replace("/login/");
         })
     })
+}
+
+// log out func
+function logOut() {
+    firebase.auth().signOut().then(() => {
+        window.location.replace("/login/");
+    }).catch((error) => {
+        console.log(error);
+    });
 }
 
 function hideLoggedNav() {
@@ -496,25 +509,25 @@ function displayQueue() {
                                 document.getElementById("noEventMessage").style.visibility = "visible";
                                 document.getElementById("checkedInEventInfo").style.visibility = "hidden";
                             } else {
-                                document.getElementById("noEventMessage").style.visibility = "hidden";
+                                document.getElementById("noEventMessage").style.visibility = "visible";
                                 document.getElementById("checkedInEventInfo").style.visibility = "visible";
                                 db.collection('events').where("id", "==", myCurrEvent)
-                                .get()
-                                .then(queryEvent => {
-                                    size = queryEvent.size;
-                                    EventsQ = queryEvent.docs;
-                                    if (size == 1) {
-                                        var thisEvent = EventsQ[0].data();
-                                        eventName = thisEvent.name;
-                                        eventDate = thisEvent.date;
-                                        eventTime = thisEvent.time;
-                                        document.getElementById("myEventInfo").innerHTML = eventName + " at " + eventDate + ", " + eventTime;
-                                        document.getElementById("myEventQueue").innerHTML = querySize + "/3";
-                                    }
-                                })
-                                .catch((error) => {
-                                    console.log("Error adding my event info: ", error);
-                                });
+                                    .get()
+                                    .then(queryEvent => {
+                                        size = queryEvent.size;
+                                        EventsQ = queryEvent.docs;
+                                        if (size == 1) {
+                                            var thisEvent = EventsQ[0].data();
+                                            eventName = thisEvent.name;
+                                            eventDate = thisEvent.date;
+                                            eventTime = thisEvent.time;
+                                            document.getElementById("myEventInfo").innerHTML = eventName + " at " + eventDate + ", " + eventTime;
+                                            document.getElementById("myEventQueue").innerHTML = querySize + "/3";
+                                        }
+                                    })
+                                    .catch((error) => {
+                                        console.log("Error adding my event info: ", error);
+                                    });
                             }
                         });
                 }
@@ -545,11 +558,10 @@ function displayQueue() {
 
 // Update check in status for all users if current event queue is full (3/3)
 function updateCheckInStatus(eID) {
-    alert('YOU MAY ENTER NOW!');
     db.collection('events').doc(eID)
         .get()
         .then(eDoc => {
-            // console.log(eDoc.data().id);
+            console.log("This Event: " + eDoc.data().id);
             const eventID = eDoc.data().id;
             
             db.collection('users')
@@ -561,7 +573,7 @@ function updateCheckInStatus(eID) {
                         if (userCurrEvent == eventID) {
                             // console.log(userDoc.id);
                             db.collection('users').doc(userDoc.id)
-                                .update({ 
+                                .update({
                                     status: "Enter Now",
                                     currentevent: "No Event"
                                 });
@@ -570,18 +582,14 @@ function updateCheckInStatus(eID) {
                 })
         });
     
-    db.collection('events').doc(localStorage.getItem('queueUserID')).collection('queue').get()
-        .then(snap => [
+    db.collection('events').doc(eID).collection('queue').get()
+        .then(snap => {
             snap.forEach(doc => {
-                console.log(doc.id);
+                console.log("Deleting User From Queue: " + doc.id);
                 doc.ref.delete();
             })
-        ]);
-
-    document.location.reload(true);
+        });
 }
-
-setInterval(updateTime, 1000);
 
 function updateTime() {
     let now = new Date();
@@ -637,7 +645,6 @@ function updateBatch(docID, thisUserID) {
 
             const myMin = myTimeSplit[1];
             localStorage.setItem("userMin", myMin);
-            localStorage.setItem("queueUserID", userDoc.data().currEventID);
         });
     validateBatchTime();
 }
@@ -649,9 +656,9 @@ function validateBatchTime() {
     const userMin = localStorage.getItem('userMin');
     var currentMin = x.getMinutes();
     var currentSec = x.getSeconds();
-    console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
     var bacthValue = 0;
     var currMinValidation = 0;
+
     if (userMin > 9) {
         var floorValue = Math.floor(userMin / 10) * 10;
         bacthValue = userMin - floorValue;
@@ -661,34 +668,79 @@ function validateBatchTime() {
         batchValue = userMin;
         currMinValidation = currentMin;
     }
-
-    console.log("Min Validation: " + currMinValidation);
+    
+    console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
+    //console.log("Min Validation: " + currMinValidation);
 
     if ((bacthValue >= 0 && bacthValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
         console.log("You are in the first batch");
-        if ((currentQueueSize == 3) || ((currMinValidation == 4) && (currentSec == 59))) {
-            const thisEventID = localStorage.getItem('queueUserID');
-            updateCheckInStatus(thisEventID);
+        if ((currentQueueSize == 3) || ((currMinValidation == 3) && (currentSec == 59))) {
+            const thisEventID = localStorage.getItem('permanentEventID');
+            
+            db.collection('users').get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(function(doc) {
+                        if (doc.data().status == "Wait") {
+                            if (!alert('YOU MAY ENTER NOW!')) {
+                                updateCheckInStatus(thisEventID);
+                            }
+                            setTimeout(function() { 
+                                window.location.replace("/my-events/");
+                            }, 1000);
+                        } else {
+                            console.log("NOT REACHING!!");
+                        }
+                        
+                        // console.log(doc.id, "=>", doc.data().status);
+                    });
+                });
+            // window.location.replace("/my-events/");
         }
     } else if ((bacthValue >= 5 && bacthValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
         console.log("You are in the second batch");
         if ((currentQueueSize == 3) || ((currMinValidation == 9) && (currentSec == 59))) {
-            const thisEventID = localStorage.getItem('queueUserID');
-            updateCheckInStatus(thisEventID);
+            const thisEventID = localStorage.getItem('permanentEventID');
+            
+            db.collection('users').get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(function(doc) {
+                        if (doc.data().status == "Wait") {
+                            if (!alert('YOU MAY ENTER NOW!')) {
+                                updateCheckInStatus(thisEventID);
+                            }
+                            setTimeout(function() { 
+                                window.location.replace("/my-events/");
+                            }, 1000);
+                        } else {
+                            console.log("NOT REACHING!!");
+                        }
+                        // postCheckinRefresh();
+                    });
+                });
+            // window.location.replace("/my-events/");
         }
     }
 }
 
-
-// log out func
-function logOut() {
-    firebase.auth().signOut().then(() => {
-        window.location.replace("/login/");
-    }).catch((error) => {
-        console.log(error);
+function postCheckinRefresh() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            db.collection("users").doc(user.uid).get()
+                .then(userDoc => {
+                    const userStatus = userDoc.data().status;
+                    const userCurrEvent = userDoc.data().currentevent;
+                    if ((userCurrEvent == "No Event") && (userStatus == "Enter Now")) {
+                        db.collection('users').doc(userDoc.id).get()
+                            .then(function() {
+                                if (!alert('YOU MAY ENTER NOW!')) {
+                                    window.location.replace("/my-events/");
+                                }
+                            });
+                    }
+                })
+        }
     });
 }
-
 
 
 /*********** NEXT STEPS ************/
