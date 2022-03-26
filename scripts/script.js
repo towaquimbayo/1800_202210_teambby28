@@ -37,7 +37,6 @@ $(document).ready(function () {
     // Display current queue in my Events
     displayQueue();
 
-
     // Signout user
     signOut();
 
@@ -64,7 +63,7 @@ function loadSkeleton() {
             hideLoggedNav();
         })
     });
-    console.log($('#footerPlaceHolder').load('../temp/footer.html'));
+    // console.log($('#footerPlaceHolder').load('../temp/footer.html'));
 }
 
 function insertName() {
@@ -498,7 +497,8 @@ function displayQueue() {
     db.collection('events').doc(docID).collection('queue')
         .get()
         .then(querySnapshot => {
-            var querySize = querySnapshot.size;
+            // var querySize = querySnapshot.size;
+            var querySize = localStorage.getItem("queueSize");
             // console.log("CURRENT EVENT BATCH SIZE: " + querySize);
 
             firebase.auth().onAuthStateChanged(user => {
@@ -511,7 +511,7 @@ function displayQueue() {
                                 document.getElementById("noEventMessage").style.visibility = "visible";
                                 document.getElementById("checkedInEventInfo").style.visibility = "hidden";
                             } else {
-                                document.getElementById("noEventMessage").style.visibility = "visible";
+                                document.getElementById("noEventMessage").style.visibility = "hidden";
                                 document.getElementById("checkedInEventInfo").style.visibility = "visible";
                                 db.collection('events').where("id", "==", myCurrEvent)
                                     .get()
@@ -602,6 +602,30 @@ function updateTime() {
     document.getElementById("currentSec").innerHTML = s;
 }
 
+setInterval(updateQueueSize, 1000);
+function updateQueueSize() {
+    const docID = localStorage.getItem('permanentEventID');
+    var currentQueueSize;
+    db.collection('events').doc(docID).collection('queue')
+        .get()
+        .then(snap => {
+            currentQueueSize = snap.size;
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    if ((currentQueueSize != localStorage.getItem('queueSize')) && (currentQueueSize != 3)) {
+                        if (!alert('Queue Has Been Updated!')) {
+                            window.location.replace("/my-events/");
+                        } 
+                    } else if (currentQueueSize == 3) {
+                        if (!alert('You Are Ready To Enter!')) {
+                            window.location.replace("/my-events/");
+                        } 
+                    }
+                }
+            });
+        });
+}
+
 // Batch manager function 
 function batchManager() {
     const docID = localStorage.getItem('permanentEventID');
@@ -676,71 +700,34 @@ function validateBatchTime() {
 
     if ((bacthValue >= 0 && bacthValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
         console.log("You are in the first batch");
-        if ((currentQueueSize == 3) || ((currMinValidation == 3) && (currentSec == 59))) {
-            const thisEventID = localStorage.getItem('permanentEventID');
-            
-            db.collection('users').get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach(function(doc) {
-                        if (doc.data().status == "Wait") {
-                            if (!alert('YOU MAY ENTER NOW!')) {
-                                updateCheckInStatus(thisEventID);
-                            }
-                            setTimeout(function() { 
-                                window.location.replace("/my-events/");
-                            }, 1000);
-                        } else {
-                            console.log("NOT REACHING!!");
-                        }
-                        
-                        // console.log(doc.id, "=>", doc.data().status);
-                    });
-                });
-            // window.location.replace("/my-events/");
+        if ((currentQueueSize == 3) || ((currMinValidation == 4) && (currentSec == 59))) {
+            pushCheckinUser();
         }
     } else if ((bacthValue >= 5 && bacthValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
         console.log("You are in the second batch");
         if ((currentQueueSize == 3) || ((currMinValidation == 9) && (currentSec == 59))) {
-            const thisEventID = localStorage.getItem('permanentEventID');
-            
-            db.collection('users').get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach(function(doc) {
-                        if (doc.data().status == "Wait") {
-                            if (!alert('YOU MAY ENTER NOW!')) {
-                                updateCheckInStatus(thisEventID);
-                            }
-                            setTimeout(function() { 
-                                window.location.replace("/my-events/");
-                            }, 1000);
-                        } else {
-                            console.log("NOT REACHING!!");
-                        }
-                        // postCheckinRefresh();
-                    });
-                });
-            // window.location.replace("/my-events/");
+            pushCheckinUser();
         }
     }
 }
 
-function postCheckinRefresh() {
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            db.collection("users").doc(user.uid).get()
-                .then(userDoc => {
-                    const userStatus = userDoc.data().status;
-                    const userCurrEvent = userDoc.data().currentevent;
-                    if ((userCurrEvent == "No Event") && (userStatus == "Enter Now")) {
-                        db.collection('users').doc(userDoc.id).get()
-                            .then(function() {
-                                if (!alert('YOU MAY ENTER NOW!')) {
-                                    window.location.replace("/my-events/");
-                                }
-                            });
-                    }
-                })
-        }
+function pushCheckinUser() {
+const thisEventID = localStorage.getItem('permanentEventID');
+            
+db.collection('users').get()
+    .then(querySnapshot => {
+        querySnapshot.forEach(function(doc) {
+            if (doc.data().status == "Wait") {
+                if (!alert('YOU MAY ENTER NOW!')) {
+                    updateCheckInStatus(thisEventID);
+                }
+                setTimeout(function() { 
+                    window.location.replace("/my-events/");
+                }, 3000);
+            } else {
+                console.log("NOT REACHING!!");
+            }
+        });
     });
 }
 
