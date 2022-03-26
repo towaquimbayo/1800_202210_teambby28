@@ -421,7 +421,7 @@ footer .social li a{
     visibility: hidden;
 }
 
-.row .navContent #checkinEventListing .listPastEvents {
+.row .navContent #checkinEventListing .listCurrEvents {
     background-color: var(--white);
     border-radius: 50px;
     box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.15);
@@ -431,9 +431,10 @@ footer .social li a{
     width: 100%;
     flex-wrap: wrap;
     align-items: center;
+    visibility: hidden;
 }
 
-.row .navContent #checkinEventListing .listPastEvents img {
+.row .navContent #checkinEventListing .listCurrEvents img {
     object-fit: cover;
     object-position: center center;
     border-top-left-radius: 50px;
@@ -442,18 +443,18 @@ footer .social li a{
     height: 250px;
 }
 
-.row .navContent #checkinEventListing .listPastEvents .queueRight {
+.row .navContent #checkinEventListing .listCurrEvents .queueRight {
     padding: 1.5rem 2rem; 
 }
 
-.row .navContent #checkinEventListing .listPastEvents .listRow .pastEvent {
+.row .navContent #checkinEventListing .listCurrEvents .listRow .currEvent {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 700;
     padding-bottom: 0.7rem;
 }
 
-.row .navContent #checkinEventListing .listPastEvents .listRow p {
+.row .navContent #checkinEventListing .listCurrEvents .listRow p {
     margin: 0;
     padding-top: 5px;
     font-size: 1.2rem;
@@ -461,7 +462,7 @@ footer .social li a{
     padding-bottom: 25px;
 }
 
-.row .navContent #checkinEventListing .listPastEvents .listRow #enterEvent {
+.row .navContent #checkinEventListing .listCurrEvents .listRow #enterEvent {
     font-size: 1.2rem;
     font-weight: 400;
     color: var(--white);

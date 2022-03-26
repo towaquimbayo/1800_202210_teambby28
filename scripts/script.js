@@ -63,7 +63,7 @@ function loadSkeleton() {
             hideLoggedNav();
         })
     });
-    // console.log($('#footerPlaceHolder').load('../temp/footer.html'));
+    console.log($('#footerPlaceHolder').load('../temp/footer.html'));
 }
 
 function insertName() {
@@ -394,9 +394,6 @@ function populateCheckin() {
                 document.getElementById("eventDateCheck").innerHTML = eventDate;
 
                 checkIn();
-
-            } else {
-                console.log("Query has > 1 data");
             }
         })
         .catch((error) => {
@@ -417,7 +414,8 @@ function checkIn() {
                 currentUser.update({
                     currentevent: currEvent,
                     status: "Wait"
-                }).then(userDoc => {
+                })
+                .then(userDoc => {
                     window.location.replace("/check-in-confirmation/");
                 })
 
@@ -440,7 +438,6 @@ function checkIn() {
                                         hereTime: checkTime,
                                         currEventID: permEventID
                                     });
-
                                 });
                             console.log("Checked in user added to event!");
                         }
@@ -500,38 +497,37 @@ function displayQueue() {
             // var querySize = querySnapshot.size;
             var querySize = localStorage.getItem("queueSize");
             // console.log("CURRENT EVENT BATCH SIZE: " + querySize);
-
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     currentUser = db.collection('users').doc(user.uid);
                     currentUser.get()
-                        .then(userDoc => {
-                            myCurrEvent = userDoc.data().currentevent;
-                            if (myCurrEvent == "No Event") {
-                                document.getElementById("noEventMessage").style.visibility = "visible";
-                                document.getElementById("checkedInEventInfo").style.visibility = "hidden";
-                            } else {
-                                document.getElementById("noEventMessage").style.visibility = "hidden";
-                                document.getElementById("checkedInEventInfo").style.visibility = "visible";
-                                db.collection('events').where("id", "==", myCurrEvent)
-                                    .get()
-                                    .then(queryEvent => {
-                                        size = queryEvent.size;
-                                        EventsQ = queryEvent.docs;
-                                        if (size == 1) {
-                                            var thisEvent = EventsQ[0].data();
-                                            eventName = thisEvent.name;
-                                            eventDate = thisEvent.date;
-                                            eventTime = thisEvent.time;
-                                            document.getElementById("myEventInfo").innerHTML = eventName + " at " + eventDate + ", " + eventTime;
-                                            document.getElementById("myEventQueue").innerHTML = querySize + "/3";
-                                        }
-                                    })
-                                    .catch((error) => {
-                                        console.log("Error adding my event info: ", error);
-                                    });
-                            }
-                        });
+                    .then(userDoc => {
+                        myCurrEvent = userDoc.data().currentevent;
+                        if (myCurrEvent == "No Event") {
+                            document.getElementById("noEventMessage").style.visibility = "visible";
+                            document.getElementById("checkedInEventInfo").style.visibility = "hidden";
+                        } else {
+                            document.getElementById("noEventMessage").style.visibility = "hidden";
+                            document.getElementById("checkedInEventInfo").style.visibility = "visible";
+                            db.collection('events').where("id", "==", myCurrEvent)
+                                .get()
+                                .then(queryEvent => {
+                                    size = queryEvent.size;
+                                    EventsQ = queryEvent.docs;
+                                    if (size == 1) {
+                                        var thisEvent = EventsQ[0].data();
+                                        eventName = thisEvent.name;
+                                        eventDate = thisEvent.date;
+                                        eventTime = thisEvent.time;
+                                        document.getElementById("myEventInfo").innerHTML = eventName + " at " + eventDate + ", " + eventTime;
+                                        document.getElementById("myEventQueue").innerHTML = querySize + "/3";
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log("Error adding my event info: ", error);
+                                });
+                        }
+                    });
                 }
             });
         });
@@ -613,10 +609,14 @@ function updateQueueSize() {
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     if ((currentQueueSize != localStorage.getItem('queueSize')) && (currentQueueSize != 3)) {
+                        document.getElementById("currEventHeading").style.visibility = "visible";
+                        document.getElementById("listCurrEvents").style.visibility = "visible";
                         if (!alert('Queue Has Been Updated!')) {
                             window.location.replace("/my-events/");
                         } 
                     } else if (currentQueueSize == 3) {
+                        document.getElementById("currEventHeading").style.visibility = "visible";
+                        document.getElementById("listCurrEvents").style.visibility = "visible";
                         if (!alert('You Are Ready To Enter!')) {
                             window.location.replace("/my-events/");
                         } 
