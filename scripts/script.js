@@ -349,6 +349,8 @@ function populateSingleEvent() {
                 eventLocation = thisEvent.location;
                 document.getElementById("eventLocation").innerHTML = eventLocation;
 
+                mapLoad(eventLocation);
+
                 eventTime = thisEvent.time;
                 document.getElementById("eventTime").innerHTML = eventTime;
 
@@ -742,6 +744,16 @@ function postCheckinRefresh() {
     });
 }
 
+function mapLoad(address) {
+    const apiKey = firebaseConfig.apiKey;
+    const addressEnc = encodeURI(address)
+    const addressURL = "https://www.google.com/maps/embed/v1/place?q="+ addressEnc + "&key=";
+    const injectURL = addressURL + apiKey;
+
+    iframe = document.getElementById("map-widget");
+
+    iframe.setAttribute("src", injectURL);
+}
 
 /*********** NEXT STEPS ************/
 /**
