@@ -9,7 +9,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: proxima-nova, sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .navbar {
@@ -17,6 +17,10 @@ body {
     padding: 1em 5em;
     min-height: 10vh;
     box-shadow: 0px 10px 28px -5px rgba(0,0,0,0.15);
+}
+
+.navbar-nav .nav-item {
+    padding-left: 2rem;
 }
 
 .navbar-nav .nav-item.logged-in,
@@ -33,7 +37,7 @@ body {
 .navbar-nav .nav-item .nav-link.active {
     font-size: 18px;
     color: var(--secondaryColor);
-    font-weight: 700;
+    font-weight: 600;
 }
 
 #carouselExampleCaptions .carousel-indicators { 
@@ -85,7 +89,7 @@ body {
 #carouselExampleCaptions .carousel-inner #overlay #caroCaption #descHead {
     display: block;
     font-size: 4em;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--white);
     margin-bottom: 1em;
 }
@@ -93,7 +97,7 @@ body {
 #carouselExampleCaptions .carousel-inner #overlay #caroCaption #mobHead {
     display: none;
     font-size: 4em;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--white);
     margin-bottom: 1em;
 }
@@ -147,7 +151,7 @@ footer .social li a{
 
 .wrapper h1 {
     font-size: 2.5em;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 1.5em;
     color: var(--black);
 }
@@ -176,7 +180,7 @@ footer .social li a{
 
 .wrapper .eventListings .singleEvent .card .card-body .card-title {
     font-size: 1.5em;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
     text-transform: capitalize;
     margin-bottom: 1em;
@@ -187,6 +191,10 @@ footer .social li a{
     font-weight: 400;
     color: var(--black);
     margin-bottom: 30px;
+}
+
+.wrapper .eventListings .singleEvent .card .card-body .card-text strong {
+    font-weight: 600;
 }
 
 .wrapper .eventListings .singleEvent .card .card-body .viewEvent {
@@ -297,14 +305,14 @@ footer .social li a{
 
 .row .navContent h2 {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
     padding-bottom: 1rem;
 }
 
 .row .navContent p a {
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--primaryColor);
     padding-bottom: 1rem;
 }
@@ -352,7 +360,7 @@ footer .social li a{
 .row .navContent .editProfileForm .accSubmit {
     margin-top: 1.5rem;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 500;
     padding: 20px 40px;
     color: var(--white);
     background-color: var(--secondaryColor);
@@ -414,7 +422,7 @@ footer .social li a{
 }
 
 .row .navContent #checkinEventListing #pastEventHeading {
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 .row .navContent #checkinEventListing #currEventHeading {
@@ -450,7 +458,7 @@ footer .social li a{
 .row .navContent #checkinEventListing .listCurrEvents .listRow .currEvent {
     margin: 0;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
     padding-bottom: 0.7rem;
 }
 
@@ -519,13 +527,13 @@ footer .social li a{
 /********** PRIVACY POLICY ***********/
 .privPolicy h3 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
 }
 
 .privPolicy h4 {
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
 }
 
@@ -582,7 +590,7 @@ footer .social li a{
 
 .row .contact-content .overlay-dark h3 {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--white);
     padding-bottom: 1rem;
 }
@@ -598,7 +606,7 @@ footer .social li a{
     font-weight: 400;
     color: var(--white);
     padding: 0.5rem 0;
-    line-height: 1rem;
+    line-height: 2rem;
 }
 
 .row .contact-content .overlay-dark p a {
@@ -653,7 +661,7 @@ footer .social li a{
 #eventHero #eventOverlay .eventHeader h1,
 #eventHeroCheck #eventOverlay .eventHeader h1 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 600;
     position: absolute;
     bottom: 12rem;
     color: var(--white);
@@ -731,7 +739,7 @@ footer .social li a{
 
 .eventWrapper .eventContent .eventDescRow h3 {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
     line-height: 2rem;
     margin-bottom: 1.5rem;
@@ -748,8 +756,12 @@ footer .social li a{
     line-height: 2rem;
 }
 
+.eventWrapper .eventContent .eventDescRow p strong {
+    font-weight: 600;
+}
+
 .eventWrapper .eventContent .eventDescRow p a {
-    font-weight: 700;
+    font-weight: 600;
     color: var(--primaryColor);
 }
 
@@ -767,7 +779,7 @@ footer .social li a{
 
 .eventWrapper .eventContent .eventDescRow .checkInBtn {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: none;
     text-align: center;
     color: var(--white);

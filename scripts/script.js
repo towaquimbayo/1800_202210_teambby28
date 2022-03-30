@@ -533,6 +533,74 @@ function displayQueue() {
         });
 }
 
+// Add event as array in user collection
+function addUserEventInArray() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection('users').doc(user.uid);
+            currentUser.update({
+                pastEvents: firebase.firestore.FieldValue.arrayUnion(thisEvent)
+            }, {
+                merge: true
+            })
+            .then(userDoc => {
+                console.log("User Event Array Added!");
+            })
+        }
+    });
+}
+
+// Create past event list from array in user collection
+function createPastEventList() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection('users').doc(user.uid);
+            currentUser.get()
+                .then(userDoc => {
+                    if (currentQueueSize == 3) {
+                        myCurrEvent = userDoc.data().currentevent;
+                        if (myCurrEvent == "No Event") {
+                            document.getElementById("currEventHeading").style.visibility = "hidden";
+                        } else {
+                            document.getElementById("currEventHeading").style.visibility = "visible";
+                            db.collection('events').where("id", "==", myCurrEvent)
+                                .get()
+                                .then(queryEvent => {
+                                    size = queryEvent.size;
+                                    EventsQ = queryEvent.docs;
+                                    if (size == 1) {
+                                        var eventDisplaySec = document.getElementById('checkedEventSec');
+                                        var thisEvent = EventsQ[0].data();
+                                        eventName = thisEvent.name;
+                                        eventID = thisEvent.id;
+                                        eventDate = thisEvent.date;
+                                        eventTime = thisEvent.time;
+        
+                                        var pastEventTemplate = '<div class=\"listPastEvents\">';  
+                                        pastEventTemplate += '<div class="listRow col-md-4">';
+                                        pastEventTemplate += '<img src="../images/' + eventID + '.jpg">>';
+                                        pastEventTemplate += '</div>';
+                                        pastEventTemplate += '<div class="listRow col-md-8 queueRight">';
+                                        pastEventTemplate += '<h4 class="pastEvent">' + eventName + '</h4>';
+                                        pastEventTemplate += '<p>Date of Event: (<span id="eventTime">' + eventDate + ', ' + eventTime + '</span>)</p>';
+                                        pastEventTemplate += '<button type="button" id="enterEvent">I\'m Here!</button>';
+                                        pastEventTemplate += '</div>';
+                                        pastEventTemplate += '</div>';
+        
+                                        eventDisplaySec.append(pastEventTemplate);
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log("Error adding my event info: ", error);
+                                });
+                        }
+                    }
+            });
+        }
+    });
+}
+
+
 // function displayClock() {
 //     var refresh = 1000;
 //     currentTime = setTimeout('displayClockTime()', refresh);
@@ -749,7 +817,21 @@ function mapLoad(address) {
  * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue // DONE
  * 4) My Events page -> Display "Please Wait" button (disabled) // DONE
  * 5) User Collection (Checked in User) -> Update the status: "Wait"; // DONE
+ * 6) Function for batchManager() -> Run a loop for every 90 seconds -> // DONE
+ *          7) Add checked in event to checked in user (currentEvent: event1IDName);
+ *          8) Check if there are 3 users in the batch // DONE
+ *          9) If there are 3 users -> // DONE
+ *                 10) Display a "Enter Now" button on My Events for all queued user // DONE
+ *                 11) Reset the batch (timer and delete all users from current queue) // DONE
+ *                 12) Updates user status: "Enter Now"; // DONE
  *
+ * 
+ * 13) if queue size == 3 -> alert change to user "YOU MAY ENTER NOW!" -> refresh -> display current event with button (DONT REMOVE USER OR UPDATE ANYTHING YET)
+ * 14) the button click callback function -> removes user from queue collection and updates status (individually not all users in the queue)
+ * 15) after button clicked -> refresh -> display past event list -> instead of Enter Now status maybe change to No Event?
+ * 
+ * 
+ * 
  * 
  * EX: 06:34:22 (Check In Time) -> 06:34:00 - 06:35:59 (thirdBatch)
  * minute/seconds if statements
@@ -774,13 +856,4 @@ function mapLoad(address) {
  * If no my Events, display "You haven't checked in to any events yet! Go to Events to view our available events!"
  * If there is checked in events, display their queue
  * 
- * 
- *
- * 6) Function for batchManager() -> Run a loop for every 90 seconds ->
- *          7) Add checked in event to checked in user (currentEvent: event1IDName);
- *          8) Check if there are 3 users in the batch
- *          9) If there are 3 users ->
- *                 10) Display a "Enter Now" button on My Events for all queued user
- *                 11) Reset the batch (timer and delete all users from current queue)
- *                 12) Updates user status: "Enter Now";
  */
