@@ -674,8 +674,8 @@ function updateTime() {
     var m = now.getMinutes();
     var s = now.getSeconds();
     // document.getElementById("clock").innerHTML = "Minutes: " + m + " Seconds: " + s;
-    document.getElementById("currentMin").innerHTML = m;
-    document.getElementById("currentSec").innerHTML = s;
+    // document.getElementById("currentMin").innerHTML = m;
+    // document.getElementById("currentSec").innerHTML = s;
 }
 
 setInterval(updateQueueSize, 1000);
@@ -766,20 +766,32 @@ function validateBatchTime() {
         batchValue = userMin;
     }
     
-    if (batchValue >= 0 && batchValue <= 4) {
-        if ((4 - currMinValidation) == 0) {
-            document.getElementById('waitTimeCount').innerHTML = (60 - currentSec) + " seconds";
-        } else {
-            document.getElementById('waitTimeCount').innerHTML = (4 - currMinValidation) + " minute(s) " + (60 - currentSec) + " seconds";
+    // Display wait time 
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            db.collection('users').doc(user.uid).get()
+            .then(userDoc => {
+                myStatus = userDoc.data().status;
+                if (myStatus == 'Wait') {
+                    document.getElementById('waitTimeCounter').style.display = 'block';
+                    if (batchValue >= 0 && batchValue <= 4) {
+                        if ((4 - currMinValidation) == 0) {
+                            document.getElementById('waitTimeCount').innerHTML = (60 - currentSec) + " seconds";
+                        } else {
+                            document.getElementById('waitTimeCount').innerHTML = (4 - currMinValidation) + " minute(s) " + (60 - currentSec) + " seconds";
+                        }
+                    } else if (batchValue >= 5 && batchValue <= 9) {
+                        if ((9 - currMinValidation) == 0) {
+                            document.getElementById('waitTimeCount').innerHTML = (60 - currentSec) + " seconds";
+                        } else {
+                            document.getElementById('waitTimeCount').innerHTML = (9 - currMinValidation) + " minute(s) " + (60 - currentSec) + " seconds";
+                        }
+                    }
+                }
+            });
         }
-    } else if (batchValue >= 5 && batchValue <= 9) {
-        if ((9 - currMinValidation) == 0) {
-            document.getElementById('waitTimeCount').innerHTML = (60 - currentSec) + " seconds";
-        } else {
-            document.getElementById('waitTimeCount').innerHTML = (9 - currMinValidation) + " minute(s) " + (60 - currentSec) + " seconds";
-        }
-    }
-
+    });
+    
     console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
     console.log("Min Validation: " + currMinValidation);
 
@@ -795,10 +807,6 @@ function validateBatchTime() {
         }
     }
 }
-
-// function displayWaitTime() {
-//     document.getElementById('waitTimeCount');
-// }
 
 function pushCheckinUser() {
     const thisEventID = localStorage.getItem('permanentEventID');

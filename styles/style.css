@@ -528,12 +528,13 @@ footer .social li a{
     padding-bottom: 25px;
 }
 
-.row .navContent #checkinEventListing .waitTimeCounter {
+.row .navContent #checkinEventListing #waitTimeCounter {
     width: 100%;
     font-size: 1.5rem;
     text-align: center;
     padding: 5rem 0;
     font-weight: 500;
+    display: none;
 }
 
 /********** NOTIFICATIONS ***********/
