@@ -576,6 +576,7 @@ function displayQueue() {
                                     }
                                 });
                         } else if (myStatus == "Checked In") {
+                            localStorage.setItem('permanentEventID', '');
                             document.getElementById("noEventMessage").style.display = "block";
                             document.getElementById("checkedInEventInfo").style.display = "none";
                             document.getElementById("pastEventHeading").style.display = "block";
@@ -660,6 +661,12 @@ function updateCheckInStatus(eID) {
                     })
                 })
         });
+    
+    setTimeout(function() { 
+        if (!alert('YOU MAY ENTER NOW!')) {
+            window.location.replace("/my-events/");
+        }
+    }, 1000);
 }
 
 function updateTime() {
@@ -681,18 +688,11 @@ function updateQueueSize() {
             currentQueueSize = snap.size;
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
-                    if ((currentQueueSize != localStorage.getItem('queueSize')) && (currentQueueSize != 3)) {
+                    if (currentQueueSize != localStorage.getItem('queueSize')) {
                         if (!alert('Queue Has Been Updated!')) {
                             window.location.replace("/my-events/");
                         } 
                     } 
-                    // else if (currentQueueSize == 3) {
-                    //     document.getElementById("currEventHeading").style.display = "block";
-                    //     document.getElementById("listCurrEvents").style.display = "block";
-                    //     if (!alert('You Are Ready To Enter!')) {
-                    //         window.location.replace("/my-events/");
-                    //     } 
-                    // }
                 }
             });
         });
@@ -776,7 +776,7 @@ function validateBatchTime() {
         }
     } else if ((batchValue >= 5 && batchValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
         console.log("You are in the second batch");
-        if ((currentQueueSize == 3) || ((currMinValidation == 8) && (currentSec == 59))) {
+        if ((currentQueueSize == 3) || ((currMinValidation == 9) && (currentSec == 59))) {
             pushCheckinUser();
         }
     }
@@ -791,13 +791,8 @@ function pushCheckinUser() {
             querySnapshot.forEach(function(doc) {
                 if (doc.data().status == "Wait") {
                     var userId = doc.id;
-                    if (!alert('YOU MAY ENTER NOW!')) {
-                        displayCurrentEventList(userId);
-                        updateCheckInStatus(thisEventID);
-                    }
-                    setTimeout(function() { 
-                        window.location.replace("/my-events/");
-                    }, 1000);
+                    displayCurrentEventList(userId);
+                    updateCheckInStatus(thisEventID);
                 } else {
                     console.log("NOT REACHING!!");
                 }
@@ -851,30 +846,28 @@ function addUserEventInArray(userId, thisEvent) {
 
 // Create past event list from array in user collection
 function displayCurrentEventList(userId) {
-    currentUser = db.collection('users').doc(userId);
-    currentUser.get()
+    db.collection('users').doc(userId).get()
         .then(userDoc => {
             myCurrEvent = userDoc.data().currentevent;
-            db.collection('events').where("id", "==", myCurrEvent)
-            .get()
-            .then(queryEvent => {
-                size = queryEvent.size;
-                EventsQ = queryEvent.docs;
-                if (size == 1) {
-                    var thisEvent = EventsQ[0].data();
-                    document.getElementById("listCurrEvents").style.display = "flex";
+            db.collection('events').where("id", "==", myCurrEvent).get()
+                .then(queryEvent => {
+                    size = queryEvent.size;
+                    EventsQ = queryEvent.docs;
+                    if (size == 1) {
+                        var thisEvent = EventsQ[0].data();
+                        document.getElementById("listCurrEvents").style.display = "flex";
 
-                    document.getElementById("currEventHeading").style.display = "block";
-                    
-                    var img = document.createElement("img");
-                    img.src = "../images/" + thisEvent.id + ".jpg";
-                    document.getElementById("currImg").appendChild(img);
-                    
-                    document.getElementById("currEvent").innerHTML = thisEvent.name;
-                    document.getElementById("currEventTime").innerHTML = thisEvent.date + " at " + thisEvent.time;
-                }
-            });
-    });
+                        document.getElementById("currEventHeading").style.display = "block";
+                        
+                        var img = document.createElement("img");
+                        img.src = "../images/" + thisEvent.id + ".jpg";
+                        document.getElementById("currImg").appendChild(img);
+                        
+                        document.getElementById("currEvent").innerHTML = thisEvent.name;
+                        document.getElementById("currEventTime").innerHTML = thisEvent.date + " at " + thisEvent.time;
+                    }
+                });
+        });
 }
 
 function mapLoad(address) {
