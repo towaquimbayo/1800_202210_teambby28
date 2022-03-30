@@ -212,26 +212,32 @@
                     <h2 id="currEventHeading">Current Event</h2>
                 </div>
                 <div class="listCurrEvents" id="listCurrEvents">
-                    <div class="listRow col-md-4">
-                        <img src="../images/AA2.jpg">
+                    <div class="listRow col-md-4" id="currImg">
                     </div>
                     <div class="listRow col-md-8 queueRight">
-                        <h4 class="currEvent">Event 1</h4>
-                        <p>Date of Event: (<span id="eventTime"></span>)</p>
+                        <h4 id="currEvent"></h4>
+                        <p>Date of Event: (<span id="currEventTime"></span>)</p>
                         <button type="button" id="enterEvent">I'm Here!</button>
                     </div>
                 </div>
 
-                <!-- <h2 id="pastEventHeading">Past Events</h2>
-                <div class="listPastEvents">
-                    <div class="listRow col-md-4">
-                        <img src="../images/AA2.jpg" alt="">
+                <div>
+                    <h2 id="pastEventHeading">Past Events</h2>
+                </div>
+
+                <div id="pastEventList"></div>
+
+                <template id="pastEventTemplate">
+                    <div class="listPastEvents">
+                        <div class="listRow col-md-4">
+                            <img class="pastImg">
+                        </div>
+                        <div class="listRow col-md-8 queueRight">
+                            <h4 class="pastEvent"></h4>
+                            <p>Date of Event: (<span class="pastEventTime"></span>)</p>
+                        </div>
                     </div>
-                    <div class="listRow col-md-8 queueRight">
-                        <h4 class="pastEvent">Event 1</h4>
-                        <p>Date of Event: (<span id="eventTime"></span>)</p>
-                    </div>
-                </div> -->
+                </template>
             </div>
         </div>
     </div>

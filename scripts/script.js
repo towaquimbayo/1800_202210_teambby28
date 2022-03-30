@@ -28,6 +28,20 @@ $(document).ready(function () {
         setInterval(updateTime, 1000);
     }
 
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection('users').doc(user.uid);
+            currentUser.get()
+            .then(userDoc => {
+                myCurrEvent = userDoc.data().currentevent;
+                myStatus = userDoc.data().status;
+                if (myStatus == "Guest") {
+                    document.getElementById("noEventMessage").style.display = "block";
+                }
+            });
+        }
+    });
+
     // Disable button for checked in users
     disableReCheckin();
 
@@ -138,9 +152,9 @@ function updateProfile() {
                     phone: form.phone.value,
                     email: form.email.value
                 })
-                    .then(userDoc => {
-                        window.location.replace(location.pathname);
-                    })
+                .then(userDoc => {
+                    window.location.replace(location.pathname);
+                })
             });
         }
     })
@@ -503,10 +517,8 @@ function displayQueue() {
                     currentUser.get()
                     .then(userDoc => {
                         myCurrEvent = userDoc.data().currentevent;
-                        if (myCurrEvent == "No Event") {
-                            document.getElementById("noEventMessage").style.display = "block";
-                            document.getElementById("checkedInEventInfo").style.display = "none";
-                        } else {
+                        myStatus = userDoc.data().status;
+                        if (myStatus == "Wait") {
                             document.getElementById("noEventMessage").style.display = "none";
                             document.getElementById("checkedInEventInfo").style.display = "flex";
                             db.collection('events').where("id", "==", myCurrEvent)
@@ -526,80 +538,82 @@ function displayQueue() {
                                 .catch((error) => {
                                     console.log("Error adding my event info: ", error);
                                 });
-                        }
-                    });
-                }
-            });
-        });
-}
+                            
+                            // console.log(userDoc.data().pastEvents);
+                            if (userDoc.data().pastEvents.length > 0) {
+                                document.getElementById("pastEventHeading").style.display = "block";
+                                displayPastEvents();
+                                document.querySelector(".listPastEvents").style.display = "flex";
+                            }
 
-// Add event as array in user collection
-function addUserEventInArray() {
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            currentUser = db.collection('users').doc(user.uid);
-            currentUser.update({
-                pastEvents: firebase.firestore.FieldValue.arrayUnion(thisEvent)
-            }, {
-                merge: true
-            })
-            .then(userDoc => {
-                console.log("User Event Array Added!");
-            })
-        }
-    });
-}
+                        } else if (myStatus == "Guest") {
+                            document.getElementById("noEventMessage").style.display = "block";
+                        } else if (myStatus == "Enter Now") {
+                            // Enter event function
+                            enterEvent();
 
-// Create past event list from array in user collection
-function createPastEventList() {
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            currentUser = db.collection('users').doc(user.uid);
-            currentUser.get()
-                .then(userDoc => {
-                    if (currentQueueSize == 3) {
-                        myCurrEvent = userDoc.data().currentevent;
-                        if (myCurrEvent == "No Event") {
-                            document.getElementById("currEventHeading").style.display = "none";
-                        } else {
-                            document.getElementById("currEventHeading").style.display = "block";
+                            document.getElementById("noEventMessage").style.display = "none";
+                            document.getElementById("checkedInEventInfo").style.display = "none";
+
+                            myCurrEvent = userDoc.data().currentevent;
                             db.collection('events').where("id", "==", myCurrEvent)
                                 .get()
                                 .then(queryEvent => {
                                     size = queryEvent.size;
                                     EventsQ = queryEvent.docs;
                                     if (size == 1) {
-                                        var eventDisplaySec = document.getElementById('checkedEventSec');
                                         var thisEvent = EventsQ[0].data();
-                                        eventName = thisEvent.name;
-                                        eventID = thisEvent.id;
-                                        eventDate = thisEvent.date;
-                                        eventTime = thisEvent.time;
-        
-                                        var pastEventTemplate = '<div class=\"listPastEvents\">';  
-                                        pastEventTemplate += '<div class="listRow col-md-4">';
-                                        pastEventTemplate += '<img src="../images/' + eventID + '.jpg">>';
-                                        pastEventTemplate += '</div>';
-                                        pastEventTemplate += '<div class="listRow col-md-8 queueRight">';
-                                        pastEventTemplate += '<h4 class="pastEvent">' + eventName + '</h4>';
-                                        pastEventTemplate += '<p>Date of Event: (<span id="eventTime">' + eventDate + ', ' + eventTime + '</span>)</p>';
-                                        pastEventTemplate += '<button type="button" id="enterEvent">I\'m Here!</button>';
-                                        pastEventTemplate += '</div>';
-                                        pastEventTemplate += '</div>';
-        
-                                        eventDisplaySec.append(pastEventTemplate);
+                                        document.getElementById("listCurrEvents").style.display = "flex";
+                    
+                                        document.getElementById("currEventHeading").style.display = "block";
+                                        
+                                        var img = document.createElement("img");
+                                        img.src = "../images/" + thisEvent.id + ".jpg";
+                                        document.getElementById("currImg").appendChild(img);
+                                        
+                                        document.getElementById("currEvent").innerHTML = thisEvent.name;
+                                        document.getElementById("currEventTime").innerHTML = thisEvent.date + " at " + thisEvent.time;
                                     }
-                                })
-                                .catch((error) => {
-                                    console.log("Error adding my event info: ", error);
                                 });
-                        }
-                    }
+                        } else if (myStatus == "Checked In") {
+                            document.getElementById("noEventMessage").style.display = "block";
+                            document.getElementById("checkedInEventInfo").style.display = "none";
+                            document.getElementById("pastEventHeading").style.display = "block";
+                            displayPastEvents();
+                            document.querySelector(".listPastEvents").style.display = "flex";
+                        } 
+                    });
+                }
             });
+        });
+}
+
+// Display past events for users that have entered 1 or more events
+function displayPastEvents() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            db.collection('users').doc(user.uid).get()
+                .then(userDoc => {
+                    var pastEventsList = userDoc.data().pastEvents;
+                    let CardTemplate = document.getElementById("pastEventTemplate");
+                    pastEventsList.forEach(queryEvent => {
+                        // console.log(queryEvent);
+                        db.collection('events').doc(queryEvent).get()
+                            .then(queryEvent => {
+                                console.log(queryEvent.data().id);
+
+                                let pastEventCardGroup = document.getElementById("pastEventList");
+                                let eventCard = CardTemplate.content.cloneNode(true);
+                                eventCard.querySelector('.pastImg').src = `../images/${queryEvent.data().id}.jpg`;
+                                eventCard.querySelector(".pastEvent").innerHTML = queryEvent.data().name;
+                                eventCard.querySelector(".pastEventTime").innerHTML = queryEvent.data().date + " at " + queryEvent.data().time;
+                                pastEventCardGroup.appendChild(eventCard);
+                            })  
+                    });
+                });
         }
     });
 }
-
 
 // function displayClock() {
 //     var refresh = 1000;
@@ -640,20 +654,11 @@ function updateCheckInStatus(eID) {
                             // console.log(userDoc.id);
                             db.collection('users').doc(userDoc.id)
                                 .update({
-                                    status: "Enter Now",
-                                    currentevent: "No Event"
+                                    status: "Enter Now"
                                 });
                         }
                     })
                 })
-        });
-    
-    db.collection('events').doc(eID).collection('queue').get()
-        .then(snap => {
-            snap.forEach(doc => {
-                console.log("Deleting User From Queue: " + doc.id);
-                doc.ref.delete();
-            })
         });
 }
 
@@ -677,18 +682,17 @@ function updateQueueSize() {
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     if ((currentQueueSize != localStorage.getItem('queueSize')) && (currentQueueSize != 3)) {
-                        document.getElementById("currEventHeading").style.display = "block";
-                        document.getElementById("listCurrEvents").style.display = "bloc";
                         if (!alert('Queue Has Been Updated!')) {
                             window.location.replace("/my-events/");
                         } 
-                    } else if (currentQueueSize == 3) {
-                        document.getElementById("currEventHeading").style.display = "block";
-                        document.getElementById("listCurrEvents").style.display = "block";
-                        if (!alert('You Are Ready To Enter!')) {
-                            window.location.replace("/my-events/");
-                        } 
-                    }
+                    } 
+                    // else if (currentQueueSize == 3) {
+                    //     document.getElementById("currEventHeading").style.display = "block";
+                    //     document.getElementById("listCurrEvents").style.display = "block";
+                    //     if (!alert('You Are Ready To Enter!')) {
+                    //         window.location.replace("/my-events/");
+                    //     } 
+                    // }
                 }
             });
         });
@@ -762,8 +766,6 @@ function validateBatchTime() {
         batchValue = userMin;
     }
     
-   
-    
     console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
     console.log("Min Validation: " + currMinValidation);
 
@@ -774,7 +776,7 @@ function validateBatchTime() {
         }
     } else if ((batchValue >= 5 && batchValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
         console.log("You are in the second batch");
-        if ((currentQueueSize == 3) || ((currMinValidation == 5) && (currentSec == 59))) {
+        if ((currentQueueSize == 3) || ((currMinValidation == 8) && (currentSec == 59))) {
             pushCheckinUser();
         }
     }
@@ -782,23 +784,97 @@ function validateBatchTime() {
 
 function pushCheckinUser() {
     const thisEventID = localStorage.getItem('permanentEventID');
-            
     db.collection('users').get()
         .then(querySnapshot => {
             querySnapshot.forEach(function(doc) {
                 if (doc.data().status == "Wait") {
+                    var userId = doc.id;
                     if (!alert('YOU MAY ENTER NOW!')) {
+                        localStorage.SetItem('queueSize', 0);
+                        displayCurrentEventList(userId);
                         updateCheckInStatus(thisEventID);
                     }
                     setTimeout(function() { 
                         window.location.replace("/my-events/");
-                    }, 3000);
+                    }, 1000);
                 } else {
                     console.log("NOT REACHING!!");
                 }
             });
         });
+}
+
+// Enter event function
+function enterEvent() {
+    var btn = document.getElementById('enterEvent');
+    btn.onclick = function() {
+        removeUserFromQueue();
     }
+}
+
+// Remove user once the user clicks button to check in "Im Here"
+function removeUserFromQueue() {
+    const eID = localStorage.getItem('permanentEventID');
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            userID = user.uid;
+            addUserEventInArray(userID, eID);
+            db.collection('events').doc(eID).collection('queue').where("userID", "==", userID).get()
+                .then(queryEvent => {
+                    size = queryEvent.size;
+                    EventsQ = queryEvent.docs;
+                    if (size == 1) {
+                        EventsQ[0].ref.delete();
+                    }
+                });
+
+            db.collection('users').doc(userID).update({
+                currentevent: "No Event",
+                status: "Checked In"
+            })
+        }
+    });
+}
+
+// Add event as array in user collection
+function addUserEventInArray(userId, thisEvent) {
+    db.collection('users').doc(userId).update({
+        pastEvents: firebase.firestore.FieldValue.arrayUnion(thisEvent)
+    }, {
+        merge: true
+    })
+    .then(userDoc => {
+        console.log("User Event Array Added!");
+    })
+}
+
+// Create past event list from array in user collection
+function displayCurrentEventList(userId) {
+    currentUser = db.collection('users').doc(userId);
+    currentUser.get()
+        .then(userDoc => {
+            myCurrEvent = userDoc.data().currentevent;
+            db.collection('events').where("id", "==", myCurrEvent)
+            .get()
+            .then(queryEvent => {
+                size = queryEvent.size;
+                EventsQ = queryEvent.docs;
+                if (size == 1) {
+                    var thisEvent = EventsQ[0].data();
+                    document.getElementById("listCurrEvents").style.display = "flex";
+
+                    document.getElementById("currEventHeading").style.display = "block";
+                    
+                    var img = document.createElement("img");
+                    img.src = "../images/" + thisEvent.id + ".jpg";
+                    document.getElementById("currImg").appendChild(img);
+                    
+                    document.getElementById("currEvent").innerHTML = thisEvent.name;
+                    document.getElementById("currEventTime").innerHTML = thisEvent.date + " at " + thisEvent.time;
+                }
+            });
+    });
+}
 
 function mapLoad(address) {
     const apiKey = firebaseConfig.apiKey;
@@ -825,11 +901,11 @@ function mapLoad(address) {
  *                 10) Display a "Enter Now" button on My Events for all queued user // DONE
  *                 11) Reset the batch (timer and delete all users from current queue) // DONE
  *                 12) Updates user status: "Enter Now"; // DONE
+ * 14) the button click callback function -> removes user from queue collection and updates status (individually not all users in the queue) // DONE
+ * 15) after button clicked -> refresh -> display past event list -> instead of Enter Now status maybe change to No Event // DONE
  *
  * 
  * 13) if queue size == 3 -> alert change to user "YOU MAY ENTER NOW!" -> refresh -> display current event with button (DONT REMOVE USER OR UPDATE ANYTHING YET)
- * 14) the button click callback function -> removes user from queue collection and updates status (individually not all users in the queue)
- * 15) after button clicked -> refresh -> display past event list -> instead of Enter Now status maybe change to No Event?
  * 
  * 
  * 

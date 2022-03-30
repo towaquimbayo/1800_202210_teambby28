@@ -382,6 +382,10 @@ footer .social li a{
     width: 100%;
 }
 
+.row .navContent #checkinEventListing #noEventMessage {
+    display: none;
+}
+
 .row .navContent #checkinEventListing #noEventMessage,
 .row .navContent #checkinEventListing #noEventMessage a {
     font-size: 1.2rem;
@@ -422,10 +426,12 @@ footer .social li a{
 }
 
 .row .navContent #checkinEventListing #pastEventHeading {
+    margin-bottom: 2.5rem;
     display: none;
 }
 
 .row .navContent #checkinEventListing #currEventHeading {
+    margin-bottom: 2.5rem;
     display: none;
 }
 
@@ -482,14 +488,45 @@ footer .social li a{
     transition: all ease-in-out 0.3s;
 }
 
-.row .navContent #checkinEventListing .listPastEvents .listRow #enterEvent:hover {
-    color: var(--white);
-    border: 1px solid var(--primaryColor);
-    background-color: var(--primaryColor);
+.row .navContent #checkinEventListing .listPastEvents {
+    background-color: var(--white);
+    border-radius: 50px;
+    box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
+.row .navContent #checkinEventListing .listPastEvents img {
+    object-fit: cover;
+    object-position: center center;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    width: 100%;
+    height: 250px;
+}
 
+.row .navContent #checkinEventListing .listPastEvents .queueRight {
+    padding: 1.5rem 2rem; 
+}
 
+.row .navContent #checkinEventListing .listPastEvents .listRow .pastEvent {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 0.7rem;
+}
+
+.row .navContent #checkinEventListing .listPastEvents .listRow p {
+    margin: 0;
+    padding-top: 5px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding-bottom: 25px;
+}
 
 .row .navContent #checkinEventListing .waitTimeCounter {
     width: 100%;
