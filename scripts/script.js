@@ -504,11 +504,11 @@ function displayQueue() {
                     .then(userDoc => {
                         myCurrEvent = userDoc.data().currentevent;
                         if (myCurrEvent == "No Event") {
-                            document.getElementById("noEventMessage").style.visibility = "visible";
-                            document.getElementById("checkedInEventInfo").style.visibility = "hidden";
+                            document.getElementById("noEventMessage").style.display = "block";
+                            document.getElementById("checkedInEventInfo").style.display = "none";
                         } else {
-                            document.getElementById("noEventMessage").style.visibility = "hidden";
-                            document.getElementById("checkedInEventInfo").style.visibility = "visible";
+                            document.getElementById("noEventMessage").style.display = "none";
+                            document.getElementById("checkedInEventInfo").style.display = "flex";
                             db.collection('events').where("id", "==", myCurrEvent)
                                 .get()
                                 .then(queryEvent => {
@@ -560,9 +560,9 @@ function createPastEventList() {
                     if (currentQueueSize == 3) {
                         myCurrEvent = userDoc.data().currentevent;
                         if (myCurrEvent == "No Event") {
-                            document.getElementById("currEventHeading").style.visibility = "hidden";
+                            document.getElementById("currEventHeading").style.display = "none";
                         } else {
-                            document.getElementById("currEventHeading").style.visibility = "visible";
+                            document.getElementById("currEventHeading").style.display = "block";
                             db.collection('events').where("id", "==", myCurrEvent)
                                 .get()
                                 .then(queryEvent => {
@@ -677,14 +677,14 @@ function updateQueueSize() {
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     if ((currentQueueSize != localStorage.getItem('queueSize')) && (currentQueueSize != 3)) {
-                        document.getElementById("currEventHeading").style.visibility = "visible";
-                        document.getElementById("listCurrEvents").style.visibility = "visible";
+                        document.getElementById("currEventHeading").style.display = "block";
+                        document.getElementById("listCurrEvents").style.display = "bloc";
                         if (!alert('Queue Has Been Updated!')) {
                             window.location.replace("/my-events/");
                         } 
                     } else if (currentQueueSize == 3) {
-                        document.getElementById("currEventHeading").style.visibility = "visible";
-                        document.getElementById("listCurrEvents").style.visibility = "visible";
+                        document.getElementById("currEventHeading").style.display = "block";
+                        document.getElementById("listCurrEvents").style.display = "block";
                         if (!alert('You Are Ready To Enter!')) {
                             window.location.replace("/my-events/");
                         } 
@@ -750,54 +750,55 @@ function validateBatchTime() {
     const userMin = localStorage.getItem('userMin');
     var currentMin = x.getMinutes();
     var currentSec = x.getSeconds();
-    var bacthValue = 0;
-    var currMinValidation = 0;
-
+    var batchValue = 0;
+    
+    var currFloorValue = Math.floor(currentMin / 10) * 10;
+    var currMinValidation = currentMin - currFloorValue;
+    
     if (userMin > 9) {
         var floorValue = Math.floor(userMin / 10) * 10;
-        bacthValue = userMin - floorValue;
-        var currFloorValue = Math.floor(currentMin / 10) * 10;
-        currMinValidation = currentMin - currFloorValue;
+        batchValue = userMin - floorValue;
     } else {
         batchValue = userMin;
-        currMinValidation = currentMin;
     }
     
+   
+    
     console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
-    //console.log("Min Validation: " + currMinValidation);
+    console.log("Min Validation: " + currMinValidation);
 
-    if ((bacthValue >= 0 && bacthValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
+    if ((batchValue >= 0 && batchValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
         console.log("You are in the first batch");
         if ((currentQueueSize == 3) || ((currMinValidation == 4) && (currentSec == 59))) {
             pushCheckinUser();
         }
-    } else if ((bacthValue >= 5 && bacthValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
+    } else if ((batchValue >= 5 && batchValue <= 9) && (currMinValidation >= 5 && currMinValidation <= 9)) {
         console.log("You are in the second batch");
-        if ((currentQueueSize == 3) || ((currMinValidation == 9) && (currentSec == 59))) {
+        if ((currentQueueSize == 3) || ((currMinValidation == 5) && (currentSec == 59))) {
             pushCheckinUser();
         }
     }
 }
 
 function pushCheckinUser() {
-const thisEventID = localStorage.getItem('permanentEventID');
+    const thisEventID = localStorage.getItem('permanentEventID');
             
-db.collection('users').get()
-    .then(querySnapshot => {
-        querySnapshot.forEach(function(doc) {
-            if (doc.data().status == "Wait") {
-                if (!alert('YOU MAY ENTER NOW!')) {
-                    updateCheckInStatus(thisEventID);
+    db.collection('users').get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(function(doc) {
+                if (doc.data().status == "Wait") {
+                    if (!alert('YOU MAY ENTER NOW!')) {
+                        updateCheckInStatus(thisEventID);
+                    }
+                    setTimeout(function() { 
+                        window.location.replace("/my-events/");
+                    }, 3000);
+                } else {
+                    console.log("NOT REACHING!!");
                 }
-                setTimeout(function() { 
-                    window.location.replace("/my-events/");
-                }, 3000);
-            } else {
-                console.log("NOT REACHING!!");
-            }
+            });
         });
-    });
-}
+    }
 
 function mapLoad(address) {
     const apiKey = firebaseConfig.apiKey;

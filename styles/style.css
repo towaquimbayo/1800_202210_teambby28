@@ -393,14 +393,14 @@ footer .social li a{
     background-color: var(--white);
     border-radius: 500px;
     box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.15);
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 3rem;
     margin: 0.5rem 0;
     display: flex;
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
     align-items: center;
-    visibility: hidden;
+    display: none;
 }
 
 .row .navContent #checkinEventListing .listCheckedEvents #queueRight {
@@ -422,11 +422,11 @@ footer .social li a{
 }
 
 .row .navContent #checkinEventListing #pastEventHeading {
-    visibility: hidden;
+    display: none;
 }
 
 .row .navContent #checkinEventListing #currEventHeading {
-    visibility: hidden;
+    display: none;
 }
 
 .row .navContent #checkinEventListing .listCurrEvents {
@@ -439,7 +439,7 @@ footer .social li a{
     width: 100%;
     flex-wrap: wrap;
     align-items: center;
-    visibility: hidden;
+    display: none;
 }
 
 .row .navContent #checkinEventListing .listCurrEvents img {
@@ -750,7 +750,7 @@ footer .social li a{
 }
 
 .eventWrapper .eventContent .eventDescRow p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: var(--black);
     line-height: 2rem;
