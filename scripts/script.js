@@ -784,13 +784,14 @@ function validateBatchTime() {
 
 function pushCheckinUser() {
     const thisEventID = localStorage.getItem('permanentEventID');
+    // localStorage.SetItem('queueSize', 0);
+
     db.collection('users').get()
         .then(querySnapshot => {
             querySnapshot.forEach(function(doc) {
                 if (doc.data().status == "Wait") {
                     var userId = doc.id;
                     if (!alert('YOU MAY ENTER NOW!')) {
-                        localStorage.SetItem('queueSize', 0);
                         displayCurrentEventList(userId);
                         updateCheckInStatus(thisEventID);
                     }
