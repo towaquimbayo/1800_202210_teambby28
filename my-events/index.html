@@ -201,7 +201,7 @@
                         <h4>Queue: <span id="myEventQueue"></span></h4>
                     </div>
                 </div>
-                
+
                 <div class="waitTimeCounter">
                     <span id="clock"></span>
                     <span>Minutes: </span><span id="currentMin"></span>
@@ -212,9 +212,9 @@
                     <h2 id="currEventHeading">Current Event</h2>
                 </div>
                 <div class="listCurrEvents" id="listCurrEvents">
-                    <div class="listRow col-md-4" id="currImg">
+                    <div class="listRow col-md-4 col-sm-12" id="currImg">
                     </div>
-                    <div class="listRow col-md-8 queueRight">
+                    <div class="listRow col-md-8 col-sm-12 queueRight">
                         <h4 id="currEvent"></h4>
                         <p>Date of Event: (<span id="currEventTime"></span>)</p>
                         <button type="button" id="enterEvent">I'm Here!</button>
@@ -229,12 +229,12 @@
 
                 <template id="pastEventTemplate">
                     <div class="listPastEvents">
-                        <div class="listRow col-md-4">
+                        <div class="listRow col-md-4 col-sm-12">
                             <img class="pastImg">
                         </div>
-                        <div class="listRow col-md-8 queueRight">
+                        <div class="listRow col-md-8 col-sm-12 queueRight">
                             <h4 class="pastEvent"></h4>
-                            <p>Date of Event: (<span class="pastEventTime"></span>)</p>
+                            <p>Date of Event: <span class="pastEventTime"></span></p>
                         </div>
                     </div>
                 </template>

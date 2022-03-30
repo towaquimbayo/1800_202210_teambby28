@@ -195,6 +195,20 @@
         font-size: 1em;
         line-height: 2rem;
     }
+    .row .navContent #checkinEventListing .listPastEvents .listRow,
+    .row .navContent #checkinEventListing .listCurrEvents .listRow {
+        width: 100%;
+    }
+    .row .navContent #checkinEventListing .listPastEvents,
+    .row .navContent #checkinEventListing .listCurrEvents {
+        border-radius: 30px;
+    }
+    .row .navContent #checkinEventListing .listPastEvents img,
+    .row .navContent #checkinEventListing .listCurrEvents img {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -330,6 +344,7 @@
     }
     .row .navContent #checkinEventListing .listCheckedEvents {
         padding: 1.5rem 3rem;
+        border-radius: 30px;
     }
     .row .navContent #checkinEventListing .listCheckedEvents .listRow {
         width: 100%;
@@ -340,6 +355,16 @@
     .row .navContent #checkinEventListing .listCheckedEvents .listRow h4 {
         font-size: 1.2em;
         line-height: 2rem;
+    }
+    .row .navContent #checkinEventListing .listPastEvents,
+    .row .navContent #checkinEventListing .listCurrEvents {
+        border-radius: 30px;
+    }
+    .row .navContent #checkinEventListing .listPastEvents img,
+    .row .navContent #checkinEventListing .listCurrEvents img {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
     }
 }
 
