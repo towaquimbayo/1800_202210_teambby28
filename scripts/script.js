@@ -37,6 +37,40 @@ $(document).ready(function () {
                 myStatus = userDoc.data().status;
                 if (myStatus == "Guest") {
                     document.getElementById("noEventMessage").style.display = "block";
+                } else if (myStatus == "Checked In") {
+                    localStorage.setItem('permanentEventID', '');
+                    document.getElementById("noEventMessage").style.display = "block";
+                    document.getElementById("checkedInEventInfo").style.display = "none";
+                    document.getElementById("pastEventHeading").style.display = "block";
+                    displayPastEvents();
+                    document.querySelector(".listPastEvents").style.display = "flex";
+                } else if (myStatus == "Enter Now") {
+                    // Enter event function
+                    enterEvent();
+
+                    document.getElementById("noEventMessage").style.display = "none";
+                    document.getElementById("checkedInEventInfo").style.display = "none";
+
+                    myCurrEvent = userDoc.data().currentevent;
+                    db.collection('events').where("id", "==", myCurrEvent)
+                        .get()
+                        .then(queryEvent => {
+                            size = queryEvent.size;
+                            EventsQ = queryEvent.docs;
+                            if (size == 1) {
+                                var thisEvent = EventsQ[0].data();
+                                document.getElementById("listCurrEvents").style.display = "flex";
+            
+                                document.getElementById("currEventHeading").style.display = "block";
+                                
+                                var img = document.createElement("img");
+                                img.src = "../images/" + thisEvent.id + ".jpg";
+                                document.getElementById("currImg").appendChild(img);
+                                
+                                document.getElementById("currEvent").innerHTML = thisEvent.name;
+                                document.getElementById("currEventTime").innerHTML = thisEvent.date + " at " + thisEvent.time;
+                            }
+                        });
                 }
             });
         }
@@ -508,9 +542,7 @@ function displayQueue() {
     db.collection('events').doc(docID).collection('queue')
         .get()
         .then(querySnapshot => {
-            // var querySize = querySnapshot.size;
             var querySize = localStorage.getItem("queueSize");
-            // console.log("CURRENT EVENT BATCH SIZE: " + querySize);
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     currentUser = db.collection('users').doc(user.uid);
@@ -538,51 +570,14 @@ function displayQueue() {
                                 .catch((error) => {
                                     console.log("Error adding my event info: ", error);
                                 });
-                            
+
                             // console.log(userDoc.data().pastEvents);
                             if (userDoc.data().pastEvents.length > 0) {
                                 document.getElementById("pastEventHeading").style.display = "block";
                                 displayPastEvents();
                                 document.querySelector(".listPastEvents").style.display = "flex";
                             }
-
-                        } else if (myStatus == "Guest") {
-                            document.getElementById("noEventMessage").style.display = "block";
-                        } else if (myStatus == "Enter Now") {
-                            // Enter event function
-                            enterEvent();
-
-                            document.getElementById("noEventMessage").style.display = "none";
-                            document.getElementById("checkedInEventInfo").style.display = "none";
-
-                            myCurrEvent = userDoc.data().currentevent;
-                            db.collection('events').where("id", "==", myCurrEvent)
-                                .get()
-                                .then(queryEvent => {
-                                    size = queryEvent.size;
-                                    EventsQ = queryEvent.docs;
-                                    if (size == 1) {
-                                        var thisEvent = EventsQ[0].data();
-                                        document.getElementById("listCurrEvents").style.display = "flex";
-                    
-                                        document.getElementById("currEventHeading").style.display = "block";
-                                        
-                                        var img = document.createElement("img");
-                                        img.src = "../images/" + thisEvent.id + ".jpg";
-                                        document.getElementById("currImg").appendChild(img);
-                                        
-                                        document.getElementById("currEvent").innerHTML = thisEvent.name;
-                                        document.getElementById("currEventTime").innerHTML = thisEvent.date + " at " + thisEvent.time;
-                                    }
-                                });
-                        } else if (myStatus == "Checked In") {
-                            localStorage.setItem('permanentEventID', '');
-                            document.getElementById("noEventMessage").style.display = "block";
-                            document.getElementById("checkedInEventInfo").style.display = "none";
-                            document.getElementById("pastEventHeading").style.display = "block";
-                            displayPastEvents();
-                            document.querySelector(".listPastEvents").style.display = "flex";
-                        } 
+                        }
                     });
                 }
             });
