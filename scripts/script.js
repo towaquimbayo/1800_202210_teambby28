@@ -119,8 +119,6 @@ function insertName() {
         // Check if user is signed in:
         if (user) {
             // Do something for the current logged-in user here: 
-            // console.log(user.uid);
-            // console.log("User is logged in!");
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
 
@@ -132,39 +130,37 @@ function insertName() {
                 })
         } else {
             welcomeMessage = document.getElementById("welcomeUser").style.display = "none";
-            // console.log("User not logged in!");
         }
     });
 }
 
 function getProfile() {
     firebase.auth().onAuthStateChanged(user => {
+        // Check to see if user is signed in
         if (user) {
-            // console.log(user.uid);
-            // console.log("User is account details here!");
-            //go to the correct user document by referencing to the user uid
+            // Go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
 
-            //get the document for current user.
+            // Get the document for current user.
             currentUser.get()
                 .then(userDoc => {
-                    // For first name
+                    // Gets user first name
                     var firstName = userDoc.data().firstName;
                     document.getElementById("firstName").value = firstName;
 
-                    // For last name
+                    // Gets user last name (if available)
                     var lastName = userDoc.data().lastName;
                     document.getElementById("lastName").value = lastName;
 
-                    // For email
+                    // Gets user email that is associated with the account
                     var email = userDoc.data().email;
                     document.getElementById("email").value = email;
 
-                    // For Phone
+                    // Gets user phone number (if available)
                     var phone = userDoc.data().phone;
                     document.getElementById("phone").value = phone;
 
-                    // For password
+                    // Gets user password (hidden by default)
                     // var password = userDoc.data().password;
                     // document.getElementById("password").value = password;  
                 })
@@ -172,6 +168,7 @@ function getProfile() {
     })
 }
 
+// Saves new information submitted by the user to their user document in the users collection
 function updateProfile() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -186,6 +183,7 @@ function updateProfile() {
                     phone: form.phone.value,
                     email: form.email.value
                 })
+                // Overwrites any fields filled out
                 .then(userDoc => {
                     window.location.replace(location.pathname);
                 })
@@ -209,18 +207,7 @@ function updatePassword() {
     })
 }
 
-function signOut() {
-    const logout = document.querySelector('#logout');
-    logout.addEventListener('click', (e) => {
-        e.preventDefault();
-        firebase.auth().signOut().then(() => {
-            console.log('User signed out');
-            window.location.replace("/login/");
-        })
-    })
-}
-
-// log out func
+// Log out function
 function logOut() {
     firebase.auth().signOut().then(() => {
         window.location.replace("/login/");
@@ -229,6 +216,7 @@ function logOut() {
     });
 }
 
+// Hides specific links on the navigation bar depending on user log in state
 function hideLoggedNav() {
     const loggedOutLinks = document.querySelectorAll('.logged-out');
     const loggedInLinks = document.querySelectorAll('.logged-in');
@@ -236,12 +224,12 @@ function hideLoggedNav() {
 
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            // toggle UI Elements
+            // toggle UI Elements for signed in user
             loggedInLinks.forEach(item => item.style.display = 'block');
             loggedOutLinks.forEach(item => item.style.display = 'none');
             loggedInLBtn.forEach(item => item.style.display = 'flex');
         } else {
-            // toggle UI elements
+            // toggle UI elements for signed out user
             loggedInLinks.forEach(item => item.style.display = 'none');
             loggedOutLinks.forEach(item => item.style.display = 'block');
             loggedInLBtn.forEach(item => item.style.display = 'none');
@@ -249,8 +237,7 @@ function hideLoggedNav() {
     });
 }
 
-// Only used to populate data to firestore
-// pushEvents()
+// Function populates events to the Firestore database (only ran once)
 function pushEvents() {
     var eventRef = db.collection("events");
     eventRef.add({
@@ -362,29 +349,27 @@ function displayEvents(collection) {
         })
 }
 
-// function to set event id 
+// Function to set event ID in local storage when clicked by the user
 function setEventData(eventID, docID) {
     localStorage.setItem('eventID', eventID);
     localStorage.setItem('eventDocID', docID);
 }
 
-// function to populate the single events page
+// Function to populate the single event page
 function populateSingleEvent() {
-    // get collection 
+    // Get events collection
     let eventID = localStorage.getItem("eventID");
     db.collection("events").where("id", "==", eventID)
         .get()
         .then(queryEvent => {
-            // see how many results are found for this query
+            // Check how many results are found for this query
             size = queryEvent.size;
-            // get docs of query
+            // Get queried documents
             EventsQ = queryEvent.docs;
-            // console.log("THIS EVENT: " + queryEvent.docs[0].id);
-
-            // check to see no duplicate events under 1 id
+            // Check to see no duplicate events under a single id (check if each event is unique)
             if (size == 1) {
                 var thisEvent = EventsQ[0].data();
-
+                // Sets inner HTML to the specified event's information
                 eventName = thisEvent.name;
                 document.getElementById("eventName").innerHTML = eventName;
 
@@ -405,6 +390,7 @@ function populateSingleEvent() {
                 document.getElementById("eventDate").innerHTML = eventDate;
 
             } else {
+                // Single event page is not populated since there are non-unique ids present in the "events" collection
                 console.log("Query has > 1 data");
             }
         })
@@ -413,20 +399,18 @@ function populateSingleEvent() {
         });
 }
 
-// function to populate check in page
+// Function populates check in page
 function populateCheckin() {
-    // get collection 
+    // Gets document for the specified event
     let eventID = localStorage.getItem("eventID");
     db.collection("events").where("id", "==", eventID)
         .get()
         .then(queryEvent => {
-            // see how many results are found for this query
+            // Checks how many results are found for this query
             size = queryEvent.size;
-            // get docs of query
+            // Gets the docs of query
             EventsQ = queryEvent.docs;
-            // console.log("THIS EVENT: " + queryEvent.docs[0].id);
-
-            // check to see no duplicate events under 1 id
+            // Checks to see no duplicate events under 1 id
             if (size == 1) {
                 var thisEvent = EventsQ[0].data();
 
@@ -449,11 +433,12 @@ function populateCheckin() {
         });
 }
 
-// User confirms check in 
+// Function for the user to confirm check in
 function checkIn() {
     var currEvent = localStorage.getItem("eventID");
     var currTime = new Date();
     firebase.auth().onAuthStateChanged(user => {
+        // Checks to see if user is signed in (function only runs if user is signed in)
         if (user) {
             const form = document.getElementById("checkInConfirmForm");
             currentUser = db.collection('users').doc(user.uid);
@@ -464,22 +449,28 @@ function checkIn() {
                     status: "Wait"
                 })
                 .then(userDoc => {
+                    // On success, page is redirected
                     window.location.replace("/check-in-confirmation/");
                 })
 
+                // Gets current event document
                 db.collection('events').where("id", "==", currEvent)
                     .get()
                     .then(queryEvent => {
                         size = queryEvent.size;
                         EventsQ = queryEvent.docs;
 
+                        // Checks if event document has unique ID
                         if (size == 1) {
                             var thisEvent = EventsQ[0].id;
                             localStorage.setItem('permanentEventID', thisEvent);
                             var permEventID = localStorage.getItem('permanentEventID');
+
+                            // Checks the current time
                             var checkTime = currTime.getHours() + ":" + currTime.getMinutes() + ":" + currTime.getSeconds();
                             currentUser.get()
                                 .then(userDoc => {
+                                    // Updates queue of the event
                                     db.collection('events').doc(thisEvent).collection('queue').add({
                                         userID: user.uid,
                                         userName: userDoc.data().firstName,
@@ -504,20 +495,24 @@ function disableReCheckin() {
         var currEvent = localStorage.getItem("eventID");
         var checkBtn = document.getElementById("checkinIDBtn");
 
+        // Checks if user is signed in (function only runs if user is signed in)
         if (user) {
             currentUser = db.collection('users').doc(user.uid);
             db.collection('events').where("id", "==", currEvent)
                 .get()
                 .then(queryEvent => {
+                    // Check if event is under a unique ID
                     size = queryEvent.size;
                     EventsQ = queryEvent.docs;
                     if (size == 1) {
                         var thisEvent = EventsQ[0].id;
                         currentUser.get()
                             .then(userDoc => {
+                                // Get event "queue" collection
                                 db.collection('events').doc(thisEvent).collection('queue')
                                     .get()
                                     .then(snap => {
+                                        // Updates user status
                                         if (userDoc.data().status == "Wait") {
                                             checkBtn.innerHTML = "Please Wait";
                                             checkBtn.removeAttribute("href");
@@ -548,9 +543,11 @@ function displayQueue() {
                     currentUser = db.collection('users').doc(user.uid);
                     currentUser.get()
                     .then(userDoc => {
+                        // Gets the current queue size of the current event
                         myCurrEvent = userDoc.data().currentevent;
                         myStatus = userDoc.data().status;
                         if (myStatus == "Wait") {
+                            // Checks to see if the user has checked in to the current event
                             document.getElementById("noEventMessage").style.display = "none";
                             document.getElementById("checkedInEventInfo").style.display = "flex";
                             db.collection('events').where("id", "==", myCurrEvent)
@@ -559,6 +556,7 @@ function displayQueue() {
                                     size = queryEvent.size;
                                     EventsQ = queryEvent.docs;
                                     if (size == 1) {
+                                        // Sets event data to the "Checked-In Events" page in "My Events"
                                         var thisEvent = EventsQ[0].data();
                                         eventName = thisEvent.name;
                                         eventDate = thisEvent.date;
@@ -570,8 +568,7 @@ function displayQueue() {
                                 .catch((error) => {
                                     console.log("Error adding my event info: ", error);
                                 });
-
-                            // console.log(userDoc.data().pastEvents);
+                            // Sets up display for user's past events if available
                             if (userDoc.data().pastEvents.length > 0) {
                                 document.getElementById("pastEventHeading").style.display = "block";
                                 displayPastEvents();
@@ -587,19 +584,19 @@ function displayQueue() {
 // Display past events for users that have entered 1 or more events
 function displayPastEvents() {
     firebase.auth().onAuthStateChanged(user => {
+        // Checks if user is signed in (function only runs if user is signed in)
         if (user) {
             db.collection('users').doc(user.uid).get()
                 .then(userDoc => {
+                    // Sets template for past events
                     var pastEventsList = userDoc.data().pastEvents;
                     let CardTemplate = document.getElementById("pastEventTemplate");
                     pastEventsList.forEach(queryEvent => {
-                        // console.log(queryEvent);
                         db.collection('events').doc(queryEvent).get()
                             .then(queryEvent => {
-                                console.log(queryEvent.data().id);
-
                                 let pastEventCardGroup = document.getElementById("pastEventList");
                                 let eventCard = CardTemplate.content.cloneNode(true);
+                                // Sets card details to match the past event
                                 eventCard.querySelector('.pastImg').src = `../images/${queryEvent.data().id}.jpg`;
                                 eventCard.querySelector(".pastEvent").innerHTML = queryEvent.data().name;
                                 eventCard.querySelector(".pastEventTime").innerHTML = queryEvent.data().date + " at " + queryEvent.data().time;
@@ -633,21 +630,22 @@ function displayPastEvents() {
 // }
 
 // Update check in status for all users if current event queue is full (3/3)
+
+// Function to update check in status
 function updateCheckInStatus(eID) {
+    // Gets event document from "events" collection using EventID (eID) parameter
     db.collection('events').doc(eID)
         .get()
         .then(eDoc => {
-            console.log("This Event: " + eDoc.data().id);
             const eventID = eDoc.data().id;
-            
             db.collection('users')
                 .get()
                 .then(querySnapshot => {
                     querySnapshot.forEach(function (userDoc) {
-                        // console.log(userDoc.data().currentevent);
                         const userCurrEvent = userDoc.data().currentevent;
+                        // Checks if the user is associated with the current event
                         if (userCurrEvent == eventID) {
-                            // console.log(userDoc.id);
+                            // If user is associated, their status is updated
                             db.collection('users').doc(userDoc.id)
                                 .update({
                                     status: "Enter Now"
@@ -664,6 +662,7 @@ function updateCheckInStatus(eID) {
     }, 1000);
 }
 
+// Function to update time
 function updateTime() {
     let now = new Date();
     var m = now.getMinutes();
@@ -674,6 +673,8 @@ function updateTime() {
 }
 
 setInterval(updateQueueSize, 1000);
+
+// Function to update queue size
 function updateQueueSize() {
     const docID = localStorage.getItem('permanentEventID');
     var currentQueueSize;
@@ -726,6 +727,7 @@ function batchManager() {
         });
 }
 
+// Function to update batch
 function updateBatch(docID, thisUserID) {
     db.collection('events').doc(docID).collection('queue').doc(thisUserID)
         .get()
@@ -743,6 +745,8 @@ function updateBatch(docID, thisUserID) {
 }
 
 setInterval(validateBatchTime, 1000);
+
+// Function to handle batches based on current time
 function validateBatchTime() {
     var currentQueueSize = localStorage.getItem('queueSize');
     let x = new Date();
@@ -786,10 +790,8 @@ function validateBatchTime() {
             });
         }
     });
-    
-    console.log("Current Min: " + currentMin + " Current Sec: " + currentSec);
-    console.log("Min Validation: " + currMinValidation);
 
+    // Checks to see if user should be in the first or second batch based on time of check-in and pushes into queue
     if ((batchValue >= 0 && batchValue <= 4) && (currMinValidation >= 0 && currMinValidation <= 4)) {
         console.log("You are in the first batch");
         if ((currentQueueSize == 3) || ((currMinValidation == 4) && (currentSec == 59))) {
@@ -803,9 +805,9 @@ function validateBatchTime() {
     }
 }
 
+// Function to push user into queue by updating their status for the event
 function pushCheckinUser() {
     const thisEventID = localStorage.getItem('permanentEventID');
-    // localStorage.SetItem('queueSize', 0);
 
     db.collection('users').get()
         .then(querySnapshot => {
@@ -821,7 +823,7 @@ function pushCheckinUser() {
         });
 }
 
-// Enter event function
+// Function to set a button that removes a user from queue
 function enterEvent() {
     var btn = document.getElementById('enterEvent');
     btn.onclick = function() {
@@ -829,7 +831,7 @@ function enterEvent() {
     }
 }
 
-// Remove user once the user clicks button to check in "Im Here"
+// Function to remove user once the user clicks button to check in "I'm Here"
 function removeUserFromQueue() {
     const eID = localStorage.getItem('permanentEventID');
     firebase.auth().onAuthStateChanged(user => {
@@ -853,7 +855,7 @@ function removeUserFromQueue() {
     });
 }
 
-// Add event as array in user collection
+// Function to add event as array in user collection
 function addUserEventInArray(userId, thisEvent) {
     db.collection('users').doc(userId).update({
         pastEvents: firebase.firestore.FieldValue.arrayUnion(thisEvent)
@@ -865,7 +867,7 @@ function addUserEventInArray(userId, thisEvent) {
     })
 }
 
-// Create past event list from array in user collection
+// Function to create past event list from array in user collection
 function displayCurrentEventList(userId) {
     db.collection('users').doc(userId).get()
         .then(userDoc => {
@@ -891,6 +893,7 @@ function displayCurrentEventList(userId) {
         });
 }
 
+// Google map widget loading
 function mapLoad(address) {
     const apiKey = firebaseConfig.apiKey;
     const addressEnc = encodeURI(address)
