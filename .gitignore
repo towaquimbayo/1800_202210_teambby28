@@ -3,3 +3,9 @@
 node_modules/
 firebaseAPI_TEAMBBY28.js
 .vscode/
+.firebase/
+.firebaserc
+firebase.json
+firestore.indexes.json
+firestore.rules
+404.html
