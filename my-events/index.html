@@ -17,8 +17,10 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/4c4952e8ff.js" crossorigin="anonymous"></script>
 
-    <!-- Adobe Fonts -->
-    <link rel="stylesheet" href="https://use.typekit.net/pqo2lzg.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -181,7 +183,7 @@
         <div class="navContent mob col-lg-8 col-md-7">
             <a class="returnBack" href="/account/">Go Back</a>
 
-            <h2>Check-In Events</h2>
+            <h2>My Events</h2>
             
             <div id="checkinEventListing">
                 <!-- If there are no events checked in, display message -->
@@ -199,37 +201,44 @@
                         <h4>Queue: <span id="myEventQueue"></span></h4>
                     </div>
                 </div>
-                
-                <div class="waitTimeCounter">
+
+                <div id="waitTimeCounter">
                     <span id="clock"></span>
-                    <span>Minutes: </span><span id="currentMin"></span>
-                    <span>Seconds: </span><span id="currentSec"></span>
+                    <!-- <span>Minutes: </span><span id="currentMin"></span>
+                    <span>Seconds: </span><span id="currentSec"></span> -->
+                    <p>Estimated Wait Time: <span id="waitTimeCount"></span></p>
                 </div>
                 
                 <div>
                     <h2 id="currEventHeading">Current Event</h2>
                 </div>
                 <div class="listCurrEvents" id="listCurrEvents">
-                    <div class="listRow col-md-4">
-                        <img src="../images/AA2.jpg">
+                    <div class="listRow col-md-4 col-sm-12" id="currImg">
                     </div>
-                    <div class="listRow col-md-8 queueRight">
-                        <h4 class="currEvent">Event 1</h4>
-                        <p>Date of Event: (<span id="eventTime"></span>)</p>
+                    <div class="listRow col-md-8 col-sm-12 queueRight">
+                        <h4 id="currEvent"></h4>
+                        <p>Date of Event: (<span id="currEventTime"></span>)</p>
                         <button type="button" id="enterEvent">I'm Here!</button>
                     </div>
                 </div>
 
-                <!-- <h2 id="pastEventHeading">Past Events</h2>
-                <div class="listPastEvents">
-                    <div class="listRow col-md-4">
-                        <img src="../images/AA2.jpg" alt="">
+                <div>
+                    <h2 id="pastEventHeading">Past Events</h2>
+                </div>
+
+                <div id="pastEventList"></div>
+
+                <template id="pastEventTemplate">
+                    <div class="listPastEvents">
+                        <div class="listRow col-md-4 col-sm-12">
+                            <img class="pastImg">
+                        </div>
+                        <div class="listRow col-md-8 col-sm-12 queueRight">
+                            <h4 class="pastEvent"></h4>
+                            <p>Date of Event: <span class="pastEventTime"></span></p>
+                        </div>
                     </div>
-                    <div class="listRow col-md-8 queueRight">
-                        <h4 class="pastEvent">Event 1</h4>
-                        <p>Date of Event: (<span id="eventTime"></span>)</p>
-                    </div>
-                </div> -->
+                </template>
             </div>
         </div>
     </div>

@@ -6,11 +6,19 @@
 }
 
 @media (max-width: 575.98px) {
+    .firebaseui-form-actions {
+        display: flex;
+        flex-direction: column-reverse;
+        white-space: normal;
+    }
     .navbar {
         padding: 1em 1.5em;
     }
     .navbar-nav {
         margin-top: 2em;
+    }
+    .navbar-nav .nav-item {
+        padding: 0;
     }
     .navbar-nav .nav-item .nav-link {
        padding: 1.2rem 0;
@@ -36,6 +44,14 @@
     }
     .wrapper {
         padding: 1.5em 2em;
+    }
+    .wrapper #welcomeUser {
+        margin-bottom: 1em;
+    }
+    .wrapper #eventHeading {
+        font-size: 1.8em;
+        font-weight: 600;
+        margin-bottom: 1.5em;
     }
     .row .sideNav.col-lg-4,
     .row .navContent.col-lg-8 {
@@ -195,6 +211,20 @@
         font-size: 1em;
         line-height: 2rem;
     }
+    .row .navContent #checkinEventListing .listPastEvents .listRow,
+    .row .navContent #checkinEventListing .listCurrEvents .listRow {
+        width: 100%;
+    }
+    .row .navContent #checkinEventListing .listPastEvents,
+    .row .navContent #checkinEventListing .listCurrEvents {
+        border-radius: 30px;
+    }
+    .row .navContent #checkinEventListing .listPastEvents img,
+    .row .navContent #checkinEventListing .listCurrEvents img {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -203,6 +233,9 @@
     }
     .navbar-nav {
         margin-top: 2em;
+    }
+    .navbar-nav .nav-item {
+        padding: 0;
     }
     .navbar-nav .nav-item .nav-link {
        padding: 1.2rem 0;
@@ -330,6 +363,7 @@
     }
     .row .navContent #checkinEventListing .listCheckedEvents {
         padding: 1.5rem 3rem;
+        border-radius: 30px;
     }
     .row .navContent #checkinEventListing .listCheckedEvents .listRow {
         width: 100%;
@@ -341,6 +375,16 @@
         font-size: 1.2em;
         line-height: 2rem;
     }
+    .row .navContent #checkinEventListing .listPastEvents,
+    .row .navContent #checkinEventListing .listCurrEvents {
+        border-radius: 30px;
+    }
+    .row .navContent #checkinEventListing .listPastEvents img,
+    .row .navContent #checkinEventListing .listCurrEvents img {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -349,6 +393,9 @@
     }
     .navbar-nav {
         margin-top: 2em;
+    }
+    .navbar-nav .nav-item {
+        padding: 0;
     }
     .navbar-nav .nav-item .nav-link {
        padding: 1.2rem 0;

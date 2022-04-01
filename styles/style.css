@@ -9,7 +9,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: proxima-nova, sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .navbar {
@@ -17,6 +17,14 @@ body {
     padding: 1em 5em;
     min-height: 10vh;
     box-shadow: 0px 10px 28px -5px rgba(0,0,0,0.15);
+}
+
+.navbar .container-fluid {
+    padding: 0;
+}
+
+.navbar-nav .nav-item {
+    padding-left: 2rem;
 }
 
 .navbar-nav .nav-item.logged-in,
@@ -33,7 +41,7 @@ body {
 .navbar-nav .nav-item .nav-link.active {
     font-size: 18px;
     color: var(--secondaryColor);
-    font-weight: 700;
+    font-weight: 600;
 }
 
 #carouselExampleCaptions .carousel-indicators { 
@@ -85,7 +93,7 @@ body {
 #carouselExampleCaptions .carousel-inner #overlay #caroCaption #descHead {
     display: block;
     font-size: 4em;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--white);
     margin-bottom: 1em;
 }
@@ -93,7 +101,7 @@ body {
 #carouselExampleCaptions .carousel-inner #overlay #caroCaption #mobHead {
     display: none;
     font-size: 4em;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--white);
     margin-bottom: 1em;
 }
@@ -147,9 +155,15 @@ footer .social li a{
 
 .wrapper h1 {
     font-size: 2.5em;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 1.5em;
     color: var(--black);
+}
+
+.wrapper #eventHeading {
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 1.5em;
 }
 
 .wrapper .eventListings .singleEvent .card {
@@ -159,7 +173,7 @@ footer .social li a{
 }
 
 .wrapper .eventListings .singleEvent .card img {
-    height: 300px;
+    height: 250px;
     object-fit: cover;
     object-position: center center;
     border-top-left-radius: 5%;
@@ -176,7 +190,7 @@ footer .social li a{
 
 .wrapper .eventListings .singleEvent .card .card-body .card-title {
     font-size: 1.5em;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
     text-transform: capitalize;
     margin-bottom: 1em;
@@ -187,6 +201,10 @@ footer .social li a{
     font-weight: 400;
     color: var(--black);
     margin-bottom: 30px;
+}
+
+.wrapper .eventListings .singleEvent .card .card-body .card-text strong {
+    font-weight: 600;
 }
 
 .wrapper .eventListings .singleEvent .card .card-body .viewEvent {
@@ -297,14 +315,14 @@ footer .social li a{
 
 .row .navContent h2 {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
     padding-bottom: 1rem;
 }
 
 .row .navContent p a {
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--primaryColor);
     padding-bottom: 1rem;
 }
@@ -352,7 +370,7 @@ footer .social li a{
 .row .navContent .editProfileForm .accSubmit {
     margin-top: 1.5rem;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 500;
     padding: 20px 40px;
     color: var(--white);
     background-color: var(--secondaryColor);
@@ -374,6 +392,10 @@ footer .social li a{
     width: 100%;
 }
 
+.row .navContent #checkinEventListing #noEventMessage {
+    display: none;
+}
+
 .row .navContent #checkinEventListing #noEventMessage,
 .row .navContent #checkinEventListing #noEventMessage a {
     font-size: 1.2rem;
@@ -385,14 +407,14 @@ footer .social li a{
     background-color: var(--white);
     border-radius: 500px;
     box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.15);
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 3rem;
     margin: 0.5rem 0;
     display: flex;
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
     align-items: center;
-    visibility: hidden;
+    display: none;
 }
 
 .row .navContent #checkinEventListing .listCheckedEvents #queueRight {
@@ -414,11 +436,13 @@ footer .social li a{
 }
 
 .row .navContent #checkinEventListing #pastEventHeading {
-    /* visibility: hidden; */
+    margin-bottom: 2.5rem;
+    display: none;
 }
 
 .row .navContent #checkinEventListing #currEventHeading {
-    visibility: hidden;
+    margin-bottom: 2.5rem;
+    display: none;
 }
 
 .row .navContent #checkinEventListing .listCurrEvents {
@@ -431,7 +455,7 @@ footer .social li a{
     width: 100%;
     flex-wrap: wrap;
     align-items: center;
-    visibility: hidden;
+    display: none;
 }
 
 .row .navContent #checkinEventListing .listCurrEvents img {
@@ -450,7 +474,7 @@ footer .social li a{
 .row .navContent #checkinEventListing .listCurrEvents .listRow .currEvent {
     margin: 0;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
     padding-bottom: 0.7rem;
 }
 
@@ -474,21 +498,53 @@ footer .social li a{
     transition: all ease-in-out 0.3s;
 }
 
-.row .navContent #checkinEventListing .listPastEvents .listRow #enterEvent:hover {
-    color: var(--white);
-    border: 1px solid var(--primaryColor);
-    background-color: var(--primaryColor);
+.row .navContent #checkinEventListing .listPastEvents {
+    background-color: var(--white);
+    border-radius: 50px;
+    box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
+.row .navContent #checkinEventListing .listPastEvents img {
+    object-fit: cover;
+    object-position: center center;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    width: 100%;
+    height: 250px;
+}
 
+.row .navContent #checkinEventListing .listPastEvents .queueRight {
+    padding: 1.5rem 2rem; 
+}
 
+.row .navContent #checkinEventListing .listPastEvents .listRow .pastEvent {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 0.7rem;
+}
 
-.row .navContent #checkinEventListing .waitTimeCounter {
+.row .navContent #checkinEventListing .listPastEvents .listRow p {
+    margin: 0;
+    padding-top: 5px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding-bottom: 25px;
+}
+
+.row .navContent #checkinEventListing #waitTimeCounter {
     width: 100%;
     font-size: 1.5rem;
     text-align: center;
     padding: 5rem 0;
     font-weight: 500;
+    display: none;
 }
 
 /********** NOTIFICATIONS ***********/
@@ -519,13 +575,13 @@ footer .social li a{
 /********** PRIVACY POLICY ***********/
 .privPolicy h3 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
 }
 
 .privPolicy h4 {
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
 }
 
@@ -582,7 +638,7 @@ footer .social li a{
 
 .row .contact-content .overlay-dark h3 {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--white);
     padding-bottom: 1rem;
 }
@@ -598,7 +654,7 @@ footer .social li a{
     font-weight: 400;
     color: var(--white);
     padding: 0.5rem 0;
-    line-height: 1rem;
+    line-height: 2rem;
 }
 
 .row .contact-content .overlay-dark p a {
@@ -653,7 +709,7 @@ footer .social li a{
 #eventHero #eventOverlay .eventHeader h1,
 #eventHeroCheck #eventOverlay .eventHeader h1 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 600;
     position: absolute;
     bottom: 12rem;
     color: var(--white);
@@ -731,7 +787,7 @@ footer .social li a{
 
 .eventWrapper .eventContent .eventDescRow h3 {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
     line-height: 2rem;
     margin-bottom: 1.5rem;
@@ -742,14 +798,18 @@ footer .social li a{
 }
 
 .eventWrapper .eventContent .eventDescRow p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: var(--black);
     line-height: 2rem;
 }
 
+.eventWrapper .eventContent .eventDescRow p strong {
+    font-weight: 600;
+}
+
 .eventWrapper .eventContent .eventDescRow p a {
-    font-weight: 700;
+    font-weight: 600;
     color: var(--primaryColor);
 }
 
@@ -767,7 +827,7 @@ footer .social li a{
 
 .eventWrapper .eventContent .eventDescRow .checkInBtn {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: none;
     text-align: center;
     color: var(--white);

@@ -22,7 +22,8 @@ var uiConfig = {
                         email: user.email,                          //with authenticated user's ID (user.uid)
                         phone: "",
                         password: "",
-                        currentevent: "No Event"
+                        currentevent: "No Event",
+                        status: "Guest"
                     }).then(function () {
                         console.log("New user added to firestore");
                         window.location.assign("/event-listings/");       //re-direct to main.html after signup
