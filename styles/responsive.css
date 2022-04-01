@@ -6,11 +6,19 @@
 }
 
 @media (max-width: 575.98px) {
+    .firebaseui-form-actions {
+        display: flex;
+        flex-direction: column-reverse;
+        white-space: normal;
+    }
     .navbar {
         padding: 1em 1.5em;
     }
     .navbar-nav {
         margin-top: 2em;
+    }
+    .navbar-nav .nav-item {
+        padding: 0;
     }
     .navbar-nav .nav-item .nav-link {
        padding: 1.2rem 0;
@@ -36,6 +44,14 @@
     }
     .wrapper {
         padding: 1.5em 2em;
+    }
+    .wrapper #welcomeUser {
+        margin-bottom: 1em;
+    }
+    .wrapper #eventHeading {
+        font-size: 1.8em;
+        font-weight: 600;
+        margin-bottom: 1.5em;
     }
     .row .sideNav.col-lg-4,
     .row .navContent.col-lg-8 {
@@ -218,6 +234,9 @@
     .navbar-nav {
         margin-top: 2em;
     }
+    .navbar-nav .nav-item {
+        padding: 0;
+    }
     .navbar-nav .nav-item .nav-link {
        padding: 1.2rem 0;
     }
@@ -374,6 +393,9 @@
     }
     .navbar-nav {
         margin-top: 2em;
+    }
+    .navbar-nav .nav-item {
+        padding: 0;
     }
     .navbar-nav .nav-item .nav-link {
        padding: 1.2rem 0;
