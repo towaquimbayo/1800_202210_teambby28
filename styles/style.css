@@ -35,7 +35,7 @@ body {
 }
 
 .navbar-nav .nav-item .nav-link.active {
-    font-size: 18px;
+    font-size: 22px;
     color: var(--secondaryColor);
     font-weight: 600;
 }
