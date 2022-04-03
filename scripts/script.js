@@ -777,7 +777,11 @@ function validateBatchTime() {
                         if ((4 - currMinValidation) == 0) {
                             document.getElementById('waitTimeCount').innerHTML = (59 - currentSec) + " seconds";
                         } else {
-                            document.getElementById('waitTimeCount').innerHTML = (4 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                            if (currMinValidation >= 5) {
+                                document.getElementById('waitTimeCount').innerHTML = (4 + 10 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                            } else {
+                                document.getElementById('waitTimeCount').innerHTML = (4 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                            }
                         }
                     } else if (batchValue >= 5 && batchValue <= 9) {
                         if ((9 - currMinValidation) == 0) {
