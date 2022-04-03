@@ -775,15 +775,15 @@ function validateBatchTime() {
                     document.getElementById('waitTimeCounter').style.display = 'block';
                     if (batchValue >= 0 && batchValue <= 4) {
                         if ((4 - currMinValidation) == 0) {
-                            document.getElementById('waitTimeCount').innerHTML = (60 - currentSec) + " seconds";
+                            document.getElementById('waitTimeCount').innerHTML = (59 - currentSec) + " seconds";
                         } else {
-                            document.getElementById('waitTimeCount').innerHTML = (4 - currMinValidation) + " minute(s) " + (60 - currentSec) + " seconds";
+                            document.getElementById('waitTimeCount').innerHTML = (4 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
                         }
                     } else if (batchValue >= 5 && batchValue <= 9) {
                         if ((9 - currMinValidation) == 0) {
-                            document.getElementById('waitTimeCount').innerHTML = (60 - currentSec) + " seconds";
+                            document.getElementById('waitTimeCount').innerHTML = (59 - currentSec) + " seconds";
                         } else {
-                            document.getElementById('waitTimeCount').innerHTML = (9 - currMinValidation) + " minute(s) " + (60 - currentSec) + " seconds";
+                            document.getElementById('waitTimeCount').innerHTML = (9 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
                         }
                     }
                 }
