@@ -86,9 +86,12 @@
     .row .sideNav .sideNavMenu .accNavLink {
         opacity: 1;
     }
+    .row .sideNav .sideNavMenu .accNavLink a .accIcon {
+        width: 1.8rem;
+    }
     .row .sideNav .sideNavMenu .accNavLink a h5 {
         color: var(--black);
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     .row .sideNav .sideNavMenu .accNavLink hr {
         color: var(--black);
@@ -126,7 +129,11 @@
     }
     .row .navContent .editProfileForm .form-row .form-group .form-control {
         padding: 1rem;
-        font-size: 1.2rem;
+        font-size: 1rem;
+    }
+    .row .navContent .editProfileForm .accSubmit {
+        font-size: 1rem;
+        width: 100%;
     }
     .wrapper-login {
         margin-top: 10em;

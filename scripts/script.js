@@ -2,18 +2,6 @@ $(document).ready(function () {
     // Load Nav and Footer
     loadSkeleton();
 
-    // Display User Name in Event Listings
-    insertName();
-
-    // Get profile in accounts page
-    getProfile();
-
-    // Update profile in accounts page after save changes
-    updateProfile();
-
-    // Display Event Cards
-    displayEvents('events');
-
     // Poplate Single Events
     if (window.location.pathname == '/single-event/') {
         populateSingleEvent();
@@ -22,10 +10,6 @@ $(document).ready(function () {
     // Poplate Check In
     if (window.location.pathname == '/check-in/') {
         populateCheckin();
-    }
-
-    if (window.location.pathname == '/my-events/') {
-        setInterval(updateTime, 1000);
     }
 
     firebase.auth().onAuthStateChanged(user => {
@@ -39,11 +23,12 @@ $(document).ready(function () {
                     document.getElementById("noEventMessage").style.display = "block";
                 } else if (myStatus == "Checked In") {
                     localStorage.setItem('permanentEventID', '');
-                    document.getElementById("noEventMessage").style.display = "block";
-                    document.getElementById("checkedInEventInfo").style.display = "none";
-                    document.getElementById("pastEventHeading").style.display = "block";
-                    displayPastEvents();
-                    document.querySelector(".listPastEvents").style.display = "flex";
+                    if (window.location.pathname == '/my-events/') {
+                        document.getElementById("noEventMessage").style.display = "block";
+                        document.getElementById("checkedInEventInfo").style.display = "none";
+                        displayPastEvents();
+                        document.getElementById("pastEventHeading").style.display = "block";                  
+                    }
                 } else if (myStatus == "Enter Now") {
                     // Enter event function
                     enterEvent();
@@ -86,7 +71,7 @@ $(document).ready(function () {
     displayQueue();
 
     // Signout user
-    signOut();
+    // signOut();
 
     // Account Password
     $("#show-hide-password .input-group-addon a").on('click', function (event) {
@@ -111,100 +96,7 @@ function loadSkeleton() {
             hideLoggedNav();
         })
     });
-    console.log($('#footerPlaceHolder').load('../temp/footer.html'));
-}
-
-function insertName() {
-    firebase.auth().onAuthStateChanged(user => {
-        // Check if user is signed in:
-        if (user) {
-            // Do something for the current logged-in user here: 
-            //go to the correct user document by referencing to the user uid
-            currentUser = db.collection("users").doc(user.uid);
-
-            //get the document for current user.
-            currentUser.get()
-                .then(userDoc => {
-                    var userName = userDoc.data().firstName;
-                    document.getElementById("displayUserName").innerText = userName;
-                })
-        } else {
-            welcomeMessage = document.getElementById("welcomeUser").style.display = "none";
-        }
-    });
-}
-
-function getProfile() {
-    firebase.auth().onAuthStateChanged(user => {
-        // Check to see if user is signed in
-        if (user) {
-            // Go to the correct user document by referencing to the user uid
-            currentUser = db.collection("users").doc(user.uid);
-
-            // Get the document for current user.
-            currentUser.get()
-                .then(userDoc => {
-                    // Gets user first name
-                    var firstName = userDoc.data().firstName;
-                    document.getElementById("firstName").value = firstName;
-
-                    // Gets user last name (if available)
-                    var lastName = userDoc.data().lastName;
-                    document.getElementById("lastName").value = lastName;
-
-                    // Gets user email that is associated with the account
-                    var email = userDoc.data().email;
-                    document.getElementById("email").value = email;
-
-                    // Gets user phone number (if available)
-                    var phone = userDoc.data().phone;
-                    document.getElementById("phone").value = phone;
-
-                    // Gets user password (hidden by default)
-                    // var password = userDoc.data().password;
-                    // document.getElementById("password").value = password;  
-                })
-        }
-    })
-}
-
-// Saves new information submitted by the user to their user document in the users collection
-function updateProfile() {
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            const form = document.querySelector("#profileForm");
-            // updatePassword();
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                db.collection("users").doc(user.uid).update({
-                    firstName: form.firstName.value,
-                    lastName: form.lastName.value,
-                    phone: form.phone.value,
-                    email: form.email.value
-                })
-                // Overwrites any fields filled out
-                .then(userDoc => {
-                    window.location.replace(location.pathname);
-                })
-            });
-        }
-    })
-}
-
-// Doesnt work, may not need
-function updatePassword() {
-    const form = document.querySelector("#profileForm");
-    var newPassword = form.password.value;
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            user.updatePassword(newPassword).then(function () {
-                console.log('successful password change!');
-            }).catch(function (error) {
-                console.log("Theres a error here! " + error);
-            })
-        }
-    })
+    $('#footerPlaceHolder').load('../temp/footer.html');
 }
 
 // Log out function
@@ -320,33 +212,6 @@ function pushEvents() {
         time: "09:00AM - 11:30AM",
         description: "Men's Snowboarding is taking place on May 9th, 2030. Tickets cost $20 per person. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, repudiandae doloribus. Magni repellat sit quae praesentium eius, laudantium itaque veniam?"
     });
-}
-
-// Display event cards
-function displayEvents(collection) {
-    let cardTemplate = document.getElementById("eventCardTemplate");
-
-    db.collection(collection).get()
-        .then(snap => {
-            var i = 1;
-            snap.forEach(doc => { // iterate thru each doc
-                var title = doc.data().name;   // get value of the "name" key
-                var location = doc.data().location;   // get value of the "location" key
-                var time = doc.data().time;   // get value of the "time" key
-                var eventID = doc.data().id; // get "id" key the of event
-                let newcard = cardTemplate.content.cloneNode(true);
-
-                // update title and text and image
-                newcard.querySelector('.eventName').innerHTML = title;
-                newcard.querySelector('.eventLocation').innerHTML = location;
-                newcard.querySelector('.eventTime').innerHTML = time;
-                newcard.querySelector('.eventImage').src = "../images/" + eventID + ".jpg";
-                newcard.querySelector('.viewEvent').onclick = () => setEventData(eventID, doc.id);
-                //attach to gallery
-                document.getElementById(collection + "-display").appendChild(newcard);
-                i++;
-            })
-        })
 }
 
 // Function to set event ID in local storage when clicked by the user
@@ -514,9 +379,11 @@ function disableReCheckin() {
                                     .then(snap => {
                                         // Updates user status
                                         if (userDoc.data().status == "Wait") {
-                                            checkBtn.innerHTML = "Please Wait";
-                                            checkBtn.removeAttribute("href");
-                                            checkBtn.classList.add('disabled');
+                                            if (window.location.pathname == '/single-event/') {
+                                                checkBtn.innerHTML = "Please Wait";
+                                                checkBtn.removeAttribute("href");
+                                                checkBtn.classList.add('disabled');
+                                            }
                                         } else {
                                             console.log('The user hasnt checked in yet');
                                         }
@@ -534,7 +401,8 @@ function disableReCheckin() {
 // Display queue for how many people in the current batch for the checked in event 
 function displayQueue() {
     const docID = localStorage.getItem('permanentEventID');
-    db.collection('events').doc(docID).collection('queue')
+    if (docID != '') {
+        db.collection('events').doc(docID).collection('queue')
         .get()
         .then(querySnapshot => {
             var querySize = localStorage.getItem("queueSize");
@@ -548,8 +416,10 @@ function displayQueue() {
                         myStatus = userDoc.data().status;
                         if (myStatus == "Wait") {
                             // Checks to see if the user has checked in to the current event
-                            document.getElementById("noEventMessage").style.display = "none";
-                            document.getElementById("checkedInEventInfo").style.display = "flex";
+                            if (window.location.pathname == '/my-events/') {
+                                document.getElementById("noEventMessage").style.display = "none";
+                                document.getElementById("checkedInEventInfo").style.display = "flex"; 
+                            }
                             db.collection('events').where("id", "==", myCurrEvent)
                                 .get()
                                 .then(queryEvent => {
@@ -561,8 +431,10 @@ function displayQueue() {
                                         eventName = thisEvent.name;
                                         eventDate = thisEvent.date;
                                         eventTime = thisEvent.time;
-                                        document.getElementById("myEventInfo").innerHTML = eventName + " at " + eventDate + ", " + eventTime;
-                                        document.getElementById("myEventQueue").innerHTML = querySize + "/3";
+                                        if (window.location.pathname == '/my-events/') {
+                                            document.getElementById("myEventInfo").innerHTML = eventName + " at " + eventDate + ", " + eventTime;
+                                            document.getElementById("myEventQueue").innerHTML = querySize + "/3";
+                                        }
                                     }
                                 })
                                 .catch((error) => {
@@ -570,15 +442,17 @@ function displayQueue() {
                                 });
                             // Sets up display for user's past events if available
                             if (userDoc.data().pastEvents.length > 0) {
-                                document.getElementById("pastEventHeading").style.display = "block";
-                                displayPastEvents();
-                                document.querySelector(".listPastEvents").style.display = "flex";
+                                if (window.location.pathname == '/my-events/') {
+                                    document.getElementById("pastEventHeading").style.display = "block";
+                                    displayPastEvents();
+                                }
                             }
                         }
                     });
                 }
             });
         });
+    }
 }
 
 // Display past events for users that have entered 1 or more events
@@ -608,29 +482,7 @@ function displayPastEvents() {
     });
 }
 
-// function displayClock() {
-//     var refresh = 1000;
-//     currentTime = setTimeout('displayClockTime()', refresh);
-// }
-
-// function displayClockTime() {
-//     // var x = new Date();
-//     // document.getElementById('clock').innerHTML = x;
-//     // displayClock();
-//     // var interval = setInterval(function () {
-//     // },  60 * 1000);
-//     // clearInterval(interval);
-
-//     var x = new Date();
-//     document.getElementById("currentTime").innerHTML = x.getMinutes();
-//     displayClock();
-//     var interval = setInterval(function () {
-//     },  60 * 1000);
-//     clearInterval(interval);
-// }
-
 // Update check in status for all users if current event queue is full (3/3)
-
 // Function to update check in status
 function updateCheckInStatus(eID) {
     // Gets event document from "events" collection using EventID (eID) parameter
@@ -662,23 +514,14 @@ function updateCheckInStatus(eID) {
     }, 1000);
 }
 
-// Function to update time
-function updateTime() {
-    let now = new Date();
-    var m = now.getMinutes();
-    var s = now.getSeconds();
-    // document.getElementById("clock").innerHTML = "Minutes: " + m + " Seconds: " + s;
-    // document.getElementById("currentMin").innerHTML = m;
-    // document.getElementById("currentSec").innerHTML = s;
-}
-
 setInterval(updateQueueSize, 1000);
 
 // Function to update queue size
 function updateQueueSize() {
     const docID = localStorage.getItem('permanentEventID');
     var currentQueueSize;
-    db.collection('events').doc(docID).collection('queue')
+    if (docID != '') {
+        db.collection('events').doc(docID).collection('queue')
         .get()
         .then(snap => {
             currentQueueSize = snap.size;
@@ -692,13 +535,15 @@ function updateQueueSize() {
                 }
             });
         });
+    }
 }
 
 // Batch manager function 
 function batchManager() {
     const docID = localStorage.getItem('permanentEventID');
     var currentQueueSize;
-    db.collection('events').doc(docID).collection('queue')
+    if (docID != '') {
+        db.collection('events').doc(docID).collection('queue')
         .get()
         .then(snap => {
             currentQueueSize = snap.size;
@@ -725,6 +570,7 @@ function batchManager() {
                 }
             });
         });
+    }
 }
 
 // Function to update batch
@@ -736,7 +582,10 @@ function updateBatch(docID, thisUserID) {
             var myTimeSplit = myTime.split(":");
             var x = new Date();
             var myCheckInTime = new Date(parseInt(x.getFullYear(), 10), (parseInt(x.getMonth(), 10)), parseInt(x.getDay(), 10), parseInt(myTimeSplit[0], 10), parseInt(myTimeSplit[1], 10), parseInt(myTimeSplit[2], 10));
-            document.getElementById("myCheckTime").innerHTML = myCheckInTime;
+           
+            if (window.location.pathname == '/my-events/') {
+                document.getElementById("myCheckTime").innerHTML = myCheckInTime;
+            }
 
             const myMin = myTimeSplit[1];
             localStorage.setItem("userMin", myMin);
@@ -772,22 +621,24 @@ function validateBatchTime() {
             .then(userDoc => {
                 myStatus = userDoc.data().status;
                 if (myStatus == 'Wait') {
-                    document.getElementById('waitTimeCounter').style.display = 'block';
-                    if (batchValue >= 0 && batchValue <= 4) {
-                        if ((4 - currMinValidation) == 0) {
-                            document.getElementById('waitTimeCount').innerHTML = (59 - currentSec) + " seconds";
-                        } else {
-                            if (currMinValidation >= 5) {
-                                document.getElementById('waitTimeCount').innerHTML = (4 + 10 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                    if (window.location.pathname == '/my-events/') {
+                        document.getElementById('waitTimeCounter').style.display = 'block';
+                        if (batchValue >= 0 && batchValue <= 4) {
+                            if ((4 - currMinValidation) == 0) {
+                                document.getElementById('waitTimeCount').innerHTML = (59 - currentSec) + " seconds";
                             } else {
-                                document.getElementById('waitTimeCount').innerHTML = (4 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                                if (currMinValidation >= 5) {
+                                    document.getElementById('waitTimeCount').innerHTML = (4 + 10 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                                } else {
+                                    document.getElementById('waitTimeCount').innerHTML = (4 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                                }
                             }
-                        }
-                    } else if (batchValue >= 5 && batchValue <= 9) {
-                        if ((9 - currMinValidation) == 0) {
-                            document.getElementById('waitTimeCount').innerHTML = (59 - currentSec) + " seconds";
-                        } else {
-                            document.getElementById('waitTimeCount').innerHTML = (9 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                        } else if (batchValue >= 5 && batchValue <= 9) {
+                            if ((9 - currMinValidation) == 0) {
+                                document.getElementById('waitTimeCount').innerHTML = (59 - currentSec) + " seconds";
+                            } else {
+                                document.getElementById('waitTimeCount').innerHTML = (9 - currMinValidation) + " minute(s) " + (59 - currentSec) + " seconds";
+                            }
                         }
                     }
                 }
@@ -820,8 +671,6 @@ function pushCheckinUser() {
                     var userId = doc.id;
                     displayCurrentEventList(userId);
                     updateCheckInStatus(thisEventID);
-                } else {
-                    console.log("NOT REACHING!!");
                 }
             });
         });
@@ -908,51 +757,3 @@ function mapLoad(address) {
 
     iframe.setAttribute("src", injectURL);
 }
-
-/*********** NEXT STEPS ************/
-/**
- * 1) Single events page populated from database (local session, grab event ID) // DONE
- * 2) Checked in event -> Create sub collection for currentQueue -> Should contain users and their ID // DONE
- * 3) My Events page -> Display queue (How many ppl in current batch of yours) ex. 2/5 in queue // DONE
- * 4) My Events page -> Display "Please Wait" button (disabled) // DONE
- * 5) User Collection (Checked in User) -> Update the status: "Wait"; // DONE
- * 6) Function for batchManager() -> Run a loop for every 90 seconds -> // DONE
- *          7) Add checked in event to checked in user (currentEvent: event1IDName);
- *          8) Check if there are 3 users in the batch // DONE
- *          9) If there are 3 users -> // DONE
- *                 10) Display a "Enter Now" button on My Events for all queued user // DONE
- *                 11) Reset the batch (timer and delete all users from current queue) // DONE
- *                 12) Updates user status: "Enter Now"; // DONE
- * 14) the button click callback function -> removes user from queue collection and updates status (individually not all users in the queue) // DONE
- * 15) after button clicked -> refresh -> display past event list -> instead of Enter Now status maybe change to No Event // DONE
- *
- * 
- * 13) if queue size == 3 -> alert change to user "YOU MAY ENTER NOW!" -> refresh -> display current event with button (DONT REMOVE USER OR UPDATE ANYTHING YET)
- * 
- * 
- * 
- * 
- * EX: 06:34:22 (Check In Time) -> 06:34:00 - 06:35:59 (thirdBatch)
- * minute/seconds if statements
- * for second digit minute with 0 replace with any integer from 0 to 5 (00 mins to 59mins) -> Has to be same from check in time values
- * if (00:00 to 01:59) {
- *      firstBatch = HH:M1:59;
- *      if(currentTime == firstBatch) {
- *          remove all checked in users in query;
- *          set those users status: 'Enter Now';
- *          display message to user -> "Please enter event now!";
- *      }
- * } else if (02:00 to 03:59) {
- *      secondBatch;
- * } else if (04:00 to 05:59) {
- *      thirdBatch;
- * } else if (06:00 to 07:59) {
- *      fourthBatch;
- * } else if (08:00 to 09:59) {
- *      fifthBatch;
- * }
- * 
- * If no my Events, display "You haven't checked in to any events yet! Go to Events to view our available events!"
- * If there is checked in events, display their queue
- * 
- */
