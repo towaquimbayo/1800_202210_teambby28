@@ -4,6 +4,20 @@ $(document).ready(function () {
 
     // Update profile in accounts page after save changes
     updateProfile();
+    
+    // Display password for account
+    $("#show-hide-password .input-group-addon a").on('click', function (event) {
+        event.preventDefault();
+        if ($('#show-hide-password input').attr("type") == "text") {
+            $('#show-hide-password input').attr('type', 'password');
+            $('#show-hide-password .input-group-addon a i').addClass("fa-eye-slash");
+            $('#show-hide-password .input-group-addon a i').removeClass("fa-eye");
+        } else if ($('#show-hide-password input').attr("type") == "password") {
+            $('#show-hide-password input').attr('type', 'text');
+            $('#show-hide-password .input-group-addon a i').removeClass("fa-eye-slash");
+            $('#show-hide-password .input-group-addon a i').addClass("fa-eye");
+        }
+    });
 });
 
 function getProfile() {

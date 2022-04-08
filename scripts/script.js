@@ -12,6 +12,7 @@ $(document).ready(function () {
         populateCheckin();
     }
 
+    // Check user status in the firebase collection
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection('users').doc(user.uid);
@@ -19,9 +20,12 @@ $(document).ready(function () {
             .then(userDoc => {
                 myCurrEvent = userDoc.data().currentevent;
                 myStatus = userDoc.data().status;
+                
                 if (myStatus == "Guest") {
+                    // if "Guest" they havent checked in for any event yet -> Display a message 
                     document.getElementById("noEventMessage").style.display = "block";
-                } else if (myStatus == "Checked In") {
+                } else if (myStatus == "Checked In") { 
+                    // if "Checked In" then the user has an event in the past -> Display past events  
                     localStorage.setItem('permanentEventID', '');
                     if (window.location.pathname == '/my-events/') {
                         document.getElementById("noEventMessage").style.display = "block";
@@ -30,6 +34,8 @@ $(document).ready(function () {
                         document.getElementById("pastEventHeading").style.display = "block";                  
                     }
                 } else if (myStatus == "Enter Now") {
+                    // if "Enter Now" -> they have checked in but haven't entered their current event yet
+
                     // Enter event function
                     enterEvent();
 
@@ -69,25 +75,9 @@ $(document).ready(function () {
 
     // Display current queue in my Events
     displayQueue();
-
-    // Signout user
-    // signOut();
-
-    // Account Password
-    $("#show-hide-password .input-group-addon a").on('click', function (event) {
-        event.preventDefault();
-        if ($('#show-hide-password input').attr("type") == "text") {
-            $('#show-hide-password input').attr('type', 'password');
-            $('#show-hide-password .input-group-addon a i').addClass("fa-eye-slash");
-            $('#show-hide-password .input-group-addon a i').removeClass("fa-eye");
-        } else if ($('#show-hide-password input').attr("type") == "password") {
-            $('#show-hide-password input').attr('type', 'text');
-            $('#show-hide-password .input-group-addon a i').removeClass("fa-eye-slash");
-            $('#show-hide-password .input-group-addon a i').addClass("fa-eye");
-        }
-    });
 });
 
+// Load the Navbar and Footer 
 function loadSkeleton() {
     $('#navPlaceHolder').load('../temp/nav.html', function () {
         $('.navbar-nav .nav-item .nav-link').each(function () {
@@ -538,7 +528,7 @@ function updateQueueSize() {
     }
 }
 
-// Batch manager function 
+// Batch manager function that manages the queue and wait time
 function batchManager() {
     const docID = localStorage.getItem('permanentEventID');
     var currentQueueSize;
